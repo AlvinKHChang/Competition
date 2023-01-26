@@ -231,46 +231,27 @@ namespace WindowsFormsApp1
             int[] 佳作人數s = new int[_GroupDict.Count];
             int[] 入選人數s = new int[_GroupDict.Count];
             _統計表log.Rows.Clear();
-            int groupIndex = _CompetitionTypeList[this.cbx_統計表選擇比賽.SelectedIndex];
+            int competitionIndex = _CompetitionTypeList[this.cbx_統計表選擇比賽.SelectedIndex];
 
             using (var dbContext = new TianwenContext())
             {
-                var comps = dbContext.Competitors.Where(x => x.CompetitionType == groupIndex).ToList();
-                foreach (var comp in comps)
-                {
-                    var index = comp.GroupId;
-                    報名人數s[index] += 1;
-                    報到人數s[index] += comp.CheckIn ? 1 : 0;
-                    圖紙s[index] += comp.DrawingId != null ? 1 : 0;
-                    第一名人數s[index] += comp.RankId == 0 ? 1 : 0;
-                    第二名人數s[index] += comp.RankId == 1 ? 1 : 0;
-                    第三名人數s[index] += comp.RankId == 2 ? 1 : 0;
-                    優選人數s[index] += comp.RankId == 3 ? 1 : 0;
-                    佳作人數s[index] += comp.RankId == 4 ? 1 : 0;
-                    入選人數s[index] += comp.RankId == 5 ? 1 : 0;
-                }
-            }
-
-            for (int i = 0; i < _GroupDict.Count(); i++)
-            {
-                if (報名人數s[i] > 0)
+                var groups = dbContext.Competitors.Where(x => x.CompetitionType == competitionIndex).GroupBy(g=>g.GroupId).OrderBy(g=>g.Key).ToList();
+                foreach (var group in groups)
                 {
                     DataRow row = _統計表log.NewRow();
-                    row[0] = _GroupList[i];
-                    row[1] = 報名人數s[i];
-                    row[2] = 報到人數s[i];
-                    row[3] = 圖紙s[i];
-                    row[4] = 第一名人數s[i];
-                    row[5] = 第二名人數s[i];
-                    row[6] = 第三名人數s[i];
-                    row[7] = 優選人數s[i];
-                    row[8] = 佳作人數s[i];
-                    row[9] = 入選人數s[i];
+                    row[0] = group.First().Group;
+                    row[1] = group.Count();
+                    row[2] = group.Where(x=>x.CheckIn).Count();
+                    row[3] = group.Where(x => x.RankId == 0).Count();
+                    row[4] = group.Where(x => x.RankId == 1).Count();
+                    row[5] = group.Where(x => x.RankId == 2).Count();
+                    row[6] = group.Where(x => x.RankId == 3).Count();
+                    row[7] = group.Where(x => x.RankId == 4).Count();
+                    row[8] = group.Where(x => x.RankId == 5).Count();
+                    row[9] = group.Where(x => x.RankId == 6).Count();
                     _統計表log.Rows.Add(row);
                 }
             }
-
-
         }
 
         private void txt_報到作業參賽編號_KeyDown(object sender, KeyEventArgs e)
@@ -461,11 +442,11 @@ namespace WindowsFormsApp1
             int.TryParse(this.txt_指導老師報到人數.Text, out 報到人數);
 
 
-            int typeIndex = _CompetitionTypeList[this.cbx_報到作業選擇比賽.SelectedIndex];
+            int typeIndex = _CompetitionTypeList[this.cbx_指導老師選擇比賽.SelectedIndex];
             this._指導老師紀錄log.Rows.Clear();
             using (var db = new TianwenContext())
             {
-                var groups = db.Competitors.Where(x=>!String.IsNullOrEmpty(x.TeacherName) && !String.IsNullOrEmpty(x.RegTeacherPhone)).GroupBy(x => x.RegTeacherPhone).OrderBy(g => g.Key).ToList();
+                var groups = db.Competitors.Where(x=> x.CompetitionType == typeIndex && !String.IsNullOrEmpty(x.TeacherName) && !String.IsNullOrEmpty(x.RegTeacherPhone)).GroupBy(x => x.RegTeacherPhone).OrderBy(g => g.Key).ToList();
                 foreach (var group in groups)
                 {
                     int real報名人數 = group.Count();
@@ -482,6 +463,32 @@ namespace WindowsFormsApp1
                     
                 }
             
+            }
+        }
+
+        private void cbx_統計表選擇比賽_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.btn_更新統計表.PerformClick();
+        }
+
+        private void cbx_指導老師選擇比賽_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.btn_指導老師更新.PerformClick();
+        }
+
+        private void txt_指導老師報名人數_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.btn_指導老師更新.PerformClick();
+            }
+        }
+
+        private void txt_指導老師報到人數_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.btn_指導老師更新.PerformClick();
             }
         }
     }

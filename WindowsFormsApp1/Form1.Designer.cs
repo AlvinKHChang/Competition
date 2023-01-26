@@ -45,6 +45,7 @@ namespace WindowsFormsApp1
             this.label2 = new System.Windows.Forms.Label();
             this.cbx_報到作業選擇比賽 = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_報到作業重置狀態 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btn_報到作業清除紀錄 = new System.Windows.Forms.Button();
@@ -53,24 +54,23 @@ namespace WindowsFormsApp1
             this.txt_報到作業參賽編號 = new System.Windows.Forms.TextBox();
             this.rtb_報到作業參賽資料 = new System.Windows.Forms.RichTextBox();
             this.dgv_排名作業紀錄 = new System.Windows.Forms.DataGridView();
+            this.tpg_指導老師 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txt_指導老師報到人數 = new System.Windows.Forms.TextBox();
+            this.txt_指導老師報名人數 = new System.Windows.Forms.TextBox();
+            this.btn_指導老師更新 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cbx_指導老師選擇比賽 = new System.Windows.Forms.ComboBox();
+            this.dgv_指導老師 = new System.Windows.Forms.DataGridView();
             this.tpg_setting = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_初始化所有資料 = new System.Windows.Forms.Button();
             this.btn_刪除所有資料 = new System.Windows.Forms.Button();
             this.btn_匯入參賽者資料 = new System.Windows.Forms.Button();
-            this.btn_報到作業重置狀態 = new System.Windows.Forms.Button();
-            this.tpg_指導老師 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.dgv_指導老師 = new System.Windows.Forms.DataGridView();
-            this.cbx_指導老師選擇比賽 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btn_指導老師更新 = new System.Windows.Forms.Button();
-            this.txt_指導老師報名人數 = new System.Windows.Forms.TextBox();
-            this.txt_指導老師報到人數 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -81,13 +81,13 @@ namespace WindowsFormsApp1
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_排名作業紀錄)).BeginInit();
-            this.tpg_setting.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tpg_指導老師.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_指導老師)).BeginInit();
+            this.tpg_setting.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -180,6 +180,7 @@ namespace WindowsFormsApp1
             this.cbx_統計表選擇比賽.Name = "cbx_統計表選擇比賽";
             this.cbx_統計表選擇比賽.Size = new System.Drawing.Size(128, 27);
             this.cbx_統計表選擇比賽.TabIndex = 0;
+            this.cbx_統計表選擇比賽.SelectedIndexChanged += new System.EventHandler(this.cbx_統計表選擇比賽_SelectedIndexChanged);
             // 
             // tpg_報到作業
             // 
@@ -271,6 +272,16 @@ namespace WindowsFormsApp1
             this.panel2.Size = new System.Drawing.Size(895, 101);
             this.panel2.TabIndex = 1;
             // 
+            // btn_報到作業重置狀態
+            // 
+            this.btn_報到作業重置狀態.Location = new System.Drawing.Point(576, 11);
+            this.btn_報到作業重置狀態.Name = "btn_報到作業重置狀態";
+            this.btn_報到作業重置狀態.Size = new System.Drawing.Size(132, 42);
+            this.btn_報到作業重置狀態.TabIndex = 6;
+            this.btn_報到作業重置狀態.Text = "重置狀態";
+            this.btn_報到作業重置狀態.UseVisualStyleBackColor = true;
+            this.btn_報到作業重置狀態.Click += new System.EventHandler(this.btn_報到作業重置狀態_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -346,6 +357,120 @@ namespace WindowsFormsApp1
             this.dgv_排名作業紀錄.Size = new System.Drawing.Size(895, 529);
             this.dgv_排名作業紀錄.TabIndex = 3;
             // 
+            // tpg_指導老師
+            // 
+            this.tpg_指導老師.Controls.Add(this.tableLayoutPanel4);
+            this.tpg_指導老師.Location = new System.Drawing.Point(4, 29);
+            this.tpg_指導老師.Name = "tpg_指導老師";
+            this.tpg_指導老師.Size = new System.Drawing.Size(1405, 642);
+            this.tpg_指導老師.TabIndex = 3;
+            this.tpg_指導老師.Text = "指導老師";
+            this.tpg_指導老師.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.panel3, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.dgv_指導老師, 0, 1);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.73209F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.26791F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1405, 642);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label8);
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.txt_指導老師報到人數);
+            this.panel3.Controls.Add(this.txt_指導老師報名人數);
+            this.panel3.Controls.Add(this.btn_指導老師更新);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.cbx_指導老師選擇比賽);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1399, 95);
+            this.panel3.TabIndex = 0;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(462, 15);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(89, 19);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "報到人數";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(206, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 19);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "報名人數";
+            // 
+            // txt_指導老師報到人數
+            // 
+            this.txt_指導老師報到人數.Location = new System.Drawing.Point(553, 12);
+            this.txt_指導老師報到人數.Name = "txt_指導老師報到人數";
+            this.txt_指導老師報到人數.Size = new System.Drawing.Size(155, 30);
+            this.txt_指導老師報到人數.TabIndex = 10;
+            this.txt_指導老師報到人數.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_指導老師報到人數_KeyDown);
+            // 
+            // txt_指導老師報名人數
+            // 
+            this.txt_指導老師報名人數.Location = new System.Drawing.Point(301, 12);
+            this.txt_指導老師報名人數.Name = "txt_指導老師報名人數";
+            this.txt_指導老師報名人數.Size = new System.Drawing.Size(155, 30);
+            this.txt_指導老師報名人數.TabIndex = 9;
+            this.txt_指導老師報名人數.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_指導老師報名人數_KeyDown);
+            // 
+            // btn_指導老師更新
+            // 
+            this.btn_指導老師更新.Location = new System.Drawing.Point(805, 12);
+            this.btn_指導老師更新.Name = "btn_指導老師更新";
+            this.btn_指導老師更新.Size = new System.Drawing.Size(75, 33);
+            this.btn_指導老師更新.TabIndex = 8;
+            this.btn_指導老師更新.Text = "更新統計表";
+            this.btn_指導老師更新.UseVisualStyleBackColor = true;
+            this.btn_指導老師更新.Click += new System.EventHandler(this.btn_指導老師更新_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(10, 15);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(49, 19);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "比賽";
+            // 
+            // cbx_指導老師選擇比賽
+            // 
+            this.cbx_指導老師選擇比賽.FormattingEnabled = true;
+            this.cbx_指導老師選擇比賽.Location = new System.Drawing.Point(65, 12);
+            this.cbx_指導老師選擇比賽.Name = "cbx_指導老師選擇比賽";
+            this.cbx_指導老師選擇比賽.Size = new System.Drawing.Size(128, 27);
+            this.cbx_指導老師選擇比賽.TabIndex = 6;
+            this.cbx_指導老師選擇比賽.SelectedIndexChanged += new System.EventHandler(this.cbx_指導老師選擇比賽_SelectedIndexChanged);
+            // 
+            // dgv_指導老師
+            // 
+            this.dgv_指導老師.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_指導老師.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_指導老師.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_指導老師.Location = new System.Drawing.Point(3, 104);
+            this.dgv_指導老師.Name = "dgv_指導老師";
+            this.dgv_指導老師.RowTemplate.Height = 24;
+            this.dgv_指導老師.Size = new System.Drawing.Size(1399, 535);
+            this.dgv_指導老師.TabIndex = 1;
+            // 
             // tpg_setting
             // 
             this.tpg_setting.Controls.Add(this.tableLayoutPanel1);
@@ -414,127 +539,6 @@ namespace WindowsFormsApp1
             this.btn_匯入參賽者資料.UseVisualStyleBackColor = true;
             this.btn_匯入參賽者資料.Click += new System.EventHandler(this.btn_匯入參賽者資料_Click);
             // 
-            // btn_報到作業重置狀態
-            // 
-            this.btn_報到作業重置狀態.Location = new System.Drawing.Point(576, 11);
-            this.btn_報到作業重置狀態.Name = "btn_報到作業重置狀態";
-            this.btn_報到作業重置狀態.Size = new System.Drawing.Size(132, 42);
-            this.btn_報到作業重置狀態.TabIndex = 6;
-            this.btn_報到作業重置狀態.Text = "重置狀態";
-            this.btn_報到作業重置狀態.UseVisualStyleBackColor = true;
-            this.btn_報到作業重置狀態.Click += new System.EventHandler(this.btn_報到作業重置狀態_Click);
-            // 
-            // tpg_指導老師
-            // 
-            this.tpg_指導老師.Controls.Add(this.tableLayoutPanel4);
-            this.tpg_指導老師.Location = new System.Drawing.Point(4, 29);
-            this.tpg_指導老師.Name = "tpg_指導老師";
-            this.tpg_指導老師.Size = new System.Drawing.Size(1405, 642);
-            this.tpg_指導老師.TabIndex = 3;
-            this.tpg_指導老師.Text = "指導老師";
-            this.tpg_指導老師.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Controls.Add(this.panel3, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.dgv_指導老師, 0, 1);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.73209F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.26791F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1405, 642);
-            this.tableLayoutPanel4.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.label8);
-            this.panel3.Controls.Add(this.label6);
-            this.panel3.Controls.Add(this.txt_指導老師報到人數);
-            this.panel3.Controls.Add(this.txt_指導老師報名人數);
-            this.panel3.Controls.Add(this.btn_指導老師更新);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.cbx_指導老師選擇比賽);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1399, 94);
-            this.panel3.TabIndex = 0;
-            // 
-            // dgv_指導老師
-            // 
-            this.dgv_指導老師.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv_指導老師.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_指導老師.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_指導老師.Location = new System.Drawing.Point(3, 103);
-            this.dgv_指導老師.Name = "dgv_指導老師";
-            this.dgv_指導老師.RowTemplate.Height = 24;
-            this.dgv_指導老師.Size = new System.Drawing.Size(1399, 536);
-            this.dgv_指導老師.TabIndex = 1;
-            // 
-            // cbx_指導老師選擇比賽
-            // 
-            this.cbx_指導老師選擇比賽.FormattingEnabled = true;
-            this.cbx_指導老師選擇比賽.Location = new System.Drawing.Point(65, 12);
-            this.cbx_指導老師選擇比賽.Name = "cbx_指導老師選擇比賽";
-            this.cbx_指導老師選擇比賽.Size = new System.Drawing.Size(128, 27);
-            this.cbx_指導老師選擇比賽.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 15);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 19);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "比賽";
-            // 
-            // btn_指導老師更新
-            // 
-            this.btn_指導老師更新.Location = new System.Drawing.Point(805, 12);
-            this.btn_指導老師更新.Name = "btn_指導老師更新";
-            this.btn_指導老師更新.Size = new System.Drawing.Size(75, 33);
-            this.btn_指導老師更新.TabIndex = 8;
-            this.btn_指導老師更新.Text = "更新統計表";
-            this.btn_指導老師更新.UseVisualStyleBackColor = true;
-            this.btn_指導老師更新.Click += new System.EventHandler(this.btn_指導老師更新_Click);
-            // 
-            // txt_指導老師報名人數
-            // 
-            this.txt_指導老師報名人數.Location = new System.Drawing.Point(301, 12);
-            this.txt_指導老師報名人數.Name = "txt_指導老師報名人數";
-            this.txt_指導老師報名人數.Size = new System.Drawing.Size(155, 30);
-            this.txt_指導老師報名人數.TabIndex = 9;
-            // 
-            // txt_指導老師報到人數
-            // 
-            this.txt_指導老師報到人數.Location = new System.Drawing.Point(553, 12);
-            this.txt_指導老師報到人數.Name = "txt_指導老師報到人數";
-            this.txt_指導老師報到人數.Size = new System.Drawing.Size(155, 30);
-            this.txt_指導老師報到人數.TabIndex = 10;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(206, 12);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(89, 19);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "報名人數";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(462, 15);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 19);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "報到人數";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -557,14 +561,14 @@ namespace WindowsFormsApp1
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_排名作業紀錄)).EndInit();
-            this.tpg_setting.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.tpg_指導老師.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_指導老師)).EndInit();
+            this.tpg_setting.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
