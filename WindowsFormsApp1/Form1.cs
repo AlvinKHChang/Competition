@@ -34,6 +34,7 @@ namespace WindowsFormsApp1
         private DataTable _報到作業紀錄log;
         private DataTable _指導老師紀錄log;
         private DataTable _排名作業統計log;
+        private DataTable _成績統計log;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -117,15 +118,6 @@ namespace WindowsFormsApp1
             }
             cbx_排名作業名次.SelectedIndex = 0;
 
-            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
-            foreach (var nic in nics)
-            {
-                if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
-                {
-                    this._LocalMac = nic.GetPhysicalAddress().ToString();
-                    break;
-                }
-            }
 
             this._排名作業統計log = new DataTable();
             this._排名作業統計log.Columns.Add("組別", typeof(string));
@@ -135,6 +127,36 @@ namespace WindowsFormsApp1
             this._排名作業統計log.Columns.Add("圖紙編號", typeof(string));
             this._排名作業統計log.Columns.Add("時間", typeof(string));
             dgv_排名作業統計.DataSource = this._排名作業統計log;
+
+            this.cbx_成績比賽.Items.Add("書法比賽");
+            this.cbx_成績比賽.Items.Add("寫生比賽");
+            this.cbx_成績比賽.SelectedIndex = 0;
+
+            foreach (var group in _GroupList)
+            {
+                cbx_成績分組.Items.Add(group);
+            }
+            cbx_成績分組.SelectedIndex = 0;
+
+            this._成績統計log = new DataTable();
+            this._成績統計log.Columns.Add("組別", typeof(string));
+            this._成績統計log.Columns.Add("第一名", typeof(string));
+            this._成績統計log.Columns.Add("第二名", typeof(string));
+            this._成績統計log.Columns.Add("第三名", typeof(string));
+            this._成績統計log.Columns.Add("優選", typeof(string));
+            this._成績統計log.Columns.Add("佳作", typeof(string));
+            this._成績統計log.Columns.Add("入選", typeof(string));
+            dgv_成績統計.DataSource = this._成績統計log;
+
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (var nic in nics)
+            {
+                if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    this._LocalMac = nic.GetPhysicalAddress().ToString();
+                    break;
+                }
+            }
 
             using (var dbContext = new TianwenContext())
             {
@@ -241,15 +263,7 @@ namespace WindowsFormsApp1
 
         private void btn_更新統計表_Click(object sender, EventArgs e)
         {
-            int[] 報名人數s = new int[_GroupDict.Count];
-            int[] 報到人數s = new int[_GroupDict.Count];
-            int[] 圖紙s = new int[_GroupDict.Count];
-            int[] 第一名人數s = new int[_GroupDict.Count];
-            int[] 第二名人數s = new int[_GroupDict.Count];
-            int[] 第三名人數s = new int[_GroupDict.Count];
-            int[] 優選人數s = new int[_GroupDict.Count];
-            int[] 佳作人數s = new int[_GroupDict.Count];
-            int[] 入選人數s = new int[_GroupDict.Count];
+
             _統計表log.Rows.Clear();
             int competitionIndex = _CompetitionTypeList[this.cbx_統計表選擇比賽.SelectedIndex];
 
@@ -531,8 +545,8 @@ namespace WindowsFormsApp1
 
 
                 }
-                this.dgv_報到作業紀錄.ClearSelection();
-                this.dgv_報到作業紀錄.Rows[0].Selected = true;
+                this.dgv_排名作業統計.ClearSelection();
+                this.dgv_排名作業統計.Rows[0].Selected = true;
                 this.lbl_排名作業人數.Text = comps.Count().ToString();
             }
         }
@@ -562,7 +576,7 @@ namespace WindowsFormsApp1
                     var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.EntryNumber == txt_排名作業參賽編號.Text).FirstOrDefault();
                     if (comp == null)
                     {
-                        MessageBox.Show("沒有符合的參賽編號: ${txt_排名作業參賽編號.Text)}");
+                        MessageBox.Show($"沒有符合的參賽編號: {txt_排名作業參賽編號.Text}");
                         return;
                     }
                     else
@@ -597,7 +611,7 @@ namespace WindowsFormsApp1
                     var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.DrawingId == txt_排名作業圖紙編號.Text).FirstOrDefault();
                     if (comp == null)
                     {
-                        MessageBox.Show("沒有符合的圖紙編號: ${txt_排名作業圖紙編號.Text)}");
+                        MessageBox.Show($"沒有符合的圖紙編號: {txt_排名作業圖紙編號.Text}");
                         return;
                     }
                     else
@@ -645,7 +659,7 @@ namespace WindowsFormsApp1
                     var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.EntryNumber == txt_Reset排名作業參賽編號.Text).FirstOrDefault();
                     if (comp == null)
                     {
-                        MessageBox.Show("沒有符合的參賽編號: ${txt_Reset排名作業參賽編號.Text)}");
+                        MessageBox.Show($"沒有符合的參賽編號: {txt_Reset排名作業參賽編號.Text}");
                     }
                     else
                     {
@@ -673,7 +687,7 @@ namespace WindowsFormsApp1
                     var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.DrawingId == txt_Reset排名作業圖紙編號.Text).FirstOrDefault();
                     if (comp == null)
                     {
-                        MessageBox.Show("沒有符合的圖紙編號: ${txt_Reset排名作業圖紙編號.Text)}");
+                        MessageBox.Show($"沒有符合的圖紙編號: {txt_Reset排名作業圖紙編號.Text}");
                     }
                     else
                     {
@@ -689,6 +703,79 @@ namespace WindowsFormsApp1
             this.btn_Reset排名作業圖紙編號.Enabled = false;
             this.txt_Reset排名作業圖紙編號.Text = String.Empty;
             this.btn_排名作業更新.PerformClick();
+        }
+
+        private void btn_成績更新_Click(object sender, EventArgs e)
+        {
+            int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
+            using (var db = new TianwenContext())
+            {
+                this._成績統計log.Rows.Clear();
+                var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
+                                && (this.chk_成績不分組.Checked || x.GroupId == this.cbx_成績分組.SelectedIndex)
+                                && x.Rank != null)
+                    .OrderBy(g => new { g.GroupId, g.RankId, g.EntryNumber }).ToList();
+
+                List<StringBuilder> builders = new List<StringBuilder>();
+                for (int i = 0; i < this._RankList.Count(); i++)
+                {
+                    builders.Add(new StringBuilder());
+                }
+                builders.ForEach(x => x.Clear());
+
+                List<int> indexs = new List<int>(this._RankList.Count());
+                for (int i = 0; i < this._RankList.Count(); i++)
+                {
+                    indexs.Add(0);
+                }
+
+                int groupIndex = -1;
+                Boolean isFirst = true;
+                string 組別 = string.Empty;
+                foreach (var comp in results)
+                {
+                    if (groupIndex != comp.GroupId)
+                    {
+                        if (!isFirst)
+                        {
+                            var row = this._成績統計log.NewRow();
+                            row[0] = 組別;
+                            row[1] = builders[0].ToString();
+                            row[2] = builders[1].ToString();
+                            row[3] = builders[2].ToString();
+                            row[4] = builders[3].ToString();
+                            row[5] = builders[4].ToString();
+                            row[6] = builders[5].ToString();
+                            this._成績統計log.Rows.Add(row);
+                        }
+                        groupIndex = comp.GroupId;
+                        for (int i =0; i< indexs.Count(); i++)
+                        {
+                            indexs[i] = 0;
+                        }
+                            builders.ForEach(x => x.Clear());
+                        isFirst = false;
+                    }
+                    indexs[comp.RankId]++;
+                    組別 = comp.Group;
+                    builders[comp.RankId].Append($"{indexs[comp.RankId]}.{comp.Name}({comp.EntryNumber})");
+                    builders[comp.RankId].Append(Environment.NewLine);
+                }
+                {
+                    var row = this._成績統計log.NewRow();
+                    row[0] = 組別;
+                    row[1] = builders[0].ToString();
+                    row[2] = builders[1].ToString();
+                    row[3] = builders[2].ToString();
+                    row[4] = builders[3].ToString();
+                    row[5] = builders[4].ToString();
+                    row[6] = builders[5].ToString();
+                    this._成績統計log.Rows.Add(row);
+                }
+
+                
+
+            }
         }
     }
 }

@@ -29,6 +29,7 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpg_統計 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -94,6 +95,14 @@ namespace WindowsFormsApp1
             this.btn_Reset排名作業參賽編號 = new System.Windows.Forms.Button();
             this.btn_Reset排名作業圖紙編號 = new System.Windows.Forms.Button();
             this.chk_Unlock = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.dgv_成績統計 = new System.Windows.Forms.DataGridView();
+            this.btn_成績更新 = new System.Windows.Forms.Button();
+            this.cbx_成績分組 = new System.Windows.Forms.ComboBox();
+            this.cbx_成績比賽 = new System.Windows.Forms.ComboBox();
+            this.chk_成績不分組 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -114,9 +123,13 @@ namespace WindowsFormsApp1
             ((System.ComponentModel.ISupportInitialize)(this.dgv_排名作業統計)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.tpg_成績統計.SuspendLayout();
             this.tpg_setting.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_成績統計)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -666,6 +679,7 @@ namespace WindowsFormsApp1
             // 
             // tpg_成績統計
             // 
+            this.tpg_成績統計.Controls.Add(this.tableLayoutPanel6);
             this.tpg_成績統計.Location = new System.Drawing.Point(4, 29);
             this.tpg_成績統計.Name = "tpg_成績統計";
             this.tpg_成績統計.Size = new System.Drawing.Size(1405, 642);
@@ -806,6 +820,105 @@ namespace WindowsFormsApp1
             this.chk_Unlock.UseVisualStyleBackColor = true;
             this.chk_Unlock.CheckedChanged += new System.EventHandler(this.chk_Unlock_CheckedChanged);
             // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 1;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Controls.Add(this.groupBox3, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.groupBox4, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.dgv_成績統計, 0, 2);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 3;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1405, 642);
+            this.tableLayoutPanel6.TabIndex = 0;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.chk_成績不分組);
+            this.groupBox3.Controls.Add(this.btn_成績更新);
+            this.groupBox3.Controls.Add(this.cbx_成績分組);
+            this.groupBox3.Controls.Add(this.cbx_成績比賽);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1399, 58);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "groupBox3";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(3, 67);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(1399, 58);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "groupBox4";
+            // 
+            // dgv_成績統計
+            // 
+            this.dgv_成績統計.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_成績統計.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgv_成績統計.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_成績統計.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv_成績統計.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_成績統計.Location = new System.Drawing.Point(3, 131);
+            this.dgv_成績統計.Name = "dgv_成績統計";
+            this.dgv_成績統計.RowTemplate.Height = 24;
+            this.dgv_成績統計.Size = new System.Drawing.Size(1399, 508);
+            this.dgv_成績統計.TabIndex = 2;
+            // 
+            // btn_成績更新
+            // 
+            this.btn_成績更新.Location = new System.Drawing.Point(686, 15);
+            this.btn_成績更新.Name = "btn_成績更新";
+            this.btn_成績更新.Size = new System.Drawing.Size(79, 37);
+            this.btn_成績更新.TabIndex = 14;
+            this.btn_成績更新.Text = "更新";
+            this.btn_成績更新.UseVisualStyleBackColor = true;
+            this.btn_成績更新.Click += new System.EventHandler(this.btn_成績更新_Click);
+            // 
+            // cbx_成績分組
+            // 
+            this.cbx_成績分組.FormattingEnabled = true;
+            this.cbx_成績分組.Location = new System.Drawing.Point(168, 25);
+            this.cbx_成績分組.Name = "cbx_成績分組";
+            this.cbx_成績分組.Size = new System.Drawing.Size(128, 27);
+            this.cbx_成績分組.TabIndex = 12;
+            // 
+            // cbx_成績比賽
+            // 
+            this.cbx_成績比賽.FormattingEnabled = true;
+            this.cbx_成績比賽.Location = new System.Drawing.Point(15, 25);
+            this.cbx_成績比賽.Name = "cbx_成績比賽";
+            this.cbx_成績比賽.Size = new System.Drawing.Size(128, 27);
+            this.cbx_成績比賽.TabIndex = 11;
+            // 
+            // chk_成績不分組
+            // 
+            this.chk_成績不分組.AutoSize = true;
+            this.chk_成績不分組.Checked = true;
+            this.chk_成績不分組.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_成績不分組.Location = new System.Drawing.Point(315, 29);
+            this.chk_成績不分組.Name = "chk_成績不分組";
+            this.chk_成績不分組.Size = new System.Drawing.Size(88, 23);
+            this.chk_成績不分組.TabIndex = 15;
+            this.chk_成績不分組.Text = "不分組";
+            this.chk_成績不分組.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -842,9 +955,14 @@ namespace WindowsFormsApp1
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.tpg_成績統計.ResumeLayout(false);
             this.tpg_setting.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_成績統計)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -916,6 +1034,14 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.CheckBox chk_Unlock;
         private System.Windows.Forms.Button btn_Reset排名作業圖紙編號;
         private System.Windows.Forms.Button btn_Reset排名作業參賽編號;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox chk_成績不分組;
+        private System.Windows.Forms.Button btn_成績更新;
+        private System.Windows.Forms.ComboBox cbx_成績分組;
+        private System.Windows.Forms.ComboBox cbx_成績比賽;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.DataGridView dgv_成績統計;
     }
 }
 
