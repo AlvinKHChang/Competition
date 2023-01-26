@@ -22,35 +22,31 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private List<Regex> _DrawingIdEx = new List<Regex> { new Regex(@"^X[ABCDEFG]053\d{4}$",RegexOptions.Compiled), new Regex(@"^Y025\d{4}$", RegexOptions.Compiled) };
-           
+        private List<Regex> _DrawingIdEx = new List<Regex> { new Regex(@"^X[ABCDEFG]053\d{4}$", RegexOptions.Compiled), new Regex(@"^Y025\d{4}$", RegexOptions.Compiled) };
+
         private string _LocalMac;
         private Dictionary<String, int> _GroupDict = new Dictionary<String, int>();
         private List<String> _GroupList = new List<String>() { "長青組", "社會組", "高中組", "國中組", "國小高年級組", "國小中年級組", "國小低年級組", "幼稚園組", "國際組" };
         private Dictionary<String, int> _RankDict = new Dictionary<String, int>();
+        private List<String> _RankList = new List<String>() { "第一名", "第二名", "第三名", "優選", "佳作", "入選" };
         private List<int> _CompetitionTypeList = new List<int> { 110, 111 };
         private DataTable _統計表log;
-        private DataTable _排名作業紀錄log;
+        private DataTable _報到作業紀錄log;
         private DataTable _指導老師紀錄log;
+        private DataTable _排名作業統計log;
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            _GroupDict.Add("長青組", 0);
-            _GroupDict.Add("社會組", 1);
-            _GroupDict.Add("高中組", 2);
-            _GroupDict.Add("國中組", 3);
-            _GroupDict.Add("國小高年級組", 4);
-            _GroupDict.Add("國小中年級組", 5);
-            _GroupDict.Add("國小低年級組", 6);
-            _GroupDict.Add("幼稚園組", 7);
-            _GroupDict.Add("國際組", 8);
+            for (int i = 0; i < this._GroupList.Count(); i++)
+            {
+                this._GroupDict.Add(this._GroupList[i], i);
+            }
 
-            _RankDict.Add("第一名", 0);
-            _RankDict.Add("第二名", 1);
-            _RankDict.Add("第三名", 2);
-            _RankDict.Add("優選", 3);
-            _RankDict.Add("佳作", 4);
-            _RankDict.Add("入選", 5);
+            for (int i = 0; i < this._RankList.Count(); i++)
+            {
+                this._RankDict.Add(this._GroupList[i], i);
+            }
+
 
             _統計表log = new DataTable();
             _統計表log.Columns.Add("組別", typeof(string));
@@ -75,13 +71,13 @@ namespace WindowsFormsApp1
             cbx_統計表選擇比賽.Items.Add("寫生比賽");
             cbx_統計表選擇比賽.SelectedIndex = 0;
 
-            _排名作業紀錄log = new DataTable();
-            _排名作業紀錄log.Columns.Add("組別", typeof(string));
-            _排名作業紀錄log.Columns.Add("參賽編號", typeof(string));
-            _排名作業紀錄log.Columns.Add("姓名", typeof(string));
-            _排名作業紀錄log.Columns.Add("圖紙編號", typeof(string));
-            _排名作業紀錄log.Columns.Add("時間", typeof(string));
-            dgv_排名作業紀錄.DataSource = _排名作業紀錄log;
+            _報到作業紀錄log = new DataTable();
+            _報到作業紀錄log.Columns.Add("組別", typeof(string));
+            _報到作業紀錄log.Columns.Add("參賽編號", typeof(string));
+            _報到作業紀錄log.Columns.Add("姓名", typeof(string));
+            _報到作業紀錄log.Columns.Add("圖紙編號", typeof(string));
+            _報到作業紀錄log.Columns.Add("時間", typeof(string));
+            dgv_報到作業紀錄.DataSource = _報到作業紀錄log;
 
             cbx_報到作業選擇比賽.Items.Add("書法比賽");
             cbx_報到作業選擇比賽.Items.Add("寫生比賽");
@@ -105,6 +101,21 @@ namespace WindowsFormsApp1
             this.cbx_指導老師選擇比賽.Items.Add("寫生比賽");
             this.cbx_指導老師選擇比賽.SelectedIndex = 0;
 
+            this.cbx_排名作業選擇比賽.Items.Add("書法比賽");
+            this.cbx_排名作業選擇比賽.Items.Add("寫生比賽");
+            this.cbx_排名作業選擇比賽.SelectedIndex = 0;
+
+            foreach (var group in _GroupList)
+            {
+                cbx_排名作業分組.Items.Add(group);
+            }
+            cbx_排名作業分組.SelectedIndex = 0;
+
+            foreach (var rank in _RankList)
+            {
+                cbx_排名作業名次.Items.Add(rank);
+            }
+            cbx_排名作業名次.SelectedIndex = 0;
 
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
             foreach (var nic in nics)
@@ -115,6 +126,15 @@ namespace WindowsFormsApp1
                     break;
                 }
             }
+
+            this._排名作業統計log = new DataTable();
+            this._排名作業統計log.Columns.Add("組別", typeof(string));
+            this._排名作業統計log.Columns.Add("名次", typeof(string));
+            this._排名作業統計log.Columns.Add("參賽編號", typeof(string));
+            this._排名作業統計log.Columns.Add("姓名", typeof(string));
+            this._排名作業統計log.Columns.Add("圖紙編號", typeof(string));
+            this._排名作業統計log.Columns.Add("時間", typeof(string));
+            dgv_排名作業統計.DataSource = this._排名作業統計log;
 
             using (var dbContext = new TianwenContext())
             {
@@ -235,13 +255,13 @@ namespace WindowsFormsApp1
 
             using (var dbContext = new TianwenContext())
             {
-                var groups = dbContext.Competitors.Where(x => x.CompetitionType == competitionIndex).GroupBy(g=>g.GroupId).OrderBy(g=>g.Key).ToList();
+                var groups = dbContext.Competitors.Where(x => x.CompetitionType == competitionIndex).GroupBy(g => g.GroupId).OrderBy(g => g.Key).ToList();
                 foreach (var group in groups)
                 {
                     DataRow row = _統計表log.NewRow();
                     row[0] = group.First().Group;
                     row[1] = group.Count();
-                    row[2] = group.Where(x=>x.CheckIn).Count();
+                    row[2] = group.Where(x => x.CheckIn).Count();
                     row[3] = group.Where(x => x.RankId == 0).Count();
                     row[4] = group.Where(x => x.RankId == 1).Count();
                     row[5] = group.Where(x => x.RankId == 2).Count();
@@ -284,13 +304,13 @@ namespace WindowsFormsApp1
                         var drawingMsg = result.DrawingId != null ? result.DrawingId : "--";
                         this.rtb_報到作業參賽資料.AppendText($"圖紙編號: {drawingMsg}" + Environment.NewLine);
 
-                        
+
                     }
                     else
                     {
                         this.rtb_報到作業參賽資料.Clear();
                         this.rtb_報到作業參賽資料.SelectionColor = Color.Blue;
-                        this.rtb_報到作業參賽資料.AppendText($"參賽編號: {txt_報到作業參賽編號.Text}"+ Environment.NewLine);
+                        this.rtb_報到作業參賽資料.AppendText($"參賽編號: {txt_報到作業參賽編號.Text}" + Environment.NewLine);
                         this.rtb_報到作業參賽資料.SelectionColor = Color.Red;
                         this.rtb_報到作業參賽資料.AppendText($"無符合的資料" + Environment.NewLine);
                         MessageBox.Show($"無參賽者資料!!");
@@ -302,7 +322,7 @@ namespace WindowsFormsApp1
         {
             if (e.KeyCode == Keys.Enter && !String.IsNullOrEmpty(txt_報到作業參賽編號.Text) && !String.IsNullOrEmpty(txt_報到作業圖紙編號.Text))
             {
-                
+
                 if (!this._DrawingIdEx[this.cbx_報到作業選擇比賽.SelectedIndex].IsMatch(txt_報到作業圖紙編號.Text))
                 {
                     MessageBox.Show($"圖紙編號格式有問題!!");
@@ -339,15 +359,15 @@ namespace WindowsFormsApp1
                         var drawingMsg = result.DrawingId != null ? result.DrawingId : "--";
                         this.rtb_報到作業參賽資料.AppendText($"圖紙編號: {drawingMsg}" + Environment.NewLine);
 
-                        DataRow row = this._排名作業紀錄log.NewRow();
+                        DataRow row = this._報到作業紀錄log.NewRow();
                         row[0] = result.Group;
                         row[1] = result.EntryNumber;
                         row[2] = result.Name;
                         row[3] = result.DrawingId;
                         row[4] = result.UpdatedTime.ToString("MM/dd HH:mm:ss");
-                        this._排名作業紀錄log.Rows.InsertAt(row, 0);
-                        this.dgv_排名作業紀錄.ClearSelection();
-                        this.dgv_排名作業紀錄.Rows[0].Selected = true;
+                        this._報到作業紀錄log.Rows.InsertAt(row, 0);
+                        this.dgv_報到作業紀錄.ClearSelection();
+                        this.dgv_報到作業紀錄.Rows[0].Selected = true;
                     }
                     else
                     {
@@ -359,7 +379,7 @@ namespace WindowsFormsApp1
 
         private void btn_報到作業清除紀錄_Click(object sender, EventArgs e)
         {
-            this._排名作業紀錄log.Rows.Clear();
+            this._報到作業紀錄log.Rows.Clear();
         }
 
         private void btn_報到作業本機記錄_Click(object sender, EventArgs e)
@@ -367,22 +387,22 @@ namespace WindowsFormsApp1
             int typeIndex = _CompetitionTypeList[this.cbx_報到作業選擇比賽.SelectedIndex];
             int groupIndex = this.cbx_報到作業選擇分組.SelectedIndex;
             Boolean hasGroup = this.chk_報到作業選擇分組.Checked;
-            this._排名作業紀錄log.Rows.Clear();
+            this._報到作業紀錄log.Rows.Clear();
             using (var db = new TianwenContext())
             {
-                var results = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.DrawingId != null && x.UpdatedIp == this._LocalMac && (!hasGroup || x.GroupId == groupIndex)).OrderByDescending(x=>x.UpdatedTime).ToList();
-                foreach(var result in results)
+                var results = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.DrawingId != null && x.UpdatedIp == this._LocalMac && (!hasGroup || x.GroupId == groupIndex)).OrderByDescending(x => x.UpdatedTime).ToList();
+                foreach (var result in results)
                 {
-                    DataRow row = this._排名作業紀錄log.NewRow();
+                    DataRow row = this._報到作業紀錄log.NewRow();
                     row[0] = result.Group;
                     row[1] = result.EntryNumber;
                     row[2] = result.Name;
                     row[3] = result.DrawingId;
                     row[4] = result.UpdatedTime.ToString("MM/dd HH:mm:ss");
-                    this._排名作業紀錄log.Rows.Add(row);
+                    this._報到作業紀錄log.Rows.Add(row);
                 }
-                this.dgv_排名作業紀錄.ClearSelection();
-                this.dgv_排名作業紀錄.Rows[0].Selected = true;
+                this.dgv_報到作業紀錄.ClearSelection();
+                this.dgv_報到作業紀錄.Rows[0].Selected = true;
             }
         }
 
@@ -441,12 +461,11 @@ namespace WindowsFormsApp1
             int.TryParse(this.txt_指導老師報名人數.Text, out 報名人數);
             int.TryParse(this.txt_指導老師報到人數.Text, out 報到人數);
 
-
             int typeIndex = _CompetitionTypeList[this.cbx_指導老師選擇比賽.SelectedIndex];
             this._指導老師紀錄log.Rows.Clear();
             using (var db = new TianwenContext())
             {
-                var groups = db.Competitors.Where(x=> x.CompetitionType == typeIndex && !String.IsNullOrEmpty(x.TeacherName) && !String.IsNullOrEmpty(x.RegTeacherPhone)).GroupBy(x => x.RegTeacherPhone).OrderBy(g => g.Key).ToList();
+                var groups = db.Competitors.Where(x => x.CompetitionType == typeIndex && !String.IsNullOrEmpty(x.TeacherName) && !String.IsNullOrEmpty(x.RegTeacherPhone)).GroupBy(x => x.RegTeacherPhone).OrderBy(g => g.Key).ToList();
                 foreach (var group in groups)
                 {
                     int real報名人數 = group.Count();
@@ -460,9 +479,9 @@ namespace WindowsFormsApp1
                         row[3] = real報到人數;
                         this._指導老師紀錄log.Rows.Add(row);
                     }
-                    
+
                 }
-            
+
             }
         }
 
@@ -490,6 +509,186 @@ namespace WindowsFormsApp1
             {
                 this.btn_指導老師更新.PerformClick();
             }
+        }
+
+        private void btn_排名作業更新_Click(object sender, EventArgs e)
+        {
+            int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
+            this._排名作業統計log.Rows.Clear();
+            using (var db = new TianwenContext())
+            {
+                var comps = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.RankId == this.cbx_排名作業名次.SelectedIndex).OrderByDescending(g => g.UpdatedTime).ToList();
+                foreach (var comp in comps)
+                {
+                    DataRow row = this._排名作業統計log.NewRow();
+                    row[0] = comp.Group;
+                    row[1] = comp.Rank;
+                    row[2] = comp.EntryNumber;
+                    row[3] = comp.Name;
+                    row[4] = comp.DrawingId;
+                    row[5] = comp.UpdatedTime.ToString("MM/dd HH:mm:ss");
+                    this._排名作業統計log.Rows.Add(row);
+
+
+                }
+                this.dgv_報到作業紀錄.ClearSelection();
+                this.dgv_報到作業紀錄.Rows[0].Selected = true;
+                this.lbl_排名作業人數.Text = comps.Count().ToString();
+            }
+        }
+
+        private void cbx_排名作業選擇比賽_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.btn_排名作業更新.PerformClick();
+        }
+
+        private void cbx_排名作業分組_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.btn_排名作業更新.PerformClick();
+        }
+
+        private void cbx_排名作業名次_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.btn_排名作業更新.PerformClick();
+        }
+
+        private void txt_排名作業參賽編號_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && !String.IsNullOrEmpty(txt_排名作業參賽編號.Text))
+            {
+                int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
+                using (var db = new TianwenContext())
+                {
+                    var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.EntryNumber == txt_排名作業參賽編號.Text).FirstOrDefault();
+                    if (comp == null)
+                    {
+                        MessageBox.Show("沒有符合的參賽編號: ${txt_排名作業參賽編號.Text)}");
+                        return;
+                    }
+                    else
+                    {
+                        if (comp.Rank != null)
+                        {
+                            MessageBox.Show($"參賽編號: {txt_排名作業參賽編號.Text} 已設定為: {comp.Rank}");
+                            return;
+                        }
+                        else
+                        {
+                            comp.Rank = this.cbx_排名作業名次.SelectedItem.ToString();
+                            comp.RankId = this.cbx_排名作業名次.SelectedIndex;
+                            comp.UpdatedTime = DateTime.Now;
+                            db.SaveChanges();
+                            this.btn_排名作業更新.PerformClick();
+                        }
+
+                    }
+
+                }
+            }
+        }
+
+        private void txt_排名作業圖紙編號_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && !String.IsNullOrEmpty(txt_排名作業圖紙編號.Text))
+            {
+                int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
+                using (var db = new TianwenContext())
+                {
+                    var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.DrawingId == txt_排名作業圖紙編號.Text).FirstOrDefault();
+                    if (comp == null)
+                    {
+                        MessageBox.Show("沒有符合的圖紙編號: ${txt_排名作業圖紙編號.Text)}");
+                        return;
+                    }
+                    else
+                    {
+                        if (comp.Rank != null)
+                        {
+                            MessageBox.Show($"圖紙編號: {txt_排名作業圖紙編號.Text} 已設定為: {comp.Rank}");
+                            return;
+                        }
+                        else
+                        {
+                            comp.Rank = this.cbx_排名作業名次.SelectedItem.ToString();
+                            comp.RankId = this.cbx_排名作業名次.SelectedIndex;
+                            comp.UpdatedTime = DateTime.Now;
+                            db.SaveChanges();
+                            this.btn_排名作業更新.PerformClick();
+                        }
+
+                    }
+                }
+            }
+        }
+
+        private void chk_Unlock_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chk_Unlock.Checked)
+            {
+                this.btn_Reset排名作業參賽編號.Enabled = true;
+                this.btn_Reset排名作業圖紙編號.Enabled = true;
+            }
+            else
+            {
+                this.btn_Reset排名作業參賽編號.Enabled = false;
+                this.btn_Reset排名作業圖紙編號.Enabled = false;
+            }
+        }
+
+        private void btn_Reset排名作業參賽編號_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.txt_Reset排名作業參賽編號.Text))
+            {
+                int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
+                using (var db = new TianwenContext())
+                {
+                    var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.EntryNumber == txt_Reset排名作業參賽編號.Text).FirstOrDefault();
+                    if (comp == null)
+                    {
+                        MessageBox.Show("沒有符合的參賽編號: ${txt_Reset排名作業參賽編號.Text)}");
+                    }
+                    else
+                    {
+                        comp.Rank = null;
+                        comp.RankId = 999;
+                        comp.UpdatedTime = DateTime.Now;
+                        db.SaveChanges();
+                    }
+                }
+            }
+            this.chk_Unlock.Checked = false;
+            this.btn_Reset排名作業參賽編號.Enabled = false;
+            this.btn_Reset排名作業圖紙編號.Enabled = false;
+            this.txt_Reset排名作業參賽編號.Text = String.Empty;
+            this.btn_排名作業更新.PerformClick();
+        }
+
+        private void btn_Reset排名作業圖紙編號_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.txt_Reset排名作業圖紙編號.Text))
+            {
+                int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
+                using (var db = new TianwenContext())
+                {
+                    var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.DrawingId == txt_Reset排名作業圖紙編號.Text).FirstOrDefault();
+                    if (comp == null)
+                    {
+                        MessageBox.Show("沒有符合的圖紙編號: ${txt_Reset排名作業圖紙編號.Text)}");
+                    }
+                    else
+                    {
+                        comp.Rank = null;
+                        comp.RankId = 999;
+                        comp.UpdatedTime = DateTime.Now;
+                        db.SaveChanges();
+                    }
+                }
+            }
+            this.chk_Unlock.Checked = false;
+            this.btn_Reset排名作業參賽編號.Enabled = false;
+            this.btn_Reset排名作業圖紙編號.Enabled = false;
+            this.txt_Reset排名作業圖紙編號.Text = String.Empty;
+            this.btn_排名作業更新.PerformClick();
         }
     }
 }
