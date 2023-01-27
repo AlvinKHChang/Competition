@@ -12,6 +12,10 @@ using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System.Text.RegularExpressions;
 using System.Net.NetworkInformation;
+using ZXing;
+using ZXing.QrCode;
+using iTextSharp;
+using iTextSharp.text.pdf;
 
 namespace WindowsFormsApp1
 {
@@ -25,6 +29,16 @@ namespace WindowsFormsApp1
         private List<Regex> _DrawingIdEx = new List<Regex> { new Regex(@"^X[ABCDEFG]053\d{4}$", RegexOptions.Compiled), new Regex(@"^Y025\d{4}$", RegexOptions.Compiled) };
 
         private string _LocalMac;
+        private List<string> _比賽名稱s = new List<String>()
+        {
+            "高雄市永安區天文宮第五十三屆全國書法比賽",
+            "高雄市永安區天文宮第二十五屆全國寫生比賽"
+        };
+        private Dictionary<int, string> _比賽名稱Dict = new Dictionary<int, String>()
+        {
+            {110, "高雄市永安區天文宮第五十三屆全國書法比賽" },
+            {111, "高雄市永安區天文宮第二十五屆全國寫生比賽" }
+        };
         private Dictionary<String, int> _GroupDict = new Dictionary<String, int>();
         private List<String> _GroupList = new List<String>() { "長青組", "社會組", "高中組", "國中組", "國小高年級組", "國小中年級組", "國小低年級組", "幼稚園組", "國際組" };
         private Dictionary<String, int> _RankDict = new Dictionary<String, int>();
@@ -749,11 +763,11 @@ namespace WindowsFormsApp1
                             this._成績統計log.Rows.Add(row);
                         }
                         groupIndex = comp.GroupId;
-                        for (int i =0; i< indexs.Count(); i++)
+                        for (int i = 0; i < indexs.Count(); i++)
                         {
                             indexs[i] = 0;
                         }
-                            builders.ForEach(x => x.Clear());
+                        builders.ForEach(x => x.Clear());
                         isFirst = false;
                     }
                     indexs[comp.RankId]++;
@@ -773,9 +787,98 @@ namespace WindowsFormsApp1
                     this._成績統計log.Rows.Add(row);
                 }
 
-                
+
 
             }
         }
+
+        private void btn_匯出參賽證_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txt_報到作業參賽編號.Text))
+            {
+                var str = new StringBuilder();
+                str.Clear();
+                using (var db = new TianwenContext())
+                {
+                    var result = db.Competitors.Where(x => x.EntryNumber == txt_報到作業參賽編號.Text.ToString()).FirstOrDefault();
+                    if (result != null)
+                    {
+
+                        str.AppendLine(this._比賽名稱Dict[result.CompetitionType]);
+                        str.AppendLine($"報名編號: {result.EntryNumber}");
+                        str.AppendLine($"組    別: {result.Group}");
+                        str.AppendLine($"姓    名: {result.Name}");
+                        if (!String.IsNullOrEmpty(result.PassportName))
+                        {
+                            str.AppendLine($"Name    : {result.PassportName}");
+                        }
+                        str.AppendLine($"電    話: {result.Phone}");
+                        str.AppendLine($"地    址: {result.Address}");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"無參賽者資料!!");
+                        return;
+                    }
+                }
+
+                var stream = new MemoryStream();
+
+                //建立文件
+                using (var doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4))
+                {
+                    string chFontPath = "c:\\windows\\fonts\\kaiu.ttf"; //標楷體                           
+                    BaseFont baseFont = BaseFont.CreateFont(chFontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                    iTextSharp.text.Font chtFont = new iTextSharp.text.Font(baseFont, 14);
+
+                    using (var writer = PdfWriter.GetInstance(doc, stream))
+                    {
+                        var qrCodeWriter = new ZXing.BarcodeWriter
+                        {
+                            Format = ZXing.BarcodeFormat.QR_CODE,
+                            Options = new QrCodeEncodingOptions
+                            {
+                                Height = 100,
+                                Width = 100,
+                                Margin = 0
+                            }
+                        };
+                        Bitmap bitmap = qrCodeWriter.Write(this.txt_報到作業參賽編號.Text);
+                        ImageConverter converter = new ImageConverter();
+                        iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(ImageToByte(bitmap));
+                        doc.Open();
+
+                        iTextSharp.text.Paragraph paraQR = new iTextSharp.text.Paragraph();
+                        paraQR.Leading = 15;
+                        paraQR.Add(img);
+                        doc.Add(paraQR);
+
+                        iTextSharp.text.Paragraph paraInfo = new iTextSharp.text.Paragraph();
+                        paraInfo.Leading = 15;
+                        paraInfo.Add(new iTextSharp.text.Chunk(str.ToString(), chtFont));
+                        doc.Add(paraInfo);
+
+                        doc.Close();
+                    }
+                }
+
+                var path = $"D:\\2023比賽\\參賽證";
+                Directory.CreateDirectory(path);
+                var filename = $"{path}\\{this.txt_報到作業參賽編號.Text}_{DateTime.Now.ToString("HHmmss")}.pdf";
+                FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
+                stream.WriteTo(file);
+                file.Close();
+                stream.Close();
+                System.Diagnostics.Process.Start("Acrobat.exe", filename);
+
+            }
+        }
+
+        public static byte[] ImageToByte(System.Drawing.Image img)
+        {
+            ImageConverter converter = new ImageConverter();
+            return (byte[])converter.ConvertTo(img, typeof(byte[]));
+        }
+
     }
 }
