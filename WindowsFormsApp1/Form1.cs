@@ -49,6 +49,7 @@ namespace WindowsFormsApp1
         private DataTable _指導老師紀錄log;
         private DataTable _排名作業統計log;
         private DataTable _成績統計log;
+        private SystemParameter _SystemParameter = new SystemParameter();
 
         private void Form1_Load(object sender, EventArgs e)
         {

@@ -168,6 +168,7 @@
       <DependentUpon>202301250603375_Initial4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="SystemParameter.cs" />
     <Compile Include="TianwenContext.cs" />
     <Compile Include="Competitor.cs" />
     <Compile Include="Form1.cs">
