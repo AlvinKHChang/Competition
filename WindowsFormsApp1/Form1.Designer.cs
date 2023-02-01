@@ -106,6 +106,7 @@ namespace WindowsFormsApp1
             this.btn_刪除所有資料 = new System.Windows.Forms.Button();
             this.btn_匯入參賽者資料 = new System.Windows.Forms.Button();
             this.btn_天文宮 = new System.Windows.Forms.Button();
+            this.btn_國際組中文 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -839,6 +840,7 @@ namespace WindowsFormsApp1
             // 
             // gbx_獎狀
             // 
+            this.gbx_獎狀.Controls.Add(this.btn_國際組中文);
             this.gbx_獎狀.Controls.Add(this.btn_天文宮);
             this.gbx_獎狀.Controls.Add(this.btn_市政府獎狀);
             this.gbx_獎狀.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -957,6 +959,16 @@ namespace WindowsFormsApp1
             this.btn_天文宮.Text = "天文宮";
             this.btn_天文宮.UseVisualStyleBackColor = true;
             this.btn_天文宮.Click += new System.EventHandler(this.btn_天文宮_Click);
+            // 
+            // btn_國際組中文
+            // 
+            this.btn_國際組中文.Location = new System.Drawing.Point(247, 20);
+            this.btn_國際組中文.Name = "btn_國際組中文";
+            this.btn_國際組中文.Size = new System.Drawing.Size(122, 32);
+            this.btn_國際組中文.TabIndex = 2;
+            this.btn_國際組中文.Text = "國際組中文";
+            this.btn_國際組中文.UseVisualStyleBackColor = true;
+            this.btn_國際組中文.Click += new System.EventHandler(this.btn_國際組中文_Click);
             // 
             // Form1
             // 
@@ -1085,6 +1097,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button btn_匯出參賽證;
         private System.Windows.Forms.Button btn_市政府獎狀;
         private System.Windows.Forms.Button btn_天文宮;
+        private System.Windows.Forms.Button btn_國際組中文;
     }
 }
 
