@@ -6,40 +6,48 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    class SystemParameter
+    public class SystemParameter
     {
-        string ServerIp { get; set; } = "192.168.0.1";
+        public string ServerIp { get; set; } = "192.168.0.1";
 
-        TextPrintInfo GovName { get; set; } = new TextPrintInfo() { Label="Name", x=46, y=111 };
-        TextPrintInfo Gov比賽名稱 { get; set; } = new TextPrintInfo() { Label = "天文獎  全國書法", x = 38, y = 142 };
+        public TextPrintInfo GovName { get; set; } = new TextPrintInfo() { Label="Name", X=46, Y=111 };
+        
+        public TextPrintInfo Gov比賽名稱 { get; set; } = new TextPrintInfo() { Label = "天文獎  全國書法", X = 38, Y = 142 };
 
-        TextPrintInfo Gov比賽屆數分組名次 { get; set; } = new TextPrintInfo() { Label = "第五十三屆  長青組第一名", x = 38, y = 156 };
+        public TextPrintInfo Gov比賽屆數分組名次 { get; set; } = new TextPrintInfo() { Label = "第五十三屆  長青組第一名", X = 38, Y = 156 };
 
-        TextPrintInfo GovPageNumber { get; set; } = new TextPrintInfo() { Label = "1", x = 175, y = 260 };
+        public TextPrintInfo GovPageNumber { get; set; } = new TextPrintInfo() { Label = "1", X = 175, Y = 260 };
 
-        TextPrintInfo TWName { get; set; } = new TextPrintInfo() { Label = "Name", x = 42, y = 95 };
+        public int GovFontNumber = 18;
 
-        TextPrintInfo TW屆數 { get; set; } = new TextPrintInfo() { Label = "53", x = 93, y = 110 };
+        public TextPrintInfo TWName { get; set; } = new TextPrintInfo() { Label = "Name", X = 42, Y = 95 };
 
-        TextPrintInfo TW比賽 { get; set; } = new TextPrintInfo() { Label = "書法", x = 140, y = 110 };
+        public TextPrintInfo TW屆數 { get; set; } = new TextPrintInfo() { Label = "53", X = 93, Y = 110 };
 
-        TextPrintInfo TW分組名次 { get; set; } = new TextPrintInfo() { Label = "長青組  第一名", x = 70, y = 127 };
+        public TextPrintInfo TW比賽 { get; set; } = new TextPrintInfo() { Label = "書法", X = 140, Y = 110 };
 
-        TextPrintInfo TWYear { get; set; } = new TextPrintInfo() { Label = "112", x = 83, y = 267 };
+        public TextPrintInfo TW分組名次 { get; set; } = new TextPrintInfo() { Label = "長青組  第一名", X = 70, Y = 127 };
 
-        TextPrintInfo TWMonth { get; set; } = new TextPrintInfo() { Label = "2", x = 120, y = 267 };
+        public TextPrintInfo TWYear { get; set; } = new TextPrintInfo() { Label = "112", X = 83, Y = 267 };
 
-        TextPrintInfo TWDay { get; set; } = new TextPrintInfo() { Label = "5", x = 157, y = 267 };
+        public TextPrintInfo TWMonth { get; set; } = new TextPrintInfo() { Label = "2", X = 120, Y = 267 };
 
-        TextPrintInfo TWPageNumber { get; set; } = new TextPrintInfo() { Label = "1", x = 184, y = 260 };
+        public TextPrintInfo TWDay { get; set; } = new TextPrintInfo() { Label = "5", X = 157, Y = 267 };
 
+        public TextPrintInfo TWPageNumber { get; set; } = new TextPrintInfo() { Label = "1", X = 184, Y = 260 };
+
+        public int TWFontNumber = 18;
 
     }
 
     public class TextPrintInfo
     {
         public string Label { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
+
+        public float PointX { get { return iTextSharp.text.Utilities.MillimetersToPoints(this.X); } }
+
+        public float PointY { get { return iTextSharp.text.Utilities.MillimetersToPoints(this.Y); } }
     }
 }

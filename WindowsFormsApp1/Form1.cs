@@ -39,6 +39,21 @@ namespace WindowsFormsApp1
             {110, "高雄市永安區天文宮第五十三屆全國書法比賽" },
             {111, "高雄市永安區天文宮第二十五屆全國寫生比賽" }
         };
+        private List<string> _屆數中文s = new List<String>()
+        {
+            "五十三",
+            "二十五"
+        };
+        private List<string> _屆數數字s = new List<String>()
+        {
+            "53",
+            "25"
+        };
+        private List<string> _屆數英文s = new List<String>()
+        {
+            "53rd",
+            "25th"
+        };
         private Dictionary<String, int> _GroupDict = new Dictionary<String, int>();
         private List<String> _GroupList = new List<String>() { "長青組", "社會組", "高中組", "國中組", "國小高年級組", "國小中年級組", "國小低年級組", "幼稚園組", "國際組" };
         private Dictionary<String, int> _RankDict = new Dictionary<String, int>();
@@ -143,8 +158,8 @@ namespace WindowsFormsApp1
             this._排名作業統計log.Columns.Add("時間", typeof(string));
             dgv_排名作業統計.DataSource = this._排名作業統計log;
 
-            this.cbx_成績比賽.Items.Add("書法比賽");
-            this.cbx_成績比賽.Items.Add("寫生比賽");
+            this.cbx_成績比賽.Items.Add("書法");
+            this.cbx_成績比賽.Items.Add("寫生");
             this.cbx_成績比賽.SelectedIndex = 0;
 
             foreach (var group in _GroupList)
@@ -722,7 +737,7 @@ namespace WindowsFormsApp1
 
         private void btn_成績更新_Click(object sender, EventArgs e)
         {
-            int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
+            int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
             using (var db = new TianwenContext())
             {
                 this._成績統計log.Rows.Clear();
@@ -871,6 +886,7 @@ namespace WindowsFormsApp1
                 file.Close();
                 stream.Close();
                 System.Diagnostics.Process.Start("Acrobat.exe", filename);
+                stream.Dispose();
 
             }
         }
@@ -881,5 +897,74 @@ namespace WindowsFormsApp1
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
 
+        private void chk_成績不分組_CheckedChanged(object sender, EventArgs e)
+        {
+            gbx_獎狀.Enabled = !chk_成績不分組.Checked;
+        }
+
+        private void btn_市政府獎狀_Click(object sender, EventArgs e)
+        {
+            var stream = new MemoryStream();
+            using (var db = new TianwenContext())
+            {
+                int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
+                var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
+                               && (x.GroupId == this.cbx_成績分組.SelectedIndex)
+                               && (x.RankId <= 3))
+                   .OrderBy(g => new {g.RankId, g.EntryNumber }).ToList();
+
+                using (var doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4))
+                {
+                    string chFontPath = "c:\\windows\\fonts\\kaiu.ttf"; //標楷體                           
+                    BaseFont baseFont = BaseFont.CreateFont(chFontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                    iTextSharp.text.Font chtFont = new iTextSharp.text.Font(baseFont, _SystemParameter.GovFontNumber);
+                    iTextSharp.text.Font pageFont = new iTextSharp.text.Font(baseFont, 10);
+                    iTextSharp.text.Rectangle pageSize = doc.PageSize;
+                    using (var writer = PdfWriter.GetInstance(doc, stream))
+                    {
+                        doc.Open();
+                        PdfContentByte cb = writer.DirectContent;
+                                                
+                        int pageIndex = 1;
+                        foreach (var comp in results)
+                        {
+                            iTextSharp.text.Phrase txtName = new iTextSharp.text.Phrase(comp.Name, chtFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtName, pageSize.GetLeft(_SystemParameter.GovName.PointX), pageSize.GetTop(_SystemParameter.GovName.PointY), 0);
+                            iTextSharp.text.Phrase txt比賽名稱;
+                            txt比賽名稱 = new iTextSharp.text.Phrase($"天文獎  全國{this.cbx_成績比賽.SelectedItem}", chtFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txt比賽名稱, pageSize.GetLeft(_SystemParameter.Gov比賽名稱.PointX), pageSize.GetTop(_SystemParameter.Gov比賽名稱.PointY), 0);
+
+                            iTextSharp.text.Phrase txt屆數組別名次;
+                            txt屆數組別名次 = new iTextSharp.text.Phrase($"第{this._屆數中文s[this.cbx_成績比賽.SelectedIndex]}屆  {comp.Group}{comp.Rank}", chtFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txt屆數組別名次, pageSize.GetLeft(_SystemParameter.Gov比賽屆數分組名次.PointX), pageSize.GetTop(_SystemParameter.Gov比賽屆數分組名次.PointY), 0);
+
+                            iTextSharp.text.Phrase txtPageNumber = new iTextSharp.text.Phrase(pageIndex.ToString(), pageFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtPageNumber, pageSize.GetLeft(_SystemParameter.GovPageNumber.PointX), pageSize.GetTop(_SystemParameter.GovPageNumber.PointY), 0);
+
+                            doc.NewPage();
+                            //paraInfo.Leading = 15;
+                            //paraInfo.Add(new iTextSharp.text.Chunk(comp.Name, chtFont));
+                            //doc.Add(paraInfo).set;
+                            if (comp.RankId == 2)
+                                pageIndex = 1;
+                            else
+                                pageIndex++;
+                        }
+                        doc.Close();
+                    }
+                }
+            }
+
+            var path = $"D:\\2023比賽\\獎狀";
+            Directory.CreateDirectory(path);
+            var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_{this._GroupList[this.cbx_成績分組.SelectedIndex]}_市政府獎狀_{DateTime.Now.ToString("HHmmss")}.pdf";
+            FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            stream.WriteTo(file);
+            file.Close();
+            stream.Close();
+            System.Diagnostics.Process.Start("Acrobat.exe", filename);
+
+            stream.Dispose();
+        }
     }
 }
