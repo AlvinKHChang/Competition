@@ -54,6 +54,15 @@ namespace WindowsFormsApp1
             "53rd",
             "25th"
         };
+
+        private List<string> _名次英文s = new List<String>()
+        {
+            "First Prize",
+            "Second Prize",
+            "Third Prize",
+            "Quality Award"
+        };
+
         private Dictionary<String, int> _GroupDict = new Dictionary<String, int>();
         private List<String> _GroupList = new List<String>() { "長青組", "社會組", "高中組", "國中組", "國小高年級組", "國小中年級組", "國小低年級組", "幼稚園組", "國際組" };
         private Dictionary<String, int> _RankDict = new Dictionary<String, int>();
@@ -1112,7 +1121,6 @@ namespace WindowsFormsApp1
                                 = new iTextSharp.text.Phrase(_SystemParameter.TWDay.Label, chtFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtYear, pageSize.GetLeft(_SystemParameter.TWDay.PointX), pageSize.GetTop(_SystemParameter.TWDay.PointY), 0);
 
-
                             iTextSharp.text.Phrase txtPageNumber = new iTextSharp.text.Phrase(pageIndex.ToString(), pageFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtPageNumber, pageSize.GetLeft(_SystemParameter.TWPageNumber.PointX), pageSize.GetTop(_SystemParameter.TWPageNumber.PointY), 0);
 
@@ -1133,6 +1141,101 @@ namespace WindowsFormsApp1
             var path = $"D:\\2023比賽\\獎狀";
             Directory.CreateDirectory(path);
             var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_{this._GroupList[this.cbx_成績分組.SelectedIndex]}_國際組中文_{DateTime.Now.ToString("HHmm")}.pdf";
+            FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            stream.WriteTo(file);
+            file.Close();
+            stream.Close();
+            System.Diagnostics.Process.Start("Acrobat.exe", filename);
+
+            stream.Dispose();
+        }
+
+        private void btn_國際組英文_Click(object sender, EventArgs e)
+        {
+            var stream = new MemoryStream();
+            using (var db = new TianwenContext())
+            {
+                int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
+                var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
+                               && (x.GroupId == this.cbx_成績分組.SelectedIndex)
+                               && (x.RankId < 4))
+                   .OrderBy(g => new { g.RankId, g.EntryNumber }).ToList();
+
+                using (var doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate()))
+                {
+                    string genFontPath = "c:\\windows\\fonts\\PALSCRI.ttf"; 
+                    string nameFontPath = "c:\\windows\\fonts\\timesbi.ttf";
+                    string timesFontPath = "c:\\windows\\fonts\\times.ttf";
+                    BaseFont genBaseFont = BaseFont.CreateFont(genFontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                    BaseFont nameBaseFont = BaseFont.CreateFont(nameFontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                    BaseFont timesBaseFont = BaseFont.CreateFont(timesFontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+
+                    float dist = iTextSharp.text.Utilities.MillimetersToPoints(_SystemParameter.Eng行距);
+                    iTextSharp.text.Font genFont = new iTextSharp.text.Font(genBaseFont, _SystemParameter.EngFontNumber);
+                    iTextSharp.text.Font nameFont = new iTextSharp.text.Font(nameBaseFont, _SystemParameter.EngNameFontNumber);
+                    iTextSharp.text.Font dateFont = new iTextSharp.text.Font(genBaseFont, _SystemParameter.EngFontNumber);
+                    iTextSharp.text.Font pageFont = new iTextSharp.text.Font(timesBaseFont, 10);
+                    iTextSharp.text.Rectangle pageSize = doc.PageSize;
+                    using (var writer = PdfWriter.GetInstance(doc, stream))
+                    {
+                        doc.Open();
+                        PdfContentByte cb = writer.DirectContent;
+
+                        int rankIndex = 0;
+                        int pageIndex = 1;
+                        foreach (var comp in results)
+                        {
+                            if (comp.RankId > 2 && rankIndex != comp.RankId)
+                            {
+                                rankIndex = comp.RankId;
+                                pageIndex = 1;
+                            }
+                            
+                            iTextSharp.text.Phrase txtPhrase1 = new iTextSharp.text.Phrase("This certificate is presented to", genFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase1, pageSize.Right / 2, pageSize.Top / 2 + dist *2, 0);
+
+
+                            iTextSharp.text.Phrase txtPhrase2 = new iTextSharp.text.Phrase(comp.Name, nameFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase2, pageSize.Right / 2, pageSize.Top / 2 + dist, 0);
+
+                            iTextSharp.text.Phrase txtPhrase3 = new iTextSharp.text.Phrase("For Successfully Completing the", genFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase3, pageSize.Right/2, pageSize.Top/2, 0);
+
+                            iTextSharp.text.Phrase txtPhrase4 = new iTextSharp.text.Phrase(this._名次英文s[comp.RankId], nameFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase4, pageSize.Right / 2, pageSize.Top / 2 - dist, 0);
+
+                            iTextSharp.text.Phrase txtPhrase5 = new iTextSharp.text.Phrase("In The 53th Annual Calligraphy Competition of Tian Wen Temple", genFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase5, pageSize.Right / 2, pageSize.Top / 2 - dist*2, 0);
+
+
+                            //ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtParagraph, pageSize.GetLeft(0), pageSize.GetTop(0), 0);
+
+
+                            iTextSharp.text.Phrase txtDate
+                                = new iTextSharp.text.Phrase(_SystemParameter.EnDate.Label, dateFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtDate, pageSize.Right / 2, pageSize.GetTop(_SystemParameter.EnDate.PointY), 0);
+                                                        
+                            iTextSharp.text.Phrase txtPageNumber = new iTextSharp.text.Phrase(pageIndex.ToString(), pageFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtPageNumber, pageSize.GetLeft(_SystemParameter.EnPageNumber.PointX), pageSize.GetTop(_SystemParameter.EnPageNumber.PointY), 0);
+
+                            doc.NewPage();
+                            
+                            //paraInfo.Leading = 15;
+                            //paraInfo.Add(new iTextSharp.text.Chunk(comp.Name, chtFont));
+                            //doc.Add(paraInfo).set;
+                            if (comp.RankId == 2)
+                                pageIndex = 1;
+                            else
+                                pageIndex++;
+                        }
+                        doc.Close();
+                    }
+                }
+            }
+
+            var path = $"D:\\2023比賽\\獎狀";
+            Directory.CreateDirectory(path);
+            var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_{this._GroupList[this.cbx_成績分組.SelectedIndex]}_國際組英文_{DateTime.Now.ToString("HHmmss")}.pdf";
             FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
             stream.WriteTo(file);
             file.Close();
