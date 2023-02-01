@@ -29,7 +29,7 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpg_統計 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -97,6 +97,7 @@ namespace WindowsFormsApp1
             this.cbx_成績分組 = new System.Windows.Forms.ComboBox();
             this.cbx_成績比賽 = new System.Windows.Forms.ComboBox();
             this.gbx_獎狀 = new System.Windows.Forms.GroupBox();
+            this.btn_市政府獎狀 = new System.Windows.Forms.Button();
             this.dgv_成績統計 = new System.Windows.Forms.DataGridView();
             this.tpg_setting = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -104,7 +105,7 @@ namespace WindowsFormsApp1
             this.btn_初始化所有資料 = new System.Windows.Forms.Button();
             this.btn_刪除所有資料 = new System.Windows.Forms.Button();
             this.btn_匯入參賽者資料 = new System.Windows.Forms.Button();
-            this.btn_市政府獎狀 = new System.Windows.Forms.Button();
+            this.btn_天文宮 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -795,7 +796,7 @@ namespace WindowsFormsApp1
             this.groupBox3.Size = new System.Drawing.Size(1399, 58);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
+            this.groupBox3.Text = "比賽/分組";
             // 
             // chk_成績不分組
             // 
@@ -838,6 +839,7 @@ namespace WindowsFormsApp1
             // 
             // gbx_獎狀
             // 
+            this.gbx_獎狀.Controls.Add(this.btn_天文宮);
             this.gbx_獎狀.Controls.Add(this.btn_市政府獎狀);
             this.gbx_獎狀.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbx_獎狀.Enabled = false;
@@ -848,19 +850,29 @@ namespace WindowsFormsApp1
             this.gbx_獎狀.TabStop = false;
             this.gbx_獎狀.Text = "獎狀";
             // 
+            // btn_市政府獎狀
+            // 
+            this.btn_市政府獎狀.Location = new System.Drawing.Point(35, 20);
+            this.btn_市政府獎狀.Name = "btn_市政府獎狀";
+            this.btn_市政府獎狀.Size = new System.Drawing.Size(80, 32);
+            this.btn_市政府獎狀.TabIndex = 0;
+            this.btn_市政府獎狀.Text = "市政府";
+            this.btn_市政府獎狀.UseVisualStyleBackColor = true;
+            this.btn_市政府獎狀.Click += new System.EventHandler(this.btn_市政府獎狀_Click);
+            // 
             // dgv_成績統計
             // 
             this.dgv_成績統計.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_成績統計.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_成績統計.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_成績統計.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_成績統計.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_成績統計.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_成績統計.Location = new System.Drawing.Point(3, 131);
             this.dgv_成績統計.Name = "dgv_成績統計";
@@ -936,15 +948,15 @@ namespace WindowsFormsApp1
             this.btn_匯入參賽者資料.UseVisualStyleBackColor = true;
             this.btn_匯入參賽者資料.Click += new System.EventHandler(this.btn_匯入參賽者資料_Click);
             // 
-            // btn_市政府獎狀
+            // btn_天文宮
             // 
-            this.btn_市政府獎狀.Location = new System.Drawing.Point(35, 20);
-            this.btn_市政府獎狀.Name = "btn_市政府獎狀";
-            this.btn_市政府獎狀.Size = new System.Drawing.Size(80, 32);
-            this.btn_市政府獎狀.TabIndex = 0;
-            this.btn_市政府獎狀.Text = "市政府獎狀";
-            this.btn_市政府獎狀.UseVisualStyleBackColor = true;
-            this.btn_市政府獎狀.Click += new System.EventHandler(this.btn_市政府獎狀_Click);
+            this.btn_天文宮.Location = new System.Drawing.Point(141, 20);
+            this.btn_天文宮.Name = "btn_天文宮";
+            this.btn_天文宮.Size = new System.Drawing.Size(80, 32);
+            this.btn_天文宮.TabIndex = 1;
+            this.btn_天文宮.Text = "天文宮";
+            this.btn_天文宮.UseVisualStyleBackColor = true;
+            this.btn_天文宮.Click += new System.EventHandler(this.btn_天文宮_Click);
             // 
             // Form1
             // 
@@ -1072,6 +1084,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.DataGridView dgv_成績統計;
         private System.Windows.Forms.Button btn_匯出參賽證;
         private System.Windows.Forms.Button btn_市政府獎狀;
+        private System.Windows.Forms.Button btn_天文宮;
     }
 }
 
