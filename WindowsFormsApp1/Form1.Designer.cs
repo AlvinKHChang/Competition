@@ -29,6 +29,7 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpg_統計 = new System.Windows.Forms.TabPage();
@@ -97,6 +98,9 @@ namespace WindowsFormsApp1
             this.cbx_成績分組 = new System.Windows.Forms.ComboBox();
             this.cbx_成績比賽 = new System.Windows.Forms.ComboBox();
             this.gbx_獎狀 = new System.Windows.Forms.GroupBox();
+            this.btn_國際組英文 = new System.Windows.Forms.Button();
+            this.btn_國際組中文 = new System.Windows.Forms.Button();
+            this.btn_天文宮 = new System.Windows.Forms.Button();
             this.btn_市政府獎狀 = new System.Windows.Forms.Button();
             this.dgv_成績統計 = new System.Windows.Forms.DataGridView();
             this.tpg_setting = new System.Windows.Forms.TabPage();
@@ -105,9 +109,12 @@ namespace WindowsFormsApp1
             this.btn_初始化所有資料 = new System.Windows.Forms.Button();
             this.btn_刪除所有資料 = new System.Windows.Forms.Button();
             this.btn_匯入參賽者資料 = new System.Windows.Forms.Button();
-            this.btn_天文宮 = new System.Windows.Forms.Button();
-            this.btn_國際組中文 = new System.Windows.Forms.Button();
-            this.btn_國際組英文 = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txt_ServerIp = new System.Windows.Forms.TextBox();
+            this.bs_System = new System.Windows.Forms.BindingSource(this.components);
+            this.label12 = new System.Windows.Forms.Label();
+            this.btn_領獎單 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -136,6 +143,9 @@ namespace WindowsFormsApp1
             this.tpg_setting.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_System)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -841,6 +851,7 @@ namespace WindowsFormsApp1
             // 
             // gbx_獎狀
             // 
+            this.gbx_獎狀.Controls.Add(this.btn_領獎單);
             this.gbx_獎狀.Controls.Add(this.btn_國際組英文);
             this.gbx_獎狀.Controls.Add(this.btn_國際組中文);
             this.gbx_獎狀.Controls.Add(this.btn_天文宮);
@@ -853,6 +864,36 @@ namespace WindowsFormsApp1
             this.gbx_獎狀.TabIndex = 1;
             this.gbx_獎狀.TabStop = false;
             this.gbx_獎狀.Text = "獎狀";
+            // 
+            // btn_國際組英文
+            // 
+            this.btn_國際組英文.Location = new System.Drawing.Point(386, 20);
+            this.btn_國際組英文.Name = "btn_國際組英文";
+            this.btn_國際組英文.Size = new System.Drawing.Size(122, 32);
+            this.btn_國際組英文.TabIndex = 3;
+            this.btn_國際組英文.Text = "國際組英文";
+            this.btn_國際組英文.UseVisualStyleBackColor = true;
+            this.btn_國際組英文.Click += new System.EventHandler(this.btn_國際組英文_Click);
+            // 
+            // btn_國際組中文
+            // 
+            this.btn_國際組中文.Location = new System.Drawing.Point(247, 20);
+            this.btn_國際組中文.Name = "btn_國際組中文";
+            this.btn_國際組中文.Size = new System.Drawing.Size(122, 32);
+            this.btn_國際組中文.TabIndex = 2;
+            this.btn_國際組中文.Text = "國際組中文";
+            this.btn_國際組中文.UseVisualStyleBackColor = true;
+            this.btn_國際組中文.Click += new System.EventHandler(this.btn_國際組中文_Click);
+            // 
+            // btn_天文宮
+            // 
+            this.btn_天文宮.Location = new System.Drawing.Point(141, 20);
+            this.btn_天文宮.Name = "btn_天文宮";
+            this.btn_天文宮.Size = new System.Drawing.Size(80, 32);
+            this.btn_天文宮.TabIndex = 1;
+            this.btn_天文宮.Text = "天文宮";
+            this.btn_天文宮.UseVisualStyleBackColor = true;
+            this.btn_天文宮.Click += new System.EventHandler(this.btn_天文宮_Click);
             // 
             // btn_市政府獎狀
             // 
@@ -901,6 +942,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel7, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -952,35 +994,56 @@ namespace WindowsFormsApp1
             this.btn_匯入參賽者資料.UseVisualStyleBackColor = true;
             this.btn_匯入參賽者資料.Click += new System.EventHandler(this.btn_匯入參賽者資料_Click);
             // 
-            // btn_天文宮
+            // panel7
             // 
-            this.btn_天文宮.Location = new System.Drawing.Point(141, 20);
-            this.btn_天文宮.Name = "btn_天文宮";
-            this.btn_天文宮.Size = new System.Drawing.Size(80, 32);
-            this.btn_天文宮.TabIndex = 1;
-            this.btn_天文宮.Text = "天文宮";
-            this.btn_天文宮.UseVisualStyleBackColor = true;
-            this.btn_天文宮.Click += new System.EventHandler(this.btn_天文宮_Click);
+            this.panel7.Controls.Add(this.groupBox4);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(3, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(693, 630);
+            this.panel7.TabIndex = 1;
             // 
-            // btn_國際組中文
+            // groupBox4
             // 
-            this.btn_國際組中文.Location = new System.Drawing.Point(247, 20);
-            this.btn_國際組中文.Name = "btn_國際組中文";
-            this.btn_國際組中文.Size = new System.Drawing.Size(122, 32);
-            this.btn_國際組中文.TabIndex = 2;
-            this.btn_國際組中文.Text = "國際組中文";
-            this.btn_國際組中文.UseVisualStyleBackColor = true;
-            this.btn_國際組中文.Click += new System.EventHandler(this.btn_國際組中文_Click);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.txt_ServerIp);
+            this.groupBox4.Location = new System.Drawing.Point(95, 29);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(278, 167);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "groupBox4";
             // 
-            // btn_國際組英文
+            // txt_ServerIp
             // 
-            this.btn_國際組英文.Location = new System.Drawing.Point(386, 20);
-            this.btn_國際組英文.Name = "btn_國際組英文";
-            this.btn_國際組英文.Size = new System.Drawing.Size(122, 32);
-            this.btn_國際組英文.TabIndex = 3;
-            this.btn_國際組英文.Text = "國際組英文";
-            this.btn_國際組英文.UseVisualStyleBackColor = true;
-            this.btn_國際組英文.Click += new System.EventHandler(this.btn_國際組英文_Click);
+            this.txt_ServerIp.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_System, "ServerIp", true));
+            this.txt_ServerIp.Location = new System.Drawing.Point(116, 63);
+            this.txt_ServerIp.Name = "txt_ServerIp";
+            this.txt_ServerIp.Size = new System.Drawing.Size(156, 30);
+            this.txt_ServerIp.TabIndex = 0;
+            // 
+            // bs_System
+            // 
+            this.bs_System.DataSource = typeof(WindowsFormsApp1.SystemParameter);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(17, 66);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(99, 19);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Server IP";
+            // 
+            // btn_領獎單
+            // 
+            this.btn_領獎單.Location = new System.Drawing.Point(525, 20);
+            this.btn_領獎單.Name = "btn_領獎單";
+            this.btn_領獎單.Size = new System.Drawing.Size(122, 32);
+            this.btn_領獎單.TabIndex = 4;
+            this.btn_領獎單.Text = "領獎單";
+            this.btn_領獎單.UseVisualStyleBackColor = true;
+            this.btn_領獎單.Click += new System.EventHandler(this.btn_領獎單_Click);
             // 
             // Form1
             // 
@@ -1027,6 +1090,10 @@ namespace WindowsFormsApp1
             this.tpg_setting.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_System)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1111,6 +1178,12 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button btn_天文宮;
         private System.Windows.Forms.Button btn_國際組中文;
         private System.Windows.Forms.Button btn_國際組英文;
+        private System.Windows.Forms.BindingSource bs_System;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox txt_ServerIp;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btn_領獎單;
     }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace WindowsFormsApp1
 {
@@ -55,8 +56,10 @@ namespace WindowsFormsApp1
         public float X { get; set; }
         public float Y { get; set; }
 
+        [JsonIgnore]
         public float PointX { get { return iTextSharp.text.Utilities.MillimetersToPoints(this.X); } }
 
+        [JsonIgnore]
         public float PointY { get { return iTextSharp.text.Utilities.MillimetersToPoints(this.Y); } }
     }
 }

@@ -17,6 +17,7 @@ using ZXing.QrCode;
 using iTextSharp;
 using iTextSharp.text.pdf;
 
+
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
@@ -197,6 +198,7 @@ namespace WindowsFormsApp1
                 }
             }
 
+            this.bs_System.DataSource = this._SystemParameter;
             using (var dbContext = new TianwenContext())
             {
                 // dbContext.Competitors.Add(new Competitor { Name="張光華", EntryNumber="A123", Address="高雄市湖內區", Phone="123456"});
@@ -920,7 +922,7 @@ namespace WindowsFormsApp1
                 var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
                                && (x.GroupId == this.cbx_成績分組.SelectedIndex)
                                && (x.RankId <= 3))
-                   .OrderBy(g => new {g.RankId, g.EntryNumber }).ToList();
+                   .OrderBy(g => new { g.RankId, g.EntryNumber }).ToList();
 
                 using (var doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4))
                 {
@@ -933,7 +935,7 @@ namespace WindowsFormsApp1
                     {
                         doc.Open();
                         PdfContentByte cb = writer.DirectContent;
-                                                
+
                         int pageIndex = 1;
                         foreach (var comp in results)
                         {
@@ -951,7 +953,7 @@ namespace WindowsFormsApp1
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtPageNumber, pageSize.GetLeft(_SystemParameter.GovPageNumber.PointX), pageSize.GetTop(_SystemParameter.GovPageNumber.PointY), 0);
 
                             doc.NewPage();
-                            
+
                             if (comp.RankId == 2)
                                 pageIndex = 1;
                             else
@@ -1008,7 +1010,7 @@ namespace WindowsFormsApp1
                             }
                             iTextSharp.text.Phrase txtName = new iTextSharp.text.Phrase(comp.Name, chtFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtName, pageSize.GetLeft(_SystemParameter.TWName.PointX), pageSize.GetTop(_SystemParameter.TWName.PointY), 0);
-                            
+
                             iTextSharp.text.Phrase txt屆數
                                 = new iTextSharp.text.Phrase(this._屆數數字s[this.cbx_成績比賽.SelectedIndex], chtFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txt屆數, pageSize.GetLeft(_SystemParameter.TW屆數.PointX), pageSize.GetTop(_SystemParameter.TW屆數.PointY), 0);
@@ -1163,7 +1165,7 @@ namespace WindowsFormsApp1
 
                 using (var doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate()))
                 {
-                    string genFontPath = "c:\\windows\\fonts\\PALSCRI.ttf"; 
+                    string genFontPath = "c:\\windows\\fonts\\PALSCRI.ttf";
                     string nameFontPath = "c:\\windows\\fonts\\timesbi.ttf";
                     string timesFontPath = "c:\\windows\\fonts\\times.ttf";
                     BaseFont genBaseFont = BaseFont.CreateFont(genFontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
@@ -1190,36 +1192,32 @@ namespace WindowsFormsApp1
                                 rankIndex = comp.RankId;
                                 pageIndex = 1;
                             }
-                            
+
                             iTextSharp.text.Phrase txtPhrase1 = new iTextSharp.text.Phrase("This certificate is presented to", genFont);
-                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase1, pageSize.Right / 2, pageSize.Top / 2 + dist *2, 0);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase1, pageSize.Right / 2, pageSize.Top / 2 + dist * 2, 0);
 
 
-                            iTextSharp.text.Phrase txtPhrase2 = new iTextSharp.text.Phrase(comp.Name, nameFont);
+                            iTextSharp.text.Phrase txtPhrase2 = new iTextSharp.text.Phrase(comp.PassportName, nameFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase2, pageSize.Right / 2, pageSize.Top / 2 + dist, 0);
 
                             iTextSharp.text.Phrase txtPhrase3 = new iTextSharp.text.Phrase("For Successfully Completing the", genFont);
-                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase3, pageSize.Right/2, pageSize.Top/2, 0);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase3, pageSize.Right / 2, pageSize.Top / 2, 0);
 
                             iTextSharp.text.Phrase txtPhrase4 = new iTextSharp.text.Phrase(this._名次英文s[comp.RankId], nameFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase4, pageSize.Right / 2, pageSize.Top / 2 - dist, 0);
 
                             iTextSharp.text.Phrase txtPhrase5 = new iTextSharp.text.Phrase("In The 53th Annual Calligraphy Competition of Tian Wen Temple", genFont);
-                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase5, pageSize.Right / 2, pageSize.Top / 2 - dist*2, 0);
-
-
-                            //ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtParagraph, pageSize.GetLeft(0), pageSize.GetTop(0), 0);
-
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase5, pageSize.Right / 2, pageSize.Top / 2 - dist * 2, 0);
 
                             iTextSharp.text.Phrase txtDate
                                 = new iTextSharp.text.Phrase(_SystemParameter.EnDate.Label, dateFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtDate, pageSize.Right / 2, pageSize.GetTop(_SystemParameter.EnDate.PointY), 0);
-                                                        
+
                             iTextSharp.text.Phrase txtPageNumber = new iTextSharp.text.Phrase(pageIndex.ToString(), pageFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtPageNumber, pageSize.GetLeft(_SystemParameter.EnPageNumber.PointX), pageSize.GetTop(_SystemParameter.EnPageNumber.PointY), 0);
 
                             doc.NewPage();
-                            
+
                             //paraInfo.Leading = 15;
                             //paraInfo.Add(new iTextSharp.text.Chunk(comp.Name, chtFont));
                             //doc.Add(paraInfo).set;
@@ -1240,9 +1238,86 @@ namespace WindowsFormsApp1
             stream.WriteTo(file);
             file.Close();
             stream.Close();
+            stream.Dispose();
             System.Diagnostics.Process.Start("Acrobat.exe", filename);
 
-            stream.Dispose();
+        }
+
+        private void btn_領獎單_Click(object sender, EventArgs e)
+        {
+            Stream stream = new MemoryStream(Properties.Resources.領獎單範本);
+            IWorkbook workbook = new HSSFWorkbook(stream);
+            ISheet sheet = workbook.GetSheet("工作表1");
+
+            ICellStyle headerCellStyle = sheet.GetRow(0).GetCell(0).CellStyle;
+            sheet.GetRow(0).GetCell(0).SetCellValue($"{this._比賽名稱s[this.cbx_成績比賽.SelectedIndex]}{Environment.NewLine}{ this.cbx_成績分組.SelectedItem}  比賽領獎單");
+            
+            List<ICellStyle> cellStyles = new List<ICellStyle>();
+            int cellsCount = 8;
+            for (int i = 0; i < cellsCount; i++)
+            {
+                cellStyles.Add(sheet.GetRow(2).GetCell(i).CellStyle);
+            }
+            sheet.RemoveRow(sheet.GetRow(2));
+
+            using (var db = new TianwenContext())
+            {
+                int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
+                var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
+                               && (x.GroupId == this.cbx_成績分組.SelectedIndex)
+                               && (x.RankId <= 5))
+                   .OrderBy(g => new { g.RankId, g.EntryNumber }).ToList();
+
+                int rankIndex = 0;
+                int serialNo = 1;
+                int lastRowIndex = 2;
+                int rowInPage = 0;
+                foreach (var comp in results)
+                {
+                    if (comp.RankId > 2 && rankIndex != comp.RankId)
+                    {
+                        rankIndex = comp.RankId;
+                        serialNo = 1;
+                        sheet.SetRowBreak(lastRowIndex-1);
+                        rowInPage = 0;
+                    }
+                    IRow row = sheet.CreateRow(lastRowIndex);
+                    for (int i = 0; i < cellsCount; i++)
+                    {
+                        ICell cell = row.CreateCell(i);
+                        cell.CellStyle = cellStyles[i];
+                    }
+                    row.Cells[0].SetCellValue(serialNo.ToString());
+                    row.Cells[1].SetCellValue(comp.EntryNumber);
+                    row.Cells[2].SetCellValue(comp.Group);
+                    row.Cells[3].SetCellValue(comp.Name);
+                    row.Cells[4].SetCellValue(comp.Rank);
+                    row.Cells[5].SetCellValue(comp.TeacherName);
+                    row.Cells[6].SetCellValue(comp.School);
+                    rowInPage++;
+                    if (rowInPage >= 10)
+                    {
+                        sheet.SetRowBreak(lastRowIndex);
+                        rowInPage = 0;
+                    }
+                    lastRowIndex++;
+                    serialNo++;
+                }
+
+            }
+
+            var path = $"D:\\2023比賽\\領獎單";
+            var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_{this._GroupList[this.cbx_成績分組.SelectedIndex]}_領獎單_{DateTime.Now.ToString("HHmmss")}.xls";
+            Directory.CreateDirectory(path);
+            using (FileStream file = new FileStream(filename, FileMode.Create))
+            {
+                workbook.Write(file);
+                file.Close();
+            }
+            workbook.Close();
+            stream.Close();
+            System.Diagnostics.Process.Start("Excel.exe", filename);
+
         }
     }
 }
