@@ -98,6 +98,7 @@ namespace WindowsFormsApp1
             this.cbx_成績分組 = new System.Windows.Forms.ComboBox();
             this.cbx_成績比賽 = new System.Windows.Forms.ComboBox();
             this.gbx_獎狀 = new System.Windows.Forms.GroupBox();
+            this.btn_領獎公告 = new System.Windows.Forms.Button();
             this.btn_領獎單 = new System.Windows.Forms.Button();
             this.btn_國際組英文 = new System.Windows.Forms.Button();
             this.btn_國際組中文 = new System.Windows.Forms.Button();
@@ -114,8 +115,9 @@ namespace WindowsFormsApp1
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txt_ServerIp = new System.Windows.Forms.TextBox();
-            this.btn_領獎公告 = new System.Windows.Forms.Button();
             this.bs_System = new System.Windows.Forms.BindingSource(this.components);
+            this.btn_老師領獎單 = new System.Windows.Forms.Button();
+            this.btn_老師公告單 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -457,6 +459,8 @@ namespace WindowsFormsApp1
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btn_老師公告單);
+            this.panel3.Controls.Add(this.btn_老師領獎單);
             this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.txt_指導老師報到人數);
@@ -506,7 +510,7 @@ namespace WindowsFormsApp1
             // 
             // btn_指導老師更新
             // 
-            this.btn_指導老師更新.Location = new System.Drawing.Point(805, 12);
+            this.btn_指導老師更新.Location = new System.Drawing.Point(756, 9);
             this.btn_指導老師更新.Name = "btn_指導老師更新";
             this.btn_指導老師更新.Size = new System.Drawing.Size(75, 33);
             this.btn_指導老師更新.TabIndex = 8;
@@ -867,6 +871,16 @@ namespace WindowsFormsApp1
             this.gbx_獎狀.TabStop = false;
             this.gbx_獎狀.Text = "獎狀/領獎單";
             // 
+            // btn_領獎公告
+            // 
+            this.btn_領獎公告.Location = new System.Drawing.Point(653, 20);
+            this.btn_領獎公告.Name = "btn_領獎公告";
+            this.btn_領獎公告.Size = new System.Drawing.Size(122, 32);
+            this.btn_領獎公告.TabIndex = 5;
+            this.btn_領獎公告.Text = "名次公告";
+            this.btn_領獎公告.UseVisualStyleBackColor = true;
+            this.btn_領獎公告.Click += new System.EventHandler(this.btn_名次公告_Click);
+            // 
             // btn_領獎單
             // 
             this.btn_領獎單.Location = new System.Drawing.Point(525, 20);
@@ -1043,19 +1057,28 @@ namespace WindowsFormsApp1
             this.txt_ServerIp.Size = new System.Drawing.Size(156, 30);
             this.txt_ServerIp.TabIndex = 0;
             // 
-            // btn_領獎公告
-            // 
-            this.btn_領獎公告.Location = new System.Drawing.Point(653, 20);
-            this.btn_領獎公告.Name = "btn_領獎公告";
-            this.btn_領獎公告.Size = new System.Drawing.Size(122, 32);
-            this.btn_領獎公告.TabIndex = 5;
-            this.btn_領獎公告.Text = "名次公告";
-            this.btn_領獎公告.UseVisualStyleBackColor = true;
-            this.btn_領獎公告.Click += new System.EventHandler(this.btn_名次公告_Click);
-            // 
             // bs_System
             // 
             this.bs_System.DataSource = typeof(WindowsFormsApp1.SystemParameter);
+            // 
+            // btn_老師領獎單
+            // 
+            this.btn_老師領獎單.Location = new System.Drawing.Point(848, 9);
+            this.btn_老師領獎單.Name = "btn_老師領獎單";
+            this.btn_老師領獎單.Size = new System.Drawing.Size(120, 33);
+            this.btn_老師領獎單.TabIndex = 14;
+            this.btn_老師領獎單.Text = "老師領獎單";
+            this.btn_老師領獎單.UseVisualStyleBackColor = true;
+            this.btn_老師領獎單.Click += new System.EventHandler(this.btn_老師領獎單_Click);
+            // 
+            // btn_老師公告單
+            // 
+            this.btn_老師公告單.Location = new System.Drawing.Point(985, 8);
+            this.btn_老師公告單.Name = "btn_老師公告單";
+            this.btn_老師公告單.Size = new System.Drawing.Size(120, 33);
+            this.btn_老師公告單.TabIndex = 15;
+            this.btn_老師公告單.Text = "老師公告單";
+            this.btn_老師公告單.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1197,6 +1220,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btn_領獎單;
         private System.Windows.Forms.Button btn_領獎公告;
+        private System.Windows.Forms.Button btn_老師公告單;
+        private System.Windows.Forms.Button btn_老師領獎單;
     }
 }
 
