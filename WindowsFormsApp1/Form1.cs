@@ -16,6 +16,7 @@ using ZXing;
 using ZXing.QrCode;
 using iTextSharp;
 using iTextSharp.text.pdf;
+using Newtonsoft.Json;
 
 
 namespace WindowsFormsApp1
@@ -308,7 +309,7 @@ namespace WindowsFormsApp1
             _統計表log.Rows.Clear();
             int competitionIndex = _CompetitionTypeList[this.cbx_統計表選擇比賽.SelectedIndex];
 
-            using (var dbContext = new TianwenContext())
+            using (var dbContext = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 var groups = dbContext.Competitors.Where(x => x.CompetitionType == competitionIndex).GroupBy(g => g.GroupId).OrderBy(g => g.Key).ToList();
                 foreach (var group in groups)
@@ -1674,6 +1675,60 @@ namespace WindowsFormsApp1
         private void txt_排名作業圖紙編號_Leave(object sender, EventArgs e)
         {
             _From參賽編號 = false;
+        }
+
+        private void btn_測試連線_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MessageBox.Show(this._SystemParameter.ServerIp);
+                using (var db = new TianwenContext(this._SystemParameter.ServerIp))
+                {
+                    var comp = db.Competitors.FirstOrDefault();
+                    if (comp != null)
+                    {
+                        MessageBox.Show("連線成功");
+                    }
+                    else
+                    {
+                        MessageBox.Show("無對應資料!!");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"連線失敗: {ex.Message}!!");
+            }
+        }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText("SystemParameters.json", JsonConvert.SerializeObject(this._SystemParameter));
+            MessageBox.Show("儲存成功");
+
+        }
+
+        private void btn_Load_Click(object sender, EventArgs e)
+        {
+            
+            string file = "SystemParameters.json";
+            if (File.Exists(file))
+            {
+                var json = File.ReadAllText(file);
+                var para = JsonConvert.DeserializeObject<SystemParameter>(json);
+                if (para != null)
+                {
+                    this._SystemParameter = para;
+                }
+                else
+                {
+                    this._SystemParameter = new SystemParameter();
+                }
+            }
+            else
+            {
+                this._SystemParameter = new SystemParameter();
+            }
         }
     }
 }

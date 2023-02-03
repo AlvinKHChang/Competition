@@ -30,7 +30,7 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpg_統計 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -126,9 +126,12 @@ namespace WindowsFormsApp1
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.bs_System = new System.Windows.Forms.BindingSource(this.components);
             this.label16 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btn_測試連線 = new System.Windows.Forms.Button();
+            this.btn_Save = new System.Windows.Forms.Button();
+            this.bs_System = new System.Windows.Forms.BindingSource(this.components);
+            this.btn_Load = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -974,14 +977,14 @@ namespace WindowsFormsApp1
             this.dgv_成績統計.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_成績統計.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_成績統計.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_成績統計.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_成績統計.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_成績統計.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_成績統計.Location = new System.Drawing.Point(3, 131);
             this.dgv_成績統計.Name = "dgv_成績統計";
@@ -1070,6 +1073,9 @@ namespace WindowsFormsApp1
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.btn_Load);
+            this.groupBox4.Controls.Add(this.btn_Save);
+            this.groupBox4.Controls.Add(this.btn_測試連線);
             this.groupBox4.Controls.Add(this.textBox1);
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.panel8);
@@ -1191,10 +1197,6 @@ namespace WindowsFormsApp1
             this.label15.TabIndex = 13;
             this.label15.Text = "名次";
             // 
-            // bs_System
-            // 
-            this.bs_System.DataSource = typeof(WindowsFormsApp1.SystemParameter);
-            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -1211,6 +1213,40 @@ namespace WindowsFormsApp1
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(192, 30);
             this.textBox1.TabIndex = 7;
+            // 
+            // btn_測試連線
+            // 
+            this.btn_測試連線.Location = new System.Drawing.Point(398, 94);
+            this.btn_測試連線.Name = "btn_測試連線";
+            this.btn_測試連線.Size = new System.Drawing.Size(101, 35);
+            this.btn_測試連線.TabIndex = 8;
+            this.btn_測試連線.Text = "測試連線";
+            this.btn_測試連線.UseVisualStyleBackColor = true;
+            this.btn_測試連線.Click += new System.EventHandler(this.btn_測試連線_Click);
+            // 
+            // btn_Save
+            // 
+            this.btn_Save.Location = new System.Drawing.Point(461, 28);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(75, 35);
+            this.btn_Save.TabIndex = 9;
+            this.btn_Save.Text = "儲存";
+            this.btn_Save.UseVisualStyleBackColor = true;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            // 
+            // bs_System
+            // 
+            this.bs_System.DataSource = typeof(WindowsFormsApp1.SystemParameter);
+            // 
+            // btn_Load
+            // 
+            this.btn_Load.Location = new System.Drawing.Point(371, 28);
+            this.btn_Load.Name = "btn_Load";
+            this.btn_Load.Size = new System.Drawing.Size(75, 35);
+            this.btn_Load.TabIndex = 10;
+            this.btn_Load.Text = "載入";
+            this.btn_Load.UseVisualStyleBackColor = true;
+            this.btn_Load.Click += new System.EventHandler(this.btn_Load_Click);
             // 
             // Form1
             // 
@@ -1365,6 +1401,9 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button btn_測試連線;
+        private System.Windows.Forms.Button btn_Save;
+        private System.Windows.Forms.Button btn_Load;
     }
 }
 

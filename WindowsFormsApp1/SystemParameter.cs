@@ -9,7 +9,7 @@ namespace WindowsFormsApp1
 {
     public class SystemParameter
     {
-        public string ServerIp { get; set; } = "192.168.0.1";
+        public string ServerIp { get; set; } = "192.168.1.100";
 
         public string TWRoot { get; set; } = "D:\\2023比賽";
 
