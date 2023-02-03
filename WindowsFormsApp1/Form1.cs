@@ -1319,5 +1319,113 @@ namespace WindowsFormsApp1
             System.Diagnostics.Process.Start("Excel.exe", filename);
 
         }
+
+        private void btn_名次公告_Click(object sender, EventArgs e)
+        {
+            Stream stream = new MemoryStream(Properties.Resources.成績公告範本);
+            IWorkbook workbook = new HSSFWorkbook(stream);
+            ISheet sheet = workbook.GetSheet("工作表1");
+
+            ICellStyle headerCellStyle = sheet.GetRow(0).GetCell(0).CellStyle;
+            sheet.GetRow(0).GetCell(0).SetCellValue($"{this._比賽名稱s[this.cbx_成績比賽.SelectedIndex]}{Environment.NewLine}{ this.cbx_成績分組.SelectedItem}  比賽成績公告");
+
+            List<ICellStyle> cellStyles = new List<ICellStyle>();
+            int cellsCount = 3;
+            for (int i = 0; i < cellsCount; i++)
+            {
+                cellStyles.Add(sheet.GetRow(2).GetCell(i).CellStyle);
+            }
+            sheet.RemoveRow(sheet.GetRow(2));
+
+            using (var db = new TianwenContext())
+            {
+                int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
+                var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
+                               && (x.GroupId == this.cbx_成績分組.SelectedIndex)
+                               && (x.RankId <= 5))
+                   .OrderBy(g => new { g.RankId, g.EntryNumber }).ToList();
+
+                int rankIndex = 0;
+                int lastRowIndex = 2;
+                int rowInPage = 0;
+                foreach (var comp in results)
+                {
+                    if (comp.RankId > 2 && rankIndex != comp.RankId)
+                    {
+                        rankIndex = comp.RankId;
+                        sheet.SetRowBreak(lastRowIndex - 1);
+                        rowInPage = 0;
+                    }
+                    IRow row = sheet.CreateRow(lastRowIndex);
+                    for (int i = 0; i < cellsCount; i++)
+                    {
+                        ICell cell = row.CreateCell(i);
+                        cell.CellStyle = cellStyles[i];
+                    }
+                    row.Cells[0].SetCellValue(comp.EntryNumber);
+                    row.Cells[1].SetCellValue(this.MaskName(comp.Name));
+                    row.Cells[2].SetCellValue(comp.Rank);
+                    rowInPage++;
+                    if (rowInPage >= 25)
+                    {
+                        sheet.SetRowBreak(lastRowIndex);
+                        rowInPage = 0;
+                    }
+                    lastRowIndex++;
+                }
+
+            }
+
+            var path = $"D:\\2023比賽\\領獎單";
+            var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_{this._GroupList[this.cbx_成績分組.SelectedIndex]}_成績公告_{DateTime.Now.ToString("HHmmss")}.xls";
+            Directory.CreateDirectory(path);
+            using (FileStream file = new FileStream(filename, FileMode.Create))
+            {
+                workbook.Write(file);
+                file.Close();
+            }
+            workbook.Close();
+            stream.Close();
+            System.Diagnostics.Process.Start("Excel.exe", filename);
+        }
+
+
+        private string MaskName(string val)
+        {
+            string maskstr;
+            //符合英文的模式
+            if (Regex.IsMatch(val, "[A-Za-z]"))
+            {
+                if (val.IndexOf("-") > 1)
+                {
+                    maskstr = val.Split('-')[1];
+                    val = val.Replace(maskstr, "*");
+                }
+                if (val.IndexOf(" ") > 1)
+                {
+                    maskstr = val.Split(' ')[1];
+                    val = val.Replace(maskstr, "*");
+                }
+            }
+            else
+            {
+                //中文
+                int strlen = val.Length;
+                if (strlen == 2)
+                {
+                    return val.Substring(0, 1) + "O";
+                }
+                if (strlen == 3)
+                {
+                    return val.Substring(0, 1) + "O" + val.Substring(2, 1);
+                }
+                if (strlen >= 4)
+                {
+                    return val.Substring(0, 2) + "O" + val.Substring(3, strlen - 3);
+                }
+            }
+            return val;
+        }
+
     }
 }

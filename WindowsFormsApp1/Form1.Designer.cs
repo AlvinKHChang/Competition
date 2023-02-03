@@ -98,6 +98,7 @@ namespace WindowsFormsApp1
             this.cbx_成績分組 = new System.Windows.Forms.ComboBox();
             this.cbx_成績比賽 = new System.Windows.Forms.ComboBox();
             this.gbx_獎狀 = new System.Windows.Forms.GroupBox();
+            this.btn_領獎單 = new System.Windows.Forms.Button();
             this.btn_國際組英文 = new System.Windows.Forms.Button();
             this.btn_國際組中文 = new System.Windows.Forms.Button();
             this.btn_天文宮 = new System.Windows.Forms.Button();
@@ -111,10 +112,10 @@ namespace WindowsFormsApp1
             this.btn_匯入參賽者資料 = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txt_ServerIp = new System.Windows.Forms.TextBox();
-            this.bs_System = new System.Windows.Forms.BindingSource(this.components);
             this.label12 = new System.Windows.Forms.Label();
-            this.btn_領獎單 = new System.Windows.Forms.Button();
+            this.txt_ServerIp = new System.Windows.Forms.TextBox();
+            this.btn_領獎公告 = new System.Windows.Forms.Button();
+            this.bs_System = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -851,6 +852,7 @@ namespace WindowsFormsApp1
             // 
             // gbx_獎狀
             // 
+            this.gbx_獎狀.Controls.Add(this.btn_領獎公告);
             this.gbx_獎狀.Controls.Add(this.btn_領獎單);
             this.gbx_獎狀.Controls.Add(this.btn_國際組英文);
             this.gbx_獎狀.Controls.Add(this.btn_國際組中文);
@@ -863,7 +865,17 @@ namespace WindowsFormsApp1
             this.gbx_獎狀.Size = new System.Drawing.Size(1399, 58);
             this.gbx_獎狀.TabIndex = 1;
             this.gbx_獎狀.TabStop = false;
-            this.gbx_獎狀.Text = "獎狀";
+            this.gbx_獎狀.Text = "獎狀/領獎單";
+            // 
+            // btn_領獎單
+            // 
+            this.btn_領獎單.Location = new System.Drawing.Point(525, 20);
+            this.btn_領獎單.Name = "btn_領獎單";
+            this.btn_領獎單.Size = new System.Drawing.Size(122, 32);
+            this.btn_領獎單.TabIndex = 4;
+            this.btn_領獎單.Text = "領獎單";
+            this.btn_領獎單.UseVisualStyleBackColor = true;
+            this.btn_領獎單.Click += new System.EventHandler(this.btn_領獎單_Click);
             // 
             // btn_國際組英文
             // 
@@ -1014,18 +1026,6 @@ namespace WindowsFormsApp1
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "groupBox4";
             // 
-            // txt_ServerIp
-            // 
-            this.txt_ServerIp.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_System, "ServerIp", true));
-            this.txt_ServerIp.Location = new System.Drawing.Point(116, 63);
-            this.txt_ServerIp.Name = "txt_ServerIp";
-            this.txt_ServerIp.Size = new System.Drawing.Size(156, 30);
-            this.txt_ServerIp.TabIndex = 0;
-            // 
-            // bs_System
-            // 
-            this.bs_System.DataSource = typeof(WindowsFormsApp1.SystemParameter);
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -1035,15 +1035,27 @@ namespace WindowsFormsApp1
             this.label12.TabIndex = 1;
             this.label12.Text = "Server IP";
             // 
-            // btn_領獎單
+            // txt_ServerIp
             // 
-            this.btn_領獎單.Location = new System.Drawing.Point(525, 20);
-            this.btn_領獎單.Name = "btn_領獎單";
-            this.btn_領獎單.Size = new System.Drawing.Size(122, 32);
-            this.btn_領獎單.TabIndex = 4;
-            this.btn_領獎單.Text = "領獎單";
-            this.btn_領獎單.UseVisualStyleBackColor = true;
-            this.btn_領獎單.Click += new System.EventHandler(this.btn_領獎單_Click);
+            this.txt_ServerIp.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_System, "ServerIp", true));
+            this.txt_ServerIp.Location = new System.Drawing.Point(116, 63);
+            this.txt_ServerIp.Name = "txt_ServerIp";
+            this.txt_ServerIp.Size = new System.Drawing.Size(156, 30);
+            this.txt_ServerIp.TabIndex = 0;
+            // 
+            // btn_領獎公告
+            // 
+            this.btn_領獎公告.Location = new System.Drawing.Point(653, 20);
+            this.btn_領獎公告.Name = "btn_領獎公告";
+            this.btn_領獎公告.Size = new System.Drawing.Size(122, 32);
+            this.btn_領獎公告.TabIndex = 5;
+            this.btn_領獎公告.Text = "名次公告";
+            this.btn_領獎公告.UseVisualStyleBackColor = true;
+            this.btn_領獎公告.Click += new System.EventHandler(this.btn_名次公告_Click);
+            // 
+            // bs_System
+            // 
+            this.bs_System.DataSource = typeof(WindowsFormsApp1.SystemParameter);
             // 
             // Form1
             // 
@@ -1184,6 +1196,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox txt_ServerIp;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btn_領獎單;
+        private System.Windows.Forms.Button btn_領獎公告;
     }
 }
 
