@@ -359,6 +359,13 @@ namespace WindowsFormsApp1
                         var drawingMsg = result.DrawingId != null ? result.DrawingId : "--";
                         this.rtb_報到作業參賽資料.AppendText($"圖紙編號: {drawingMsg}" + Environment.NewLine);
 
+                        if (result.DrawingId == null)
+                        {
+                            MessageBox.Show($"已綁定圖紙編號!!");
+                        }
+                        else {
+                            this.txt_報到作業圖紙編號.Focus();
+                        }
 
                     }
                     else
@@ -423,6 +430,10 @@ namespace WindowsFormsApp1
                         this._報到作業紀錄log.Rows.InsertAt(row, 0);
                         this.dgv_報到作業紀錄.ClearSelection();
                         this.dgv_報到作業紀錄.Rows[0].Selected = true;
+
+                        this.txt_報到作業參賽編號.Clear();
+                        this.txt_報到作業圖紙編號.Clear();
+                        this.txt_報到作業參賽編號.Focus();
                     }
                     else
                     {
@@ -634,6 +645,9 @@ namespace WindowsFormsApp1
                             comp.UpdatedTime = DateTime.Now;
                             db.SaveChanges();
                             this.btn_排名作業更新.PerformClick();
+                            txt_排名作業參賽編號.Clear();
+                            txt_排名作業圖紙編號.Clear();
+                            txt_排名作業參賽編號.Focus();
                         }
 
                     }
@@ -669,6 +683,9 @@ namespace WindowsFormsApp1
                             comp.UpdatedTime = DateTime.Now;
                             db.SaveChanges();
                             this.btn_排名作業更新.PerformClick();
+                            txt_排名作業參賽編號.Clear();
+                            txt_排名作業圖紙編號.Clear();
+                            txt_排名作業圖紙編號.Focus();
                         }
 
                     }
@@ -889,7 +906,7 @@ namespace WindowsFormsApp1
                     }
                 }
 
-                var path = $"D:\\2023比賽\\參賽證";
+                var path = $"{_SystemParameter.TWRoot}\\參賽證";
                 Directory.CreateDirectory(path);
                 var filename = $"{path}\\{this.txt_報到作業參賽編號.Text}_{DateTime.Now.ToString("HHmmss")}.pdf";
                 FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
@@ -964,7 +981,7 @@ namespace WindowsFormsApp1
                 }
             }
 
-            var path = $"D:\\2023比賽\\獎狀";
+            var path = $"{_SystemParameter.TWRoot}\\獎狀";
             Directory.CreateDirectory(path);
             var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_{this._GroupList[this.cbx_成績分組.SelectedIndex]}_市政府獎狀_{DateTime.Now.ToString("HHmm")}.pdf";
             FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
@@ -1052,7 +1069,7 @@ namespace WindowsFormsApp1
                 }
             }
 
-            var path = $"D:\\2023比賽\\獎狀";
+            var path = $"{_SystemParameter.TWRoot}\\獎狀";
             Directory.CreateDirectory(path);
             var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_{this._GroupList[this.cbx_成績分組.SelectedIndex]}_天文宮獎狀_{DateTime.Now.ToString("HHmm")}.pdf";
             FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
@@ -1140,7 +1157,7 @@ namespace WindowsFormsApp1
                 }
             }
 
-            var path = $"D:\\2023比賽\\獎狀";
+            var path = $"{_SystemParameter.TWRoot}\\獎狀";
             Directory.CreateDirectory(path);
             var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_{this._GroupList[this.cbx_成績分組.SelectedIndex]}_國際組中文_{DateTime.Now.ToString("HHmm")}.pdf";
             FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
@@ -1231,7 +1248,7 @@ namespace WindowsFormsApp1
                 }
             }
 
-            var path = $"D:\\2023比賽\\獎狀";
+            var path = $"{_SystemParameter.TWRoot}\\獎狀";
             Directory.CreateDirectory(path);
             var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_{this._GroupList[this.cbx_成績分組.SelectedIndex]}_國際組英文_{DateTime.Now.ToString("HHmmss")}.pdf";
             FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
@@ -1306,7 +1323,7 @@ namespace WindowsFormsApp1
 
             }
 
-            var path = $"D:\\2023比賽\\領獎單";
+            var path = $"{_SystemParameter.TWRoot}\\領獎單";
             var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_{this._GroupList[this.cbx_成績分組.SelectedIndex]}_領獎單_{DateTime.Now.ToString("HHmmss")}.xls";
             Directory.CreateDirectory(path);
             using (FileStream file = new FileStream(filename, FileMode.Create))
@@ -1376,7 +1393,7 @@ namespace WindowsFormsApp1
 
             }
 
-            var path = $"D:\\2023比賽\\領獎單";
+            var path = $"{_SystemParameter.TWRoot}\\領獎單";
             var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_{this._GroupList[this.cbx_成績分組.SelectedIndex]}_成績公告_{DateTime.Now.ToString("HHmmss")}.xls";
             Directory.CreateDirectory(path);
             using (FileStream file = new FileStream(filename, FileMode.Create))
@@ -1499,7 +1516,7 @@ namespace WindowsFormsApp1
                 }
             }
 
-            var path = $"D:\\2023比賽\\領獎單";
+            var path = $"{_SystemParameter.TWRoot}\\領獎單";
             var filename = $"{path}\\{this.cbx_指導老師選擇比賽.SelectedItem}_帶隊老師領獎單_{DateTime.Now.ToString("HHmmss")}.xls";
             Directory.CreateDirectory(path);
             using (FileStream file = new FileStream(filename, FileMode.Create))
@@ -1570,7 +1587,7 @@ namespace WindowsFormsApp1
                 }
             }
 
-            var path = $"D:\\2023比賽\\領獎單";
+            var path = $"{_SystemParameter.TWRoot}\\領獎單";
             var filename = $"{path}\\{this.cbx_指導老師選擇比賽.SelectedItem}_帶隊老師公告單_{DateTime.Now.ToString("HHmmss")}.xls";
             Directory.CreateDirectory(path);
             using (FileStream file = new FileStream(filename, FileMode.Create))
@@ -1581,6 +1598,82 @@ namespace WindowsFormsApp1
             workbook.Close();
             stream.Close();
             System.Diagnostics.Process.Start("Excel.exe", filename);
+        }
+
+        private void btn_英文獎狀測試_Click(object sender, EventArgs e)
+        {
+            this.btn_國際組英文.PerformClick();
+        }
+
+        private void btn_天文宮獎狀測試_Click(object sender, EventArgs e)
+        {
+            this.btn_天文宮.PerformClick();
+        }
+
+        private void btn_市政府獎狀測試_Click(object sender, EventArgs e)
+        {
+            this.btn_市政府獎狀.PerformClick();
+        }
+
+        private bool UnlockDbSetting = false;
+        private int UnlockDbSettingCnt = 0;
+
+        private void panel8_MouseLeave(object sender, EventArgs e)
+        {
+            UnlockDbSettingCnt = 0;
+            UnlockDbSetting = false;
+        }
+
+        private void panel8_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                UnlockDbSettingCnt++;
+                if (UnlockDbSettingCnt >= 5)
+                {
+                    UnlockDbSetting = true;
+                }
+            }
+            else
+            {
+                UnlockDbSettingCnt = 0;
+                UnlockDbSetting = false;
+            }
+        }
+
+        private void btn_清除報到輸入_Click(object sender, EventArgs e)
+        {
+            this.txt_報到作業參賽編號.Clear();
+            this.txt_報到作業圖紙編號.Clear();
+            this.rtb_報到作業參賽資料.Clear();
+            this.txt_報到作業參賽編號.Focus();
+
+        }
+
+        private bool _From參賽編號;
+
+        private void btn_排名欄位清除_Click(object sender, EventArgs e)
+        {
+            this.txt_排名作業參賽編號.Clear();
+            this.txt_排名作業圖紙編號.Clear();
+            if (_From參賽編號)
+            {
+                this.txt_排名作業參賽編號.Focus();
+            }
+            else
+            {
+                this.txt_排名作業圖紙編號.Focus();
+            }
+        }
+
+        private void txt_排名作業參賽編號_Leave(object sender, EventArgs e)
+        {
+            _From參賽編號 = true;
+        }
+
+        private void txt_排名作業圖紙編號_Leave(object sender, EventArgs e)
+        {
+            _From參賽編號 = false;
         }
     }
 }

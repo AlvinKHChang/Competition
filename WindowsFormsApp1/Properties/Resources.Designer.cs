@@ -61,6 +61,16 @@ namespace WindowsFormsApp1.Properties {
         }
         
         /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 天文logo {
+            get {
+                object obj = ResourceManager.GetObject("天文logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查詢類型 System.Byte[] 的當地語系化資源。
         /// </summary>
         internal static byte[] 帶隊老師公告範本 {

@@ -30,7 +30,7 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpg_統計 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -60,6 +60,8 @@ namespace WindowsFormsApp1
             this.tpg_指導老師 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btn_老師公告單 = new System.Windows.Forms.Button();
+            this.btn_老師領獎單 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_指導老師報到人數 = new System.Windows.Forms.TextBox();
@@ -113,11 +115,20 @@ namespace WindowsFormsApp1
             this.btn_匯入參賽者資料 = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.btn_英文獎狀測試 = new System.Windows.Forms.Button();
+            this.btn_天文宮獎狀測試 = new System.Windows.Forms.Button();
+            this.btn_市政府獎狀測試 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.txt_ServerIp = new System.Windows.Forms.TextBox();
-            this.btn_老師領獎單 = new System.Windows.Forms.Button();
-            this.btn_老師公告單 = new System.Windows.Forms.Button();
+            this.btn_清除報到輸入 = new System.Windows.Forms.Button();
+            this.btn_排名欄位清除 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.bs_System = new System.Windows.Forms.BindingSource(this.components);
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -322,6 +333,7 @@ namespace WindowsFormsApp1
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btn_清除報到輸入);
             this.panel2.Controls.Add(this.btn_匯出參賽證);
             this.panel2.Controls.Add(this.btn_報到作業重置狀態);
             this.panel2.Controls.Add(this.label4);
@@ -338,7 +350,7 @@ namespace WindowsFormsApp1
             // 
             // btn_匯出參賽證
             // 
-            this.btn_匯出參賽證.Location = new System.Drawing.Point(381, 12);
+            this.btn_匯出參賽證.Location = new System.Drawing.Point(473, 9);
             this.btn_匯出參賽證.Name = "btn_匯出參賽證";
             this.btn_匯出參賽證.Size = new System.Drawing.Size(132, 33);
             this.btn_匯出參賽證.TabIndex = 7;
@@ -348,7 +360,7 @@ namespace WindowsFormsApp1
             // 
             // btn_報到作業重置狀態
             // 
-            this.btn_報到作業重置狀態.Location = new System.Drawing.Point(683, 7);
+            this.btn_報到作業重置狀態.Location = new System.Drawing.Point(749, 8);
             this.btn_報到作業重置狀態.Name = "btn_報到作業重置狀態";
             this.btn_報到作業重置狀態.Size = new System.Drawing.Size(132, 37);
             this.btn_報到作業重置狀態.TabIndex = 6;
@@ -376,7 +388,7 @@ namespace WindowsFormsApp1
             // 
             // btn_報到作業清除紀錄
             // 
-            this.btn_報到作業清除紀錄.Location = new System.Drawing.Point(530, 51);
+            this.btn_報到作業清除紀錄.Location = new System.Drawing.Point(611, 48);
             this.btn_報到作業清除紀錄.Name = "btn_報到作業清除紀錄";
             this.btn_報到作業清除紀錄.Size = new System.Drawing.Size(132, 42);
             this.btn_報到作業清除紀錄.TabIndex = 3;
@@ -386,7 +398,7 @@ namespace WindowsFormsApp1
             // 
             // btn_報到作業本機記錄
             // 
-            this.btn_報到作業本機記錄.Location = new System.Drawing.Point(530, 12);
+            this.btn_報到作業本機記錄.Location = new System.Drawing.Point(611, 11);
             this.btn_報到作業本機記錄.Name = "btn_報到作業本機記錄";
             this.btn_報到作業本機記錄.Size = new System.Drawing.Size(132, 33);
             this.btn_報到作業本機記錄.TabIndex = 2;
@@ -473,6 +485,26 @@ namespace WindowsFormsApp1
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1399, 95);
             this.panel3.TabIndex = 0;
+            // 
+            // btn_老師公告單
+            // 
+            this.btn_老師公告單.Location = new System.Drawing.Point(985, 8);
+            this.btn_老師公告單.Name = "btn_老師公告單";
+            this.btn_老師公告單.Size = new System.Drawing.Size(120, 33);
+            this.btn_老師公告單.TabIndex = 15;
+            this.btn_老師公告單.Text = "老師公告單";
+            this.btn_老師公告單.UseVisualStyleBackColor = true;
+            this.btn_老師公告單.Click += new System.EventHandler(this.btn_老師公告單_Click);
+            // 
+            // btn_老師領獎單
+            // 
+            this.btn_老師領獎單.Location = new System.Drawing.Point(848, 9);
+            this.btn_老師領獎單.Name = "btn_老師領獎單";
+            this.btn_老師領獎單.Size = new System.Drawing.Size(120, 33);
+            this.btn_老師領獎單.TabIndex = 14;
+            this.btn_老師領獎單.Text = "老師領獎單";
+            this.btn_老師領獎單.UseVisualStyleBackColor = true;
+            this.btn_老師領獎單.Click += new System.EventHandler(this.btn_老師領獎單_Click);
             // 
             // label8
             // 
@@ -577,6 +609,9 @@ namespace WindowsFormsApp1
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label15);
+            this.panel4.Controls.Add(this.label14);
+            this.panel4.Controls.Add(this.label13);
             this.panel4.Controls.Add(this.btn_排名作業更新);
             this.panel4.Controls.Add(this.lbl_排名作業人數);
             this.panel4.Controls.Add(this.cbx_排名作業名次);
@@ -650,6 +685,7 @@ namespace WindowsFormsApp1
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btn_排名欄位清除);
             this.panel5.Controls.Add(this.label7);
             this.panel5.Controls.Add(this.label9);
             this.panel5.Controls.Add(this.txt_排名作業圖紙編號);
@@ -685,6 +721,7 @@ namespace WindowsFormsApp1
             this.txt_排名作業圖紙編號.Size = new System.Drawing.Size(155, 30);
             this.txt_排名作業圖紙編號.TabIndex = 7;
             this.txt_排名作業圖紙編號.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_排名作業圖紙編號_KeyDown);
+            this.txt_排名作業圖紙編號.Leave += new System.EventHandler(this.txt_排名作業圖紙編號_Leave);
             // 
             // txt_排名作業參賽編號
             // 
@@ -693,6 +730,7 @@ namespace WindowsFormsApp1
             this.txt_排名作業參賽編號.Size = new System.Drawing.Size(155, 30);
             this.txt_排名作業參賽編號.TabIndex = 6;
             this.txt_排名作業參賽編號.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_排名作業參賽編號_KeyDown);
+            this.txt_排名作業參賽編號.Leave += new System.EventHandler(this.txt_排名作業參賽編號_Leave);
             // 
             // panel6
             // 
@@ -936,14 +974,14 @@ namespace WindowsFormsApp1
             this.dgv_成績統計.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_成績統計.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_成績統計.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_成績統計.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_成績統計.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_成績統計.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_成績統計.Location = new System.Drawing.Point(3, 131);
             this.dgv_成績統計.Name = "dgv_成績統計";
@@ -989,6 +1027,7 @@ namespace WindowsFormsApp1
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Visible = false;
             // 
             // btn_初始化所有資料
             // 
@@ -1031,19 +1070,67 @@ namespace WindowsFormsApp1
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.panel8);
+            this.groupBox4.Controls.Add(this.btn_英文獎狀測試);
+            this.groupBox4.Controls.Add(this.btn_天文宮獎狀測試);
+            this.groupBox4.Controls.Add(this.btn_市政府獎狀測試);
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.txt_ServerIp);
-            this.groupBox4.Location = new System.Drawing.Point(95, 29);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(278, 167);
+            this.groupBox4.Size = new System.Drawing.Size(693, 630);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "groupBox4";
+            this.groupBox4.Text = "設定";
+            // 
+            // panel8
+            // 
+            this.panel8.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.天文logo;
+            this.panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel8.Location = new System.Drawing.Point(6, 28);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(51, 48);
+            this.panel8.TabIndex = 5;
+            this.panel8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel8_MouseClick);
+            this.panel8.MouseLeave += new System.EventHandler(this.panel8_MouseLeave);
+            // 
+            // btn_英文獎狀測試
+            // 
+            this.btn_英文獎狀測試.Location = new System.Drawing.Point(354, 317);
+            this.btn_英文獎狀測試.Name = "btn_英文獎狀測試";
+            this.btn_英文獎狀測試.Size = new System.Drawing.Size(163, 40);
+            this.btn_英文獎狀測試.TabIndex = 4;
+            this.btn_英文獎狀測試.Text = "英文獎狀測試";
+            this.btn_英文獎狀測試.UseVisualStyleBackColor = true;
+            this.btn_英文獎狀測試.Click += new System.EventHandler(this.btn_英文獎狀測試_Click);
+            // 
+            // btn_天文宮獎狀測試
+            // 
+            this.btn_天文宮獎狀測試.Location = new System.Drawing.Point(354, 271);
+            this.btn_天文宮獎狀測試.Name = "btn_天文宮獎狀測試";
+            this.btn_天文宮獎狀測試.Size = new System.Drawing.Size(163, 40);
+            this.btn_天文宮獎狀測試.TabIndex = 3;
+            this.btn_天文宮獎狀測試.Text = "天文宮獎狀測試";
+            this.btn_天文宮獎狀測試.UseVisualStyleBackColor = true;
+            this.btn_天文宮獎狀測試.Click += new System.EventHandler(this.btn_天文宮獎狀測試_Click);
+            // 
+            // btn_市政府獎狀測試
+            // 
+            this.btn_市政府獎狀測試.Location = new System.Drawing.Point(354, 216);
+            this.btn_市政府獎狀測試.Name = "btn_市政府獎狀測試";
+            this.btn_市政府獎狀測試.Size = new System.Drawing.Size(163, 40);
+            this.btn_市政府獎狀測試.TabIndex = 2;
+            this.btn_市政府獎狀測試.Text = "市政府獎狀測試";
+            this.btn_市政府獎狀測試.UseVisualStyleBackColor = true;
+            this.btn_市政府獎狀測試.Click += new System.EventHandler(this.btn_市政府獎狀測試_Click);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(17, 66);
+            this.label12.Location = new System.Drawing.Point(27, 105);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(99, 19);
             this.label12.TabIndex = 1;
@@ -1052,34 +1139,78 @@ namespace WindowsFormsApp1
             // txt_ServerIp
             // 
             this.txt_ServerIp.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_System, "ServerIp", true));
-            this.txt_ServerIp.Location = new System.Drawing.Point(116, 63);
+            this.txt_ServerIp.Location = new System.Drawing.Point(162, 94);
             this.txt_ServerIp.Name = "txt_ServerIp";
-            this.txt_ServerIp.Size = new System.Drawing.Size(156, 30);
+            this.txt_ServerIp.Size = new System.Drawing.Size(192, 30);
             this.txt_ServerIp.TabIndex = 0;
             // 
-            // btn_老師領獎單
+            // btn_清除報到輸入
             // 
-            this.btn_老師領獎單.Location = new System.Drawing.Point(848, 9);
-            this.btn_老師領獎單.Name = "btn_老師領獎單";
-            this.btn_老師領獎單.Size = new System.Drawing.Size(120, 33);
-            this.btn_老師領獎單.TabIndex = 14;
-            this.btn_老師領獎單.Text = "老師領獎單";
-            this.btn_老師領獎單.UseVisualStyleBackColor = true;
-            this.btn_老師領獎單.Click += new System.EventHandler(this.btn_老師領獎單_Click);
+            this.btn_清除報到輸入.Location = new System.Drawing.Point(315, 8);
+            this.btn_清除報到輸入.Name = "btn_清除報到輸入";
+            this.btn_清除報到輸入.Size = new System.Drawing.Size(132, 33);
+            this.btn_清除報到輸入.TabIndex = 8;
+            this.btn_清除報到輸入.Text = "清除欄位";
+            this.btn_清除報到輸入.UseVisualStyleBackColor = true;
+            this.btn_清除報到輸入.Click += new System.EventHandler(this.btn_清除報到輸入_Click);
             // 
-            // btn_老師公告單
+            // btn_排名欄位清除
             // 
-            this.btn_老師公告單.Location = new System.Drawing.Point(985, 8);
-            this.btn_老師公告單.Name = "btn_老師公告單";
-            this.btn_老師公告單.Size = new System.Drawing.Size(120, 33);
-            this.btn_老師公告單.TabIndex = 15;
-            this.btn_老師公告單.Text = "老師公告單";
-            this.btn_老師公告單.UseVisualStyleBackColor = true;
-            this.btn_老師公告單.Click += new System.EventHandler(this.btn_老師公告單_Click);
+            this.btn_排名欄位清除.Location = new System.Drawing.Point(324, 36);
+            this.btn_排名欄位清除.Name = "btn_排名欄位清除";
+            this.btn_排名欄位清除.Size = new System.Drawing.Size(107, 37);
+            this.btn_排名欄位清除.TabIndex = 11;
+            this.btn_排名欄位清除.Text = "欄位清除";
+            this.btn_排名欄位清除.UseVisualStyleBackColor = true;
+            this.btn_排名欄位清除.Click += new System.EventHandler(this.btn_排名欄位清除_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(13, 22);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(49, 19);
+            this.label13.TabIndex = 11;
+            this.label13.Text = "比賽";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(166, 22);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(49, 19);
+            this.label14.TabIndex = 12;
+            this.label14.Text = "分組";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(317, 22);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(49, 19);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "名次";
             // 
             // bs_System
             // 
             this.bs_System.DataSource = typeof(WindowsFormsApp1.SystemParameter);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(27, 141);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(129, 19);
+            this.label16.TabIndex = 6;
+            this.label16.Text = "檔案匯出路徑";
+            // 
+            // textBox1
+            // 
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_System, "TWRoot", true));
+            this.textBox1.Location = new System.Drawing.Point(162, 138);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(192, 30);
+            this.textBox1.TabIndex = 7;
             // 
             // Form1
             // 
@@ -1223,6 +1354,17 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button btn_領獎公告;
         private System.Windows.Forms.Button btn_老師公告單;
         private System.Windows.Forms.Button btn_老師領獎單;
+        private System.Windows.Forms.Button btn_英文獎狀測試;
+        private System.Windows.Forms.Button btn_天文宮獎狀測試;
+        private System.Windows.Forms.Button btn_市政府獎狀測試;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Button btn_清除報到輸入;
+        private System.Windows.Forms.Button btn_排名欄位清除;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label16;
     }
 }
 

@@ -11,6 +11,8 @@ namespace WindowsFormsApp1
     {
         public string ServerIp { get; set; } = "192.168.0.1";
 
+        public string TWRoot { get; set; } = "D:\\2023比賽";
+
         public TextPrintInfo GovName { get; set; } = new TextPrintInfo() { Label="Name", X=46, Y=111 };
         
         public TextPrintInfo Gov比賽名稱 { get; set; } = new TextPrintInfo() { Label = "天文獎  全國書法", X = 38, Y = 142 };
