@@ -1427,6 +1427,20 @@ namespace WindowsFormsApp1
             return val;
         }
 
+        private string MaskPhone(string val)
+        {
+            int strlen = val.Length;
+            if (strlen < 4)
+            {
+                return val;
+            }
+            else
+            {
+                return val.Substring(0, strlen - 4) + "xxxx";
+            }
+        }
+
+
         private void btn_老師領獎單_Click(object sender, EventArgs e)
         {
             Stream stream = new MemoryStream(Properties.Resources.帶隊老師領獎單範本);
@@ -1496,12 +1510,77 @@ namespace WindowsFormsApp1
             workbook.Close();
             stream.Close();
             System.Diagnostics.Process.Start("Excel.exe", filename);
+        }
 
+        private void btn_老師公告單_Click(object sender, EventArgs e)
+        {
+            Stream stream = new MemoryStream(Properties.Resources.帶隊老師公告範本);
+            IWorkbook workbook = new HSSFWorkbook(stream);
+            ISheet sheet = workbook.GetSheet("工作表1");
 
+            ICellStyle headerCellStyle = sheet.GetRow(0).GetCell(0).CellStyle;
+            sheet.GetRow(0).GetCell(0).SetCellValue($"{this._比賽名稱s[this.cbx_指導老師選擇比賽.SelectedIndex]}");
 
+            List<ICellStyle> cellStyles = new List<ICellStyle>();
+            int cellsCount = 5;
+            for (int i = 0; i < cellsCount; i++)
+            {
+                cellStyles.Add(sheet.GetRow(3).GetCell(i).CellStyle);
+            }
+            sheet.RemoveRow(sheet.GetRow(3));
 
+            int 報名人數 = 0;
+            int 報到人數 = 0;
+            int.TryParse(this.txt_指導老師報名人數.Text, out 報名人數);
+            int.TryParse(this.txt_指導老師報到人數.Text, out 報到人數);
 
-            
+            int typeIndex = _CompetitionTypeList[this.cbx_指導老師選擇比賽.SelectedIndex];
+            this._指導老師紀錄log.Rows.Clear();
+            using (var db = new TianwenContext())
+            {
+                var groups = db.Competitors.Where(x => x.CompetitionType == typeIndex && !String.IsNullOrEmpty(x.TeacherName) && !String.IsNullOrEmpty(x.RegTeacherPhone)).GroupBy(x => x.RegTeacherPhone).OrderBy(g => g.Key).ToList();
+                int lastRowIndex = 3;
+                int rowInPage = 0;
+                foreach (var group in groups)
+                {
+                    int real報名人數 = group.Count();
+                    int real報到人數 = group.Where(x => x.DrawingId != null).Count();
+                    if (real報名人數 >= 報名人數 && real報到人數 >= 報到人數)
+                    {
+                        IRow row = sheet.CreateRow(lastRowIndex);
+                        for (int i = 0; i < cellsCount; i++)
+                        {
+                            ICell cell = row.CreateCell(i);
+                            cell.CellStyle = cellStyles[i];
+                        }
+
+                        row.Cells[0].SetCellValue((lastRowIndex - 2).ToString());
+                        row.Cells[1].SetCellValue(this.MaskName(group.First().TeacherName));
+                        row.Cells[2].SetCellValue(this.MaskPhone(group.First().TeacherPhone));
+                        row.Cells[3].SetCellValue(real報名人數.ToString());
+                        row.Cells[4].SetCellValue(real報到人數.ToString());
+                        rowInPage++;
+                        if (rowInPage >= 25)
+                        {
+                            sheet.SetRowBreak(lastRowIndex);
+                            rowInPage = 0;
+                        }
+                        lastRowIndex++;
+                    }
+                }
+            }
+
+            var path = $"D:\\2023比賽\\領獎單";
+            var filename = $"{path}\\{this.cbx_指導老師選擇比賽.SelectedItem}_帶隊老師公告單_{DateTime.Now.ToString("HHmmss")}.xls";
+            Directory.CreateDirectory(path);
+            using (FileStream file = new FileStream(filename, FileMode.Create))
+            {
+                workbook.Write(file);
+                file.Close();
+            }
+            workbook.Close();
+            stream.Close();
+            System.Diagnostics.Process.Start("Excel.exe", filename);
         }
     }
 }

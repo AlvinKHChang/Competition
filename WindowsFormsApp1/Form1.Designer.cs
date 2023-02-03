@@ -115,9 +115,9 @@ namespace WindowsFormsApp1
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txt_ServerIp = new System.Windows.Forms.TextBox();
-            this.bs_System = new System.Windows.Forms.BindingSource(this.components);
             this.btn_老師領獎單 = new System.Windows.Forms.Button();
             this.btn_老師公告單 = new System.Windows.Forms.Button();
+            this.bs_System = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -1057,10 +1057,6 @@ namespace WindowsFormsApp1
             this.txt_ServerIp.Size = new System.Drawing.Size(156, 30);
             this.txt_ServerIp.TabIndex = 0;
             // 
-            // bs_System
-            // 
-            this.bs_System.DataSource = typeof(WindowsFormsApp1.SystemParameter);
-            // 
             // btn_老師領獎單
             // 
             this.btn_老師領獎單.Location = new System.Drawing.Point(848, 9);
@@ -1079,6 +1075,11 @@ namespace WindowsFormsApp1
             this.btn_老師公告單.TabIndex = 15;
             this.btn_老師公告單.Text = "老師公告單";
             this.btn_老師公告單.UseVisualStyleBackColor = true;
+            this.btn_老師公告單.Click += new System.EventHandler(this.btn_老師公告單_Click);
+            // 
+            // bs_System
+            // 
+            this.bs_System.DataSource = typeof(WindowsFormsApp1.SystemParameter);
             // 
             // Form1
             // 
