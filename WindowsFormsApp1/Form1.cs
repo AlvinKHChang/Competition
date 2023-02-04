@@ -1897,9 +1897,64 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void btn_匯出得獎清單_Click(object sender, EventArgs e)
+        private void btn_匯出得獎清單_Click_1(object sender, EventArgs e)
         {
+            Stream stream = new MemoryStream(Properties.Resources.得獎名單範本);
+            IWorkbook workbook = new HSSFWorkbook(stream);
+            ISheet sheet = workbook.GetSheet("工作表1");
+                      
+            List<ICellStyle> cellStyles = new List<ICellStyle>();
+            int cellsCount = 12;
+            for (int i = 0; i < cellsCount; i++)
+            {
+                cellStyles.Add(sheet.GetRow(1).GetCell(i).CellStyle);
+            }
+            sheet.RemoveRow(sheet.GetRow(1));
 
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
+            {
+                int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
+                var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
+                               && (x.RankId <= 5))
+                   .OrderBy(g => new { g.GroupId, g.RankId, g.EntryNumber }).ToList();
+
+                int lastRowIndex = 1;
+                foreach (var comp in results)
+                {
+                    IRow row = sheet.CreateRow(lastRowIndex);
+                    for (int i = 0; i < cellsCount; i++)
+                    {
+                        ICell cell = row.CreateCell(i);
+                        cell.CellStyle = cellStyles[i];
+                    }
+                    row.Cells[0].SetCellValue(this.cbx_成績比賽.SelectedItem.ToString());
+                    row.Cells[1].SetCellValue(comp.Group);
+                    row.Cells[2].SetCellValue(comp.Rank);
+                    row.Cells[3].SetCellValue(comp.EntryNumber);
+                    row.Cells[4].SetCellValue(comp.Name);
+                    row.Cells[5].SetCellValue(comp.PassportName);
+                    row.Cells[6].SetCellValue(comp.Gender);
+                    row.Cells[7].SetCellValue(comp.Phone);
+                    row.Cells[8].SetCellValue(comp.Address);
+                    row.Cells[9].SetCellValue(comp.School);
+                    row.Cells[10].SetCellValue(comp.TeacherName);
+                    row.Cells[11].SetCellValue(comp.TeacherPhone);
+                    lastRowIndex++;
+                }
+
+            }
+
+            var path = $"{_SystemParameter.TWRoot}\\領獎單";
+            var filename = $"{path}\\{this.cbx_成績比賽.SelectedItem}_得獎名單_{DateTime.Now.ToString("HHmmss")}.xls";
+            Directory.CreateDirectory(path);
+            using (FileStream file = new FileStream(filename, FileMode.Create))
+            {
+                workbook.Write(file);
+                file.Close();
+            }
+            workbook.Close();
+            stream.Close();
+            System.Diagnostics.Process.Start("Excel.exe", filename);
         }
     }
 }
