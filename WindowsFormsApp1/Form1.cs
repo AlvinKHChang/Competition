@@ -80,6 +80,16 @@ namespace WindowsFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             this.LoadParameter();
+            for (int i = 0; i < this._GroupList.Count(); i++)
+            {
+                this._GroupDict.Add(this._GroupList[i], i);
+            }
+
+            for (int i = 0; i < this._RankList.Count(); i++)
+            {
+                this._RankDict.Add(this._GroupList[i], i);
+            }
+
 
             this.tabControl1.TabPages.Remove(this.tpg_統計);
             this.tabControl1.TabPages.Remove(this.tpg_報到作業);
@@ -96,15 +106,7 @@ namespace WindowsFormsApp1
             this.tabControl1.TabPages.Add(this.tpg_排名作業);
             this.tabControl1.TabPages.Add(this.tpg_成績統計);
             
-            for (int i = 0; i < this._GroupList.Count(); i++)
-            {
-                this._GroupDict.Add(this._GroupList[i], i);
-            }
-
-            for (int i = 0; i < this._RankList.Count(); i++)
-            {
-                this._RankDict.Add(this._GroupList[i], i);
-            }
+            
 
             _統計表log = new DataTable();
             _統計表log.Columns.Add("組別", typeof(string));
@@ -1691,6 +1693,15 @@ namespace WindowsFormsApp1
 
         private void btn_測試連線_Click(object sender, EventArgs e)
         {
+            if (this.tabControl1.TabPages.Count > 1)
+            {
+                this.tabControl1.TabPages.Remove(this.tpg_統計);
+                this.tabControl1.TabPages.Remove(this.tpg_報到作業);
+                this.tabControl1.TabPages.Remove(this.tpg_指導老師);
+                this.tabControl1.TabPages.Remove(this.tpg_排名作業);
+                this.tabControl1.TabPages.Remove(this.tpg_成績統計);
+            }
+            
             try
             {
                 using (var db = new TianwenContext(this._SystemParameter.ServerIp))
