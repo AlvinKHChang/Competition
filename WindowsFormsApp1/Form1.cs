@@ -90,9 +90,6 @@ namespace WindowsFormsApp1
             this.bs_TW日.DataSource = this._SystemParameter.TWDay;
             this.bs_TW頁.DataSource = this._SystemParameter.TWPageNumber;
 
-
-
-
             for (int i = 0; i < this._GroupList.Count(); i++)
             {
                 this._GroupDict.Add(this._GroupList[i], i);
@@ -1198,14 +1195,16 @@ namespace WindowsFormsApp1
                     string genFontPath = "c:\\windows\\fonts\\PALSCRI.ttf";
                     string nameFontPath = "c:\\windows\\fonts\\timesbi.ttf";
                     string timesFontPath = "c:\\windows\\fonts\\times.ttf";
+                    string chFontPath = "c:\\windows\\fonts\\kaiu.ttf"; //標楷體   
                     BaseFont genBaseFont = BaseFont.CreateFont(genFontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
                     BaseFont nameBaseFont = BaseFont.CreateFont(nameFontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
                     BaseFont timesBaseFont = BaseFont.CreateFont(timesFontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-
+                    BaseFont chBaseFont = BaseFont.CreateFont(chFontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                                        
                     float dist = iTextSharp.text.Utilities.MillimetersToPoints(_SystemParameter.Eng行距);
                     iTextSharp.text.Font genFont = new iTextSharp.text.Font(genBaseFont, _SystemParameter.EngFontNumber);
                     iTextSharp.text.Font nameFont = new iTextSharp.text.Font(nameBaseFont, _SystemParameter.EngNameFontNumber);
-                    iTextSharp.text.Font dateFont = new iTextSharp.text.Font(genBaseFont, _SystemParameter.EngFontNumber);
+                    iTextSharp.text.Font chtFont = new iTextSharp.text.Font(chBaseFont, _SystemParameter.TWFontNumber);
                     iTextSharp.text.Font pageFont = new iTextSharp.text.Font(timesBaseFont, 10);
                     iTextSharp.text.Rectangle pageSize = doc.PageSize;
                     using (var writer = PdfWriter.GetInstance(doc, stream))
@@ -1226,8 +1225,15 @@ namespace WindowsFormsApp1
                             iTextSharp.text.Phrase txtPhrase1 = new iTextSharp.text.Phrase("This certificate is presented to", genFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase1, pageSize.Right / 2, pageSize.Top / 2 + dist * 2, 0);
 
-
-                            iTextSharp.text.Phrase txtPhrase2 = new iTextSharp.text.Phrase(comp.PassportName, nameFont);
+                            iTextSharp.text.Phrase txtPhrase2;
+                            if (Regex.IsMatch(comp.PassportName, "[A-Za-z]"))
+                            {
+                                txtPhrase2 = new iTextSharp.text.Phrase(comp.PassportName, nameFont);
+                            }
+                            else
+                            {
+                                txtPhrase2 = new iTextSharp.text.Phrase(comp.Name, chtFont);
+                            }
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase2, pageSize.Right / 2, pageSize.Top / 2 + dist, 0);
 
                             iTextSharp.text.Phrase txtPhrase3 = new iTextSharp.text.Phrase("For Successfully Completing the", genFont);
@@ -1238,11 +1244,7 @@ namespace WindowsFormsApp1
 
                             iTextSharp.text.Phrase txtPhrase5 = new iTextSharp.text.Phrase("In The 53th Annual Calligraphy Competition of Tian Wen Temple", genFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase5, pageSize.Right / 2, pageSize.Top / 2 - dist * 2, 0);
-
-                            iTextSharp.text.Phrase txtDate
-                                = new iTextSharp.text.Phrase(_SystemParameter.EnDate.Label, dateFont);
-                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtDate, pageSize.Right / 2, pageSize.GetTop(_SystemParameter.EnDate.PointY), 0);
-
+                                                        
                             iTextSharp.text.Phrase txtPageNumber = new iTextSharp.text.Phrase(pageIndex.ToString(), pageFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtPageNumber, pageSize.GetLeft(_SystemParameter.EnPageNumber.PointX), pageSize.GetTop(_SystemParameter.EnPageNumber.PointY), 0);
 
@@ -1642,7 +1644,7 @@ namespace WindowsFormsApp1
                 UnlockDbSettingCnt++;
                 if (UnlockDbSettingCnt >= 5)
                 {
-                    this.grb_DbSetting.Visible = true;
+                    this.gbx_DbSetting.Visible = true;
                 }
             }
             else
@@ -1755,7 +1757,7 @@ namespace WindowsFormsApp1
                 dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '第二名', rank_id = 1 WHERE entry_name = 'BS0100002';");
                 dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '第三名', rank_id = 2 WHERE entry_name = 'BS0100003';");
                 dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '優選', rank_id = 3 WHERE entry_name = 'BS0100004';;");
-                var result = dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100005'");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100005'");
                 dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100006';");
                 dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100007';");
                 dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100008';");
@@ -1849,9 +1851,37 @@ namespace WindowsFormsApp1
             stream.Dispose();
         }
 
-        private void label24_Click(object sender, EventArgs e)
+        private void btn_LockDbSetting_Click(object sender, EventArgs e)
+        {
+            this.gbx_DbSetting.Visible = false;
+        }
+
+        private void label27_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_國際組名字_Click(object sender, EventArgs e)
+        {
+            using (var dbContext = new TianwenContext())
+            {
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '福島友理', passport_name = 'YURI FUKUSHIMA' WHERE entry_name = 'A05300536';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '何紫萱', passport_name = 'Parichat Apichayodom' WHERE entry_name = 'A05300533';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '寒星明', passport_name = 'Sophie Diana Haase' WHERE entry_name = 'A05300531';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '孫賽亞', passport_name = 'Asiah Jalon Crutchfield' WHERE entry_name = 'A05300530';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '湯大衛', passport_name = 'Trzcinski David' WHERE entry_name = 'A05300483';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '須山健大', passport_name = 'SUYAMA KENTA' WHERE entry_name = 'A05300480';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '小山穗乃香', passport_name = 'Koyama Honoka' WHERE entry_name = 'A05300307';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '松室亞美', passport_name = 'MATSUMURO AMI' WHERE entry_name = 'A05300097';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '洪賢植', passport_name = 'HERNAN FELIPE PUENTES CANTOR' WHERE entry_name = 'A05300080';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '黃海薇', passport_name = 'Huang Hai Wei' WHERE entry_name = 'A05300030';");
+                MessageBox.Show($"已更新國際組姓名!!");
+            }
         }
     }
 }
