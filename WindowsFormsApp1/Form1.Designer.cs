@@ -199,6 +199,7 @@ namespace WindowsFormsApp1
             this.btn_Load = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
             this.btn_測試連線 = new System.Windows.Forms.Button();
+            this.btn_匯出得獎清單 = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
             this.bs_En序號 = new System.Windows.Forms.BindingSource(this.components);
             this.bs_System = new System.Windows.Forms.BindingSource(this.components);
@@ -214,7 +215,6 @@ namespace WindowsFormsApp1
             this.bs_TW比賽分組 = new System.Windows.Forms.BindingSource(this.components);
             this.bs_TW屆數 = new System.Windows.Forms.BindingSource(this.components);
             this.bs_TW比賽姓名 = new System.Windows.Forms.BindingSource(this.components);
-            this.btn_匯出得獎清單 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -2113,6 +2113,16 @@ namespace WindowsFormsApp1
             this.btn_測試連線.UseVisualStyleBackColor = true;
             this.btn_測試連線.Click += new System.EventHandler(this.btn_測試連線_Click);
             // 
+            // btn_匯出得獎清單
+            // 
+            this.btn_匯出得獎清單.Location = new System.Drawing.Point(525, 19);
+            this.btn_匯出得獎清單.Name = "btn_匯出得獎清單";
+            this.btn_匯出得獎清單.Size = new System.Drawing.Size(250, 29);
+            this.btn_匯出得獎清單.TabIndex = 16;
+            this.btn_匯出得獎清單.Text = "不分組得獎清單";
+            this.btn_匯出得獎清單.UseVisualStyleBackColor = true;
+            this.btn_匯出得獎清單.Click += new System.EventHandler(this.btn_匯出得獎清單_Click_1);
+            // 
             // panel8
             // 
             this.panel8.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.天文logo;
@@ -2179,16 +2189,6 @@ namespace WindowsFormsApp1
             // bs_TW比賽姓名
             // 
             this.bs_TW比賽姓名.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
-            // 
-            // btn_匯出得獎清單
-            // 
-            this.btn_匯出得獎清單.Location = new System.Drawing.Point(525, 19);
-            this.btn_匯出得獎清單.Name = "btn_匯出得獎清單";
-            this.btn_匯出得獎清單.Size = new System.Drawing.Size(250, 29);
-            this.btn_匯出得獎清單.TabIndex = 16;
-            this.btn_匯出得獎清單.Text = "不分組得獎清單";
-            this.btn_匯出得獎清單.UseVisualStyleBackColor = true;
-            this.btn_匯出得獎清單.Click += new System.EventHandler(this.btn_匯出得獎清單_Click_1);
             // 
             // Form1
             // 

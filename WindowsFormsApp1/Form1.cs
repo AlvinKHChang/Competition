@@ -95,7 +95,7 @@ namespace WindowsFormsApp1
             this.tabControl1.TabPages.Add(this.tpg_指導老師);
             this.tabControl1.TabPages.Add(this.tpg_排名作業);
             this.tabControl1.TabPages.Add(this.tpg_成績統計);
-
+            
             for (int i = 0; i < this._GroupList.Count(); i++)
             {
                 this._GroupDict.Add(this._GroupList[i], i);
@@ -1057,11 +1057,11 @@ namespace WindowsFormsApp1
 
                             iTextSharp.text.Phrase txtMonth
                                 = new iTextSharp.text.Phrase(_SystemParameter.TWMonth.Label, chtFont);
-                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtYear, pageSize.GetLeft(_SystemParameter.TWMonth.PointX), pageSize.GetTop(_SystemParameter.TWMonth.PointY), 0);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtMonth, pageSize.GetLeft(_SystemParameter.TWMonth.PointX), pageSize.GetTop(_SystemParameter.TWMonth.PointY), 0);
 
                             iTextSharp.text.Phrase txtDay
                                 = new iTextSharp.text.Phrase(_SystemParameter.TWDay.Label, chtFont);
-                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtYear, pageSize.GetLeft(_SystemParameter.TWDay.PointX), pageSize.GetTop(_SystemParameter.TWDay.PointY), 0);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtDay, pageSize.GetLeft(_SystemParameter.TWDay.PointX), pageSize.GetTop(_SystemParameter.TWDay.PointY), 0);
 
                             iTextSharp.text.Phrase txtPageNumber = new iTextSharp.text.Phrase(pageIndex.ToString(), pageFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtPageNumber, pageSize.GetLeft(_SystemParameter.TWPageNumber.PointX), pageSize.GetTop(_SystemParameter.TWPageNumber.PointY), 0);
@@ -1145,11 +1145,11 @@ namespace WindowsFormsApp1
 
                             iTextSharp.text.Phrase txtMonth
                                 = new iTextSharp.text.Phrase(_SystemParameter.TWMonth.Label, chtFont);
-                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtYear, pageSize.GetLeft(_SystemParameter.TWMonth.PointX), pageSize.GetTop(_SystemParameter.TWMonth.PointY), 0);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtMonth, pageSize.GetLeft(_SystemParameter.TWMonth.PointX), pageSize.GetTop(_SystemParameter.TWMonth.PointY), 0);
 
                             iTextSharp.text.Phrase txtDay
                                 = new iTextSharp.text.Phrase(_SystemParameter.TWDay.Label, chtFont);
-                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtYear, pageSize.GetLeft(_SystemParameter.TWDay.PointX), pageSize.GetTop(_SystemParameter.TWDay.PointY), 0);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtDay, pageSize.GetLeft(_SystemParameter.TWDay.PointX), pageSize.GetTop(_SystemParameter.TWDay.PointY), 0);
 
                             iTextSharp.text.Phrase txtPageNumber = new iTextSharp.text.Phrase(pageIndex.ToString(), pageFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtPageNumber, pageSize.GetLeft(_SystemParameter.TWPageNumber.PointX), pageSize.GetTop(_SystemParameter.TWPageNumber.PointY), 0);
@@ -1618,17 +1618,17 @@ namespace WindowsFormsApp1
 
         private void btn_英文獎狀測試_Click(object sender, EventArgs e)
         {
-            this.btn_國際組英文.PerformClick();
+            this.btn_國際組英文_Click(sender, e); ;
         }
 
         private void btn_天文宮獎狀測試_Click(object sender, EventArgs e)
         {
-            this.btn_天文宮.PerformClick();
+            this.btn_天文宮_Click(sender, e);
         }
 
         private void btn_市政府獎狀測試_Click(object sender, EventArgs e)
         {
-            this.btn_市政府獎狀.PerformClick();
+            this.btn_市政府獎狀_Click(sender, e);
         }
 
         private int UnlockDbSettingCnt = 0;
