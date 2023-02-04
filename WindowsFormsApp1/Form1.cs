@@ -80,22 +80,21 @@ namespace WindowsFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             this.LoadParameter();
-            this.bs_System.DataSource = this._SystemParameter;
-            this.bs_TW比賽姓名.DataSource = this._SystemParameter.TWName;
-            this.bs_TW比賽名稱.DataSource = this._SystemParameter.TW比賽;
-            this.bs_TW屆數.DataSource = this._SystemParameter.TW屆數;
-            this.bs_TW比賽分組.DataSource = this._SystemParameter.TW分組名次;
-            this.bs_TW年.DataSource = this._SystemParameter.TWYear;
-            this.bs_TW月.DataSource = this._SystemParameter.TWMonth;
-            this.bs_TW日.DataSource = this._SystemParameter.TWDay;
-            this.bs_TW序號.DataSource = this._SystemParameter.TWPageNumber;
-            this.bs_Gov比賽姓名.DataSource = this._SystemParameter.GovName;
-            this.bs_Gov比賽名稱.DataSource = this._SystemParameter.Gov比賽名稱;
-            this.bs_Gov屆數分組名次.DataSource = this._SystemParameter.Gov比賽屆數分組名次;
-            this.bs_Gov序號.DataSource = this._SystemParameter.GovPageNumber;
-            this.bs_En序號.DataSource = this._SystemParameter.EnPageNumber;
 
+            this.tabControl1.TabPages.Remove(this.tpg_統計);
+            this.tabControl1.TabPages.Remove(this.tpg_報到作業);
+            this.tabControl1.TabPages.Remove(this.tpg_指導老師);
+            this.tabControl1.TabPages.Remove(this.tpg_排名作業);
+            this.tabControl1.TabPages.Remove(this.tpg_成績統計);
+        }
 
+        private void InitTabPages()
+        {
+            this.tabControl1.TabPages.Add(this.tpg_統計);
+            this.tabControl1.TabPages.Add(this.tpg_報到作業);
+            this.tabControl1.TabPages.Add(this.tpg_指導老師);
+            this.tabControl1.TabPages.Add(this.tpg_排名作業);
+            this.tabControl1.TabPages.Add(this.tpg_成績統計);
 
             for (int i = 0; i < this._GroupList.Count(); i++)
             {
@@ -128,7 +127,7 @@ namespace WindowsFormsApp1
 
             cbx_統計表選擇比賽.Items.Add("書法比賽");
             cbx_統計表選擇比賽.Items.Add("寫生比賽");
-            //cbx_統計表選擇比賽.SelectedIndex = 0;
+            cbx_統計表選擇比賽.SelectedIndex = 0;
 
             _報到作業紀錄log = new DataTable();
             _報到作業紀錄log.Columns.Add("組別", typeof(string));
@@ -140,13 +139,13 @@ namespace WindowsFormsApp1
 
             cbx_報到作業選擇比賽.Items.Add("書法比賽");
             cbx_報到作業選擇比賽.Items.Add("寫生比賽");
-            //cbx_報到作業選擇比賽.SelectedIndex = 0;
+            cbx_報到作業選擇比賽.SelectedIndex = 0;
 
             foreach (var group in _GroupList)
             {
                 cbx_報到作業選擇分組.Items.Add(group);
             }
-            //cbx_報到作業選擇分組.SelectedIndex = 0;
+            cbx_報到作業選擇分組.SelectedIndex = 0;
             chk_報到作業選擇分組.Checked = true;
 
             this._指導老師紀錄log = new DataTable();
@@ -168,14 +167,13 @@ namespace WindowsFormsApp1
             {
                 cbx_排名作業分組.Items.Add(group);
             }
-            //cbx_排名作業分組.SelectedIndex = 0;
+            cbx_排名作業分組.SelectedIndex = 0;
 
             foreach (var rank in _RankList)
             {
                 cbx_排名作業名次.Items.Add(rank);
             }
-            //cbx_排名作業名次.SelectedIndex = 0;
-
+            cbx_排名作業名次.SelectedIndex = 0;
 
             this._排名作業統計log = new DataTable();
             this._排名作業統計log.Columns.Add("組別", typeof(string));
@@ -188,13 +186,13 @@ namespace WindowsFormsApp1
 
             this.cbx_成績比賽.Items.Add("書法");
             this.cbx_成績比賽.Items.Add("寫生");
-            //this.cbx_成績比賽.SelectedIndex = 0;
+            this.cbx_成績比賽.SelectedIndex = 0;
 
             foreach (var group in _GroupList)
             {
                 cbx_成績分組.Items.Add(group);
             }
-            // cbx_成績分組.SelectedIndex = 0;
+            cbx_成績分組.SelectedIndex = 0;
 
             this._成績統計log = new DataTable();
             this._成績統計log.Columns.Add("組別", typeof(string));
@@ -215,11 +213,7 @@ namespace WindowsFormsApp1
                     break;
                 }
             }
-
-            //this.bs_System.DataSource = this._SystemParameter;
-
-            this.tabControl1.SelectedIndex = 5;
-
+            this.tabControl1.SelectedIndex = 1;
         }
 
         private void btn_匯入參賽者資料_Click(object sender, EventArgs e)
@@ -1699,12 +1693,15 @@ namespace WindowsFormsApp1
         {
             try
             {
-                MessageBox.Show(this._SystemParameter.ServerIp);
                 using (var db = new TianwenContext(this._SystemParameter.ServerIp))
                 {
                     var comp = db.Competitors.FirstOrDefault();
                     if (comp != null)
                     {
+                        this.grb_市政府獎狀.Enabled = true;
+                        this.grb_天文宮獎狀.Enabled = true;
+                        this.grb_英文獎狀.Enabled = true;
+                        this.InitTabPages();
                         MessageBox.Show("連線成功");
                     }
                     else
@@ -1726,8 +1723,6 @@ namespace WindowsFormsApp1
 
         }
 
-
-
         private void btn_Load_Click(object sender, EventArgs e)
         {
             this.LoadParameter();
@@ -1742,18 +1737,29 @@ namespace WindowsFormsApp1
                 var json = File.ReadAllText(file);
                 var para = JsonConvert.DeserializeObject<SystemParameter>(json);
                 if (para != null)
-                {
                     this._SystemParameter = para;
-                }
                 else
-                {
                     this._SystemParameter = new SystemParameter();
-                }
             }
             else
             {
                 this._SystemParameter = new SystemParameter();
             }
+
+            this.bs_System.DataSource = this._SystemParameter;
+            this.bs_TW比賽姓名.DataSource = this._SystemParameter.TWName;
+            this.bs_TW比賽名稱.DataSource = this._SystemParameter.TW比賽;
+            this.bs_TW屆數.DataSource = this._SystemParameter.TW屆數;
+            this.bs_TW比賽分組.DataSource = this._SystemParameter.TW分組名次;
+            this.bs_TW年.DataSource = this._SystemParameter.TWYear;
+            this.bs_TW月.DataSource = this._SystemParameter.TWMonth;
+            this.bs_TW日.DataSource = this._SystemParameter.TWDay;
+            this.bs_TW序號.DataSource = this._SystemParameter.TWPageNumber;
+            this.bs_Gov比賽姓名.DataSource = this._SystemParameter.GovName;
+            this.bs_Gov比賽名稱.DataSource = this._SystemParameter.Gov比賽名稱;
+            this.bs_Gov屆數分組名次.DataSource = this._SystemParameter.Gov比賽屆數分組名次;
+            this.bs_Gov序號.DataSource = this._SystemParameter.GovPageNumber;
+            this.bs_En序號.DataSource = this._SystemParameter.EnPageNumber;
         }
 
         private void btn_特別獎名次_Click(object sender, EventArgs e)

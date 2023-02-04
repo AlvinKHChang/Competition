@@ -30,7 +30,7 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpg_統計 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -122,12 +122,12 @@ namespace WindowsFormsApp1
             this.btn_刪除所有資料 = new System.Windows.Forms.Button();
             this.btn_匯入參賽者資料 = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.grb_市政府獎狀 = new System.Windows.Forms.GroupBox();
             this.btn_市政府獎狀測試 = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grb_天文宮獎狀 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.label26 = new System.Windows.Forms.Label();
             this.textBox14 = new System.Windows.Forms.TextBox();
@@ -187,7 +187,7 @@ namespace WindowsFormsApp1
             this.textBox34 = new System.Windows.Forms.TextBox();
             this.textBox29 = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.grb_英文獎狀 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.label33 = new System.Windows.Forms.Label();
             this.textBox21 = new System.Windows.Forms.TextBox();
@@ -200,8 +200,9 @@ namespace WindowsFormsApp1
             this.textBox23 = new System.Windows.Forms.TextBox();
             this.label39 = new System.Windows.Forms.Label();
             this.textBox28 = new System.Windows.Forms.TextBox();
-            this.bs_Gov序號 = new System.Windows.Forms.BindingSource(this.components);
+            this.bs_En序號 = new System.Windows.Forms.BindingSource(this.components);
             this.bs_System = new System.Windows.Forms.BindingSource(this.components);
+            this.bs_Gov序號 = new System.Windows.Forms.BindingSource(this.components);
             this.bs_Gov比賽名稱 = new System.Windows.Forms.BindingSource(this.components);
             this.bs_Gov屆數分組名次 = new System.Windows.Forms.BindingSource(this.components);
             this.bs_Gov比賽姓名 = new System.Windows.Forms.BindingSource(this.components);
@@ -213,7 +214,6 @@ namespace WindowsFormsApp1
             this.bs_TW比賽分組 = new System.Windows.Forms.BindingSource(this.components);
             this.bs_TW屆數 = new System.Windows.Forms.BindingSource(this.components);
             this.bs_TW比賽姓名 = new System.Windows.Forms.BindingSource(this.components);
-            this.bs_En序號 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -243,16 +243,17 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.SuspendLayout();
             this.gbx_DbSetting.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.grb_市政府獎狀.SuspendLayout();
+            this.grb_天文宮獎狀.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
-            this.groupBox9.SuspendLayout();
+            this.grb_英文獎狀.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bs_Gov序號)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_En序號)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_System)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_Gov序號)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Gov比賽名稱)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Gov屆數分組名次)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Gov比賽姓名)).BeginInit();
@@ -264,7 +265,6 @@ namespace WindowsFormsApp1
             ((System.ComponentModel.ISupportInitialize)(this.bs_TW比賽分組)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_TW屆數)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_TW比賽姓名)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bs_En序號)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1126,14 +1126,14 @@ namespace WindowsFormsApp1
             this.dgv_成績統計.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_成績統計.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_成績統計.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_成績統計.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_成績統計.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_成績統計.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_成績統計.Location = new System.Drawing.Point(3, 131);
             this.dgv_成績統計.Name = "dgv_成績統計";
@@ -1246,12 +1246,12 @@ namespace WindowsFormsApp1
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.groupBox9);
-            this.panel7.Controls.Add(this.groupBox8);
+            this.panel7.Controls.Add(this.grb_英文獎狀);
+            this.panel7.Controls.Add(this.grb_市政府獎狀);
             this.panel7.Controls.Add(this.groupBox7);
             this.panel7.Controls.Add(this.groupBox6);
             this.panel7.Controls.Add(this.groupBox5);
-            this.panel7.Controls.Add(this.groupBox1);
+            this.panel7.Controls.Add(this.grb_天文宮獎狀);
             this.panel7.Controls.Add(this.groupBox4);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(3, 3);
@@ -1259,16 +1259,17 @@ namespace WindowsFormsApp1
             this.panel7.Size = new System.Drawing.Size(931, 630);
             this.panel7.TabIndex = 1;
             // 
-            // groupBox8
+            // grb_市政府獎狀
             // 
-            this.groupBox8.Controls.Add(this.tableLayoutPanel9);
-            this.groupBox8.Controls.Add(this.btn_市政府獎狀測試);
-            this.groupBox8.Location = new System.Drawing.Point(0, 129);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(275, 469);
-            this.groupBox8.TabIndex = 5;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "市政府獎狀";
+            this.grb_市政府獎狀.Controls.Add(this.tableLayoutPanel9);
+            this.grb_市政府獎狀.Controls.Add(this.btn_市政府獎狀測試);
+            this.grb_市政府獎狀.Enabled = false;
+            this.grb_市政府獎狀.Location = new System.Drawing.Point(0, 129);
+            this.grb_市政府獎狀.Name = "grb_市政府獎狀";
+            this.grb_市政府獎狀.Size = new System.Drawing.Size(275, 469);
+            this.grb_市政府獎狀.TabIndex = 5;
+            this.grb_市政府獎狀.TabStop = false;
+            this.grb_市政府獎狀.Text = "市政府獎狀";
             // 
             // btn_市政府獎狀測試
             // 
@@ -1307,17 +1308,18 @@ namespace WindowsFormsApp1
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "groupBox5";
             // 
-            // groupBox1
+            // grb_天文宮獎狀
             // 
-            this.groupBox1.Controls.Add(this.tableLayoutPanel7);
-            this.groupBox1.Controls.Add(this.btn_特別獎獎狀);
-            this.groupBox1.Controls.Add(this.btn_天文宮獎狀測試);
-            this.groupBox1.Location = new System.Drawing.Point(281, 129);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(275, 469);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "天文宮獎狀";
+            this.grb_天文宮獎狀.Controls.Add(this.tableLayoutPanel7);
+            this.grb_天文宮獎狀.Controls.Add(this.btn_特別獎獎狀);
+            this.grb_天文宮獎狀.Controls.Add(this.btn_天文宮獎狀測試);
+            this.grb_天文宮獎狀.Enabled = false;
+            this.grb_天文宮獎狀.Location = new System.Drawing.Point(281, 129);
+            this.grb_天文宮獎狀.Name = "grb_天文宮獎狀";
+            this.grb_天文宮獎狀.Size = new System.Drawing.Size(275, 469);
+            this.grb_天文宮獎狀.TabIndex = 1;
+            this.grb_天文宮獎狀.TabStop = false;
+            this.grb_天文宮獎狀.Text = "天文宮獎狀";
             // 
             // tableLayoutPanel7
             // 
@@ -1766,7 +1768,7 @@ namespace WindowsFormsApp1
             this.btn_測試連線.Name = "btn_測試連線";
             this.btn_測試連線.Size = new System.Drawing.Size(101, 35);
             this.btn_測試連線.TabIndex = 8;
-            this.btn_測試連線.Text = "測試連線";
+            this.btn_測試連線.Text = "連線";
             this.btn_測試連線.UseVisualStyleBackColor = true;
             this.btn_測試連線.Click += new System.EventHandler(this.btn_測試連線_Click);
             // 
@@ -1970,16 +1972,17 @@ namespace WindowsFormsApp1
             this.label31.Text = "名字";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // groupBox9
+            // grb_英文獎狀
             // 
-            this.groupBox9.Controls.Add(this.tableLayoutPanel10);
-            this.groupBox9.Controls.Add(this.btn_英文獎狀測試);
-            this.groupBox9.Location = new System.Drawing.Point(562, 129);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(344, 447);
-            this.groupBox9.TabIndex = 6;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "英文獎狀";
+            this.grb_英文獎狀.Controls.Add(this.tableLayoutPanel10);
+            this.grb_英文獎狀.Controls.Add(this.btn_英文獎狀測試);
+            this.grb_英文獎狀.Enabled = false;
+            this.grb_英文獎狀.Location = new System.Drawing.Point(562, 129);
+            this.grb_英文獎狀.Name = "grb_英文獎狀";
+            this.grb_英文獎狀.Size = new System.Drawing.Size(344, 447);
+            this.grb_英文獎狀.TabIndex = 6;
+            this.grb_英文獎狀.TabStop = false;
+            this.grb_英文獎狀.Text = "英文獎狀";
             // 
             // tableLayoutPanel10
             // 
@@ -2119,13 +2122,17 @@ namespace WindowsFormsApp1
             this.textBox28.Size = new System.Drawing.Size(70, 30);
             this.textBox28.TabIndex = 37;
             // 
-            // bs_Gov序號
+            // bs_En序號
             // 
-            this.bs_Gov序號.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
+            this.bs_En序號.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
             // 
             // bs_System
             // 
             this.bs_System.DataSource = typeof(WindowsFormsApp1.SystemParameter);
+            // 
+            // bs_Gov序號
+            // 
+            this.bs_Gov序號.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
             // 
             // bs_Gov比賽名稱
             // 
@@ -2170,10 +2177,6 @@ namespace WindowsFormsApp1
             // bs_TW比賽姓名
             // 
             this.bs_TW比賽姓名.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
-            // 
-            // bs_En序號
-            // 
-            this.bs_En序號.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
             // 
             // Form1
             // 
@@ -2221,8 +2224,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.ResumeLayout(false);
             this.gbx_DbSetting.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
+            this.grb_市政府獎狀.ResumeLayout(false);
+            this.grb_天文宮獎狀.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -2230,11 +2233,12 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel8.PerformLayout();
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
-            this.groupBox9.ResumeLayout(false);
+            this.grb_英文獎狀.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bs_Gov序號)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_En序號)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_System)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_Gov序號)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Gov比賽名稱)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Gov屆數分組名次)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_Gov比賽姓名)).EndInit();
@@ -2246,7 +2250,6 @@ namespace WindowsFormsApp1
             ((System.ComponentModel.ISupportInitialize)(this.bs_TW比賽分組)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_TW屆數)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs_TW比賽姓名)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bs_En序號)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2355,7 +2358,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.Button btn_Load;
         private System.Windows.Forms.Button btn_特別獎名次;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grb_天文宮獎狀;
         private System.Windows.Forms.Button btn_特別獎獎狀;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox textBox14;
@@ -2395,7 +2398,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox grb_市政府獎狀;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -2422,7 +2425,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.BindingSource bs_Gov比賽名稱;
         private System.Windows.Forms.BindingSource bs_Gov屆數分組名次;
         private System.Windows.Forms.BindingSource bs_Gov序號;
-        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox grb_英文獎狀;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label37;
