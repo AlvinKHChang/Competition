@@ -223,7 +223,7 @@ namespace WindowsFormsApp1
             dialog.Filter = "Excel檔案(*.xls)|*.xls";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                using (var dbContext = new TianwenContext())
+                using (var dbContext = new TianwenContext(this._SystemParameter.ServerIp))
                 {
                     FileInfo fi = new FileInfo(dialog.FileName);
                     using (FileStream fstream = new FileStream(fi.FullName, FileMode.Open))
@@ -286,7 +286,7 @@ namespace WindowsFormsApp1
 
         private void btn_刪除所有資料_Click(object sender, EventArgs e)
         {
-            using (var dbContext = new TianwenContext())
+            using (var dbContext = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE competitors");
                 MessageBox.Show($"已刪除所有資料!!");
@@ -295,7 +295,7 @@ namespace WindowsFormsApp1
 
         private void btn_初始化所有資料_Click(object sender, EventArgs e)
         {
-            using (var dbContext = new TianwenContext())
+            using (var dbContext = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 var competitors = dbContext.Competitors.ToList();
                 foreach (var competitor in competitors)
@@ -346,7 +346,7 @@ namespace WindowsFormsApp1
                 int typeIndex = _CompetitionTypeList[this.cbx_報到作業選擇比賽.SelectedIndex];
                 int groupIndex = this.cbx_報到作業選擇分組.SelectedIndex;
                 Boolean hasGroup = this.chk_報到作業選擇分組.Checked;
-                using (var db = new TianwenContext())
+                using (var db = new TianwenContext(this._SystemParameter.ServerIp))
                 {
                     var result = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.EntryNumber == txt_報到作業參賽編號.Text.ToString() && (!hasGroup || x.GroupId == groupIndex)).FirstOrDefault();
                     if (result != null)
@@ -404,7 +404,7 @@ namespace WindowsFormsApp1
                 int typeIndex = _CompetitionTypeList[this.cbx_報到作業選擇比賽.SelectedIndex];
                 int groupIndex = this.cbx_報到作業選擇分組.SelectedIndex;
                 Boolean hasGroup = this.chk_報到作業選擇分組.Checked;
-                using (var db = new TianwenContext())
+                using (var db = new TianwenContext(this._SystemParameter.ServerIp))
                 {
                     var result = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.EntryNumber == txt_報到作業參賽編號.Text.ToString() && x.DrawingId == null && (!hasGroup || x.GroupId == groupIndex)).FirstOrDefault();
                     if (result != null)
@@ -465,7 +465,7 @@ namespace WindowsFormsApp1
             int groupIndex = this.cbx_報到作業選擇分組.SelectedIndex;
             Boolean hasGroup = this.chk_報到作業選擇分組.Checked;
             this._報到作業紀錄log.Rows.Clear();
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 var results = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.DrawingId != null && x.UpdatedIp == this._LocalMac && (!hasGroup || x.GroupId == groupIndex)).OrderByDescending(x => x.UpdatedTime).ToList();
                 foreach (var result in results)
@@ -490,7 +490,7 @@ namespace WindowsFormsApp1
                 int typeIndex = _CompetitionTypeList[this.cbx_報到作業選擇比賽.SelectedIndex];
                 int groupIndex = this.cbx_報到作業選擇分組.SelectedIndex;
                 Boolean hasGroup = this.chk_報到作業選擇分組.Checked;
-                using (var db = new TianwenContext())
+                using (var db = new TianwenContext(this._SystemParameter.ServerIp))
                 {
                     var result = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.EntryNumber == txt_報到作業參賽編號.Text.ToString() && (!hasGroup || x.GroupId == groupIndex)).FirstOrDefault();
                     if (result != null)
@@ -540,7 +540,7 @@ namespace WindowsFormsApp1
 
             int typeIndex = _CompetitionTypeList[this.cbx_指導老師選擇比賽.SelectedIndex];
             this._指導老師紀錄log.Rows.Clear();
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 var groups = db.Competitors.Where(x => x.CompetitionType == typeIndex && !String.IsNullOrEmpty(x.TeacherName) && !String.IsNullOrEmpty(x.RegTeacherPhone)).GroupBy(x => x.RegTeacherPhone).OrderBy(g => g.Key).ToList();
                 foreach (var group in groups)
@@ -592,7 +592,7 @@ namespace WindowsFormsApp1
         {
             int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
             this._排名作業統計log.Rows.Clear();
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 var comps = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.RankId == this.cbx_排名作業名次.SelectedIndex).OrderByDescending(g => g.UpdatedTime).ToList();
                 foreach (var comp in comps)
@@ -634,7 +634,7 @@ namespace WindowsFormsApp1
             if (e.KeyCode == Keys.Enter && !String.IsNullOrEmpty(txt_排名作業參賽編號.Text))
             {
                 int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
-                using (var db = new TianwenContext())
+                using (var db = new TianwenContext(this._SystemParameter.ServerIp))
                 {
                     var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.EntryNumber == txt_排名作業參賽編號.Text).FirstOrDefault();
                     if (comp == null)
@@ -672,7 +672,7 @@ namespace WindowsFormsApp1
             if (e.KeyCode == Keys.Enter && !String.IsNullOrEmpty(txt_排名作業圖紙編號.Text))
             {
                 int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
-                using (var db = new TianwenContext())
+                using (var db = new TianwenContext(this._SystemParameter.ServerIp))
                 {
                     var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.DrawingId == txt_排名作業圖紙編號.Text).FirstOrDefault();
                     if (comp == null)
@@ -723,7 +723,7 @@ namespace WindowsFormsApp1
             if (!String.IsNullOrEmpty(this.txt_Reset排名作業參賽編號.Text))
             {
                 int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
-                using (var db = new TianwenContext())
+                using (var db = new TianwenContext(this._SystemParameter.ServerIp))
                 {
                     var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.EntryNumber == txt_Reset排名作業參賽編號.Text).FirstOrDefault();
                     if (comp == null)
@@ -751,7 +751,7 @@ namespace WindowsFormsApp1
             if (!String.IsNullOrEmpty(this.txt_Reset排名作業圖紙編號.Text))
             {
                 int typeIndex = _CompetitionTypeList[this.cbx_排名作業選擇比賽.SelectedIndex];
-                using (var db = new TianwenContext())
+                using (var db = new TianwenContext(this._SystemParameter.ServerIp))
                 {
                     var comp = db.Competitors.Where(x => x.CompetitionType == typeIndex && x.GroupId == this.cbx_排名作業分組.SelectedIndex && x.DrawingId == txt_Reset排名作業圖紙編號.Text).FirstOrDefault();
                     if (comp == null)
@@ -777,7 +777,7 @@ namespace WindowsFormsApp1
         private void btn_成績更新_Click(object sender, EventArgs e)
         {
             int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 this._成績統計log.Rows.Clear();
                 var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
@@ -853,7 +853,7 @@ namespace WindowsFormsApp1
             {
                 var str = new StringBuilder();
                 str.Clear();
-                using (var db = new TianwenContext())
+                using (var db = new TianwenContext(this._SystemParameter.ServerIp))
                 {
                     var result = db.Competitors.Where(x => x.EntryNumber == txt_報到作業參賽編號.Text.ToString()).FirstOrDefault();
                     if (result != null)
@@ -944,7 +944,7 @@ namespace WindowsFormsApp1
         private void btn_市政府獎狀_Click(object sender, EventArgs e)
         {
             var stream = new MemoryStream();
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
                 var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
@@ -1007,7 +1007,7 @@ namespace WindowsFormsApp1
         private void btn_天文宮_Click(object sender, EventArgs e)
         {
             var stream = new MemoryStream();
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
                 var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
@@ -1095,7 +1095,7 @@ namespace WindowsFormsApp1
         private void btn_國際組中文_Click(object sender, EventArgs e)
         {
             var stream = new MemoryStream();
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
                 var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
@@ -1183,7 +1183,7 @@ namespace WindowsFormsApp1
         private void btn_國際組英文_Click(object sender, EventArgs e)
         {
             var stream = new MemoryStream();
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
                 var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
@@ -1293,7 +1293,7 @@ namespace WindowsFormsApp1
             }
             sheet.RemoveRow(sheet.GetRow(2));
 
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
                 var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
@@ -1370,7 +1370,7 @@ namespace WindowsFormsApp1
             }
             sheet.RemoveRow(sheet.GetRow(2));
 
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 int typeIndex = _CompetitionTypeList[this.cbx_成績比賽.SelectedIndex];
                 var results = db.Competitors.Where(x => x.CompetitionType == typeIndex
@@ -1498,7 +1498,7 @@ namespace WindowsFormsApp1
 
             int typeIndex = _CompetitionTypeList[this.cbx_指導老師選擇比賽.SelectedIndex];
             this._指導老師紀錄log.Rows.Clear();
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 var groups = db.Competitors.Where(x => x.CompetitionType == typeIndex && !String.IsNullOrEmpty(x.TeacherName) && !String.IsNullOrEmpty(x.RegTeacherPhone)).GroupBy(x => x.RegTeacherPhone).OrderBy(g => g.Key).ToList();
                 int lastRowIndex = 3;
@@ -1569,7 +1569,7 @@ namespace WindowsFormsApp1
 
             int typeIndex = _CompetitionTypeList[this.cbx_指導老師選擇比賽.SelectedIndex];
             this._指導老師紀錄log.Rows.Clear();
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 var groups = db.Competitors.Where(x => x.CompetitionType == typeIndex && !String.IsNullOrEmpty(x.TeacherName) && !String.IsNullOrEmpty(x.RegTeacherPhone)).GroupBy(x => x.RegTeacherPhone).OrderBy(g => g.Key).ToList();
                 int lastRowIndex = 3;
@@ -1764,7 +1764,7 @@ namespace WindowsFormsApp1
 
         private void btn_特別獎名次_Click(object sender, EventArgs e)
         {
-            using (var dbContext = new TianwenContext())
+            using (var dbContext = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '第一名', rank_id = 0 WHERE entry_name = 'BS0100001';");
                 dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '第二名', rank_id = 1 WHERE entry_name = 'BS0100002';");
@@ -1787,7 +1787,7 @@ namespace WindowsFormsApp1
         private void btn_特別獎獎狀_Click(object sender, EventArgs e)
         {
             var stream = new MemoryStream();
-            using (var db = new TianwenContext())
+            using (var db = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 var results = db.Competitors.Where(x => x.CompetitionType == 112)
                    .OrderBy(g => new { g.RankId, g.EntryNumber }).ToList();
@@ -1881,7 +1881,7 @@ namespace WindowsFormsApp1
 
         private void btn_國際組名字_Click(object sender, EventArgs e)
         {
-            using (var dbContext = new TianwenContext())
+            using (var dbContext = new TianwenContext(this._SystemParameter.ServerIp))
             {
                 dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '福島友理', passport_name = 'YURI FUKUSHIMA' WHERE entry_name = 'A05300536';");
                 dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '何紫萱', passport_name = 'Parichat Apichayodom' WHERE entry_name = 'A05300533';");
@@ -1895,6 +1895,11 @@ namespace WindowsFormsApp1
                 dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET name = '黃海薇', passport_name = 'Huang Hai Wei' WHERE entry_name = 'A05300030';");
                 MessageBox.Show($"已更新國際組姓名!!");
             }
+        }
+
+        private void btn_匯出得獎清單_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

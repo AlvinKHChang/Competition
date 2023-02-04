@@ -18,9 +18,8 @@ namespace WindowsFormsApp1
             System.Data.Entity.Database.SetInitializer<TianwenContext>(null);
         }
 
-        public TianwenContext() : base(nameOrConnectionString: "PGConnectionString") { }
-
-
+        //public TianwenContext() : base(nameOrConnectionString: "PGConnectionString") { }
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("public");
