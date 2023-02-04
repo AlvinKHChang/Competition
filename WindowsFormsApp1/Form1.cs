@@ -75,10 +75,24 @@ namespace WindowsFormsApp1
         private DataTable _指導老師紀錄log;
         private DataTable _排名作業統計log;
         private DataTable _成績統計log;
-        private SystemParameter _SystemParameter = new SystemParameter();
+        private SystemParameter _SystemParameter;
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.LoadParameter();
+            this.bs_System.DataSource = this._SystemParameter;
+            this.bs_TW比賽姓名.DataSource = this._SystemParameter.TWName;
+            this.bs_TW比賽名稱.DataSource = this._SystemParameter.TW比賽;
+            this.bs_TW屆數.DataSource = this._SystemParameter.TW屆數;
+            this.bs_TW比賽分組.DataSource = this._SystemParameter.TW分組名次;
+            this.bs_TW年.DataSource = this._SystemParameter.TWYear;
+            this.bs_TW月.DataSource = this._SystemParameter.TWMonth;
+            this.bs_TW日.DataSource = this._SystemParameter.TWDay;
+            this.bs_TW頁.DataSource = this._SystemParameter.TWPageNumber;
+
+
+
+
             for (int i = 0; i < this._GroupList.Count(); i++)
             {
                 this._GroupDict.Add(this._GroupList[i], i);
@@ -88,7 +102,6 @@ namespace WindowsFormsApp1
             {
                 this._RankDict.Add(this._GroupList[i], i);
             }
-
 
             _統計表log = new DataTable();
             _統計表log.Columns.Add("組別", typeof(string));
@@ -111,7 +124,7 @@ namespace WindowsFormsApp1
 
             cbx_統計表選擇比賽.Items.Add("書法比賽");
             cbx_統計表選擇比賽.Items.Add("寫生比賽");
-            cbx_統計表選擇比賽.SelectedIndex = 0;
+            //cbx_統計表選擇比賽.SelectedIndex = 0;
 
             _報到作業紀錄log = new DataTable();
             _報到作業紀錄log.Columns.Add("組別", typeof(string));
@@ -123,13 +136,13 @@ namespace WindowsFormsApp1
 
             cbx_報到作業選擇比賽.Items.Add("書法比賽");
             cbx_報到作業選擇比賽.Items.Add("寫生比賽");
-            cbx_報到作業選擇比賽.SelectedIndex = 0;
+            //cbx_報到作業選擇比賽.SelectedIndex = 0;
 
             foreach (var group in _GroupList)
             {
                 cbx_報到作業選擇分組.Items.Add(group);
             }
-            cbx_報到作業選擇分組.SelectedIndex = 0;
+            //cbx_報到作業選擇分組.SelectedIndex = 0;
             chk_報到作業選擇分組.Checked = true;
 
             this._指導老師紀錄log = new DataTable();
@@ -151,13 +164,13 @@ namespace WindowsFormsApp1
             {
                 cbx_排名作業分組.Items.Add(group);
             }
-            cbx_排名作業分組.SelectedIndex = 0;
+            //cbx_排名作業分組.SelectedIndex = 0;
 
             foreach (var rank in _RankList)
             {
                 cbx_排名作業名次.Items.Add(rank);
             }
-            cbx_排名作業名次.SelectedIndex = 0;
+            //cbx_排名作業名次.SelectedIndex = 0;
 
 
             this._排名作業統計log = new DataTable();
@@ -171,13 +184,13 @@ namespace WindowsFormsApp1
 
             this.cbx_成績比賽.Items.Add("書法");
             this.cbx_成績比賽.Items.Add("寫生");
-            this.cbx_成績比賽.SelectedIndex = 0;
+            //this.cbx_成績比賽.SelectedIndex = 0;
 
             foreach (var group in _GroupList)
             {
                 cbx_成績分組.Items.Add(group);
             }
-            cbx_成績分組.SelectedIndex = 0;
+            // cbx_成績分組.SelectedIndex = 0;
 
             this._成績統計log = new DataTable();
             this._成績統計log.Columns.Add("組別", typeof(string));
@@ -199,12 +212,10 @@ namespace WindowsFormsApp1
                 }
             }
 
-            this.bs_System.DataSource = this._SystemParameter;
-            using (var dbContext = new TianwenContext())
-            {
-                // dbContext.Competitors.Add(new Competitor { Name="張光華", EntryNumber="A123", Address="高雄市湖內區", Phone="123456"});
-                //dbContext.SaveChanges();
-            }
+            //this.bs_System.DataSource = this._SystemParameter;
+
+            this.tabControl1.SelectedIndex = 5;
+
         }
 
         private void btn_匯入參賽者資料_Click(object sender, EventArgs e)
@@ -364,7 +375,8 @@ namespace WindowsFormsApp1
                         {
                             MessageBox.Show($"已綁定圖紙編號!!");
                         }
-                        else {
+                        else
+                        {
                             this.txt_報到作業圖紙編號.Focus();
                         }
 
@@ -1269,7 +1281,7 @@ namespace WindowsFormsApp1
 
             ICellStyle headerCellStyle = sheet.GetRow(0).GetCell(0).CellStyle;
             sheet.GetRow(0).GetCell(0).SetCellValue($"{this._比賽名稱s[this.cbx_成績比賽.SelectedIndex]}{Environment.NewLine}{ this.cbx_成績分組.SelectedItem}  比賽領獎單");
-            
+
             List<ICellStyle> cellStyles = new List<ICellStyle>();
             int cellsCount = 8;
             for (int i = 0; i < cellsCount; i++)
@@ -1296,7 +1308,7 @@ namespace WindowsFormsApp1
                     {
                         rankIndex = comp.RankId;
                         serialNo = 1;
-                        sheet.SetRowBreak(lastRowIndex-1);
+                        sheet.SetRowBreak(lastRowIndex - 1);
                         rowInPage = 0;
                     }
                     IRow row = sheet.CreateRow(lastRowIndex);
@@ -1501,7 +1513,7 @@ namespace WindowsFormsApp1
                             cell.CellStyle = cellStyles[i];
                         }
 
-                        row.Cells[0].SetCellValue((lastRowIndex-2).ToString());
+                        row.Cells[0].SetCellValue((lastRowIndex - 2).ToString());
                         row.Cells[1].SetCellValue(group.First().TeacherName);
                         row.Cells[2].SetCellValue(group.First().TeacherPhone);
                         row.Cells[3].SetCellValue(real報名人數.ToString());
@@ -1616,13 +1628,11 @@ namespace WindowsFormsApp1
             this.btn_市政府獎狀.PerformClick();
         }
 
-        private bool UnlockDbSetting = false;
         private int UnlockDbSettingCnt = 0;
 
         private void panel8_MouseLeave(object sender, EventArgs e)
         {
             UnlockDbSettingCnt = 0;
-            UnlockDbSetting = false;
         }
 
         private void panel8_MouseClick(object sender, MouseEventArgs e)
@@ -1632,13 +1642,12 @@ namespace WindowsFormsApp1
                 UnlockDbSettingCnt++;
                 if (UnlockDbSettingCnt >= 5)
                 {
-                    UnlockDbSetting = true;
+                    this.grb_DbSetting.Visible = true;
                 }
             }
             else
             {
                 UnlockDbSettingCnt = 0;
-                UnlockDbSetting = false;
             }
         }
 
@@ -1695,7 +1704,7 @@ namespace WindowsFormsApp1
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"連線失敗: {ex.Message}!!");
             }
@@ -1708,9 +1717,16 @@ namespace WindowsFormsApp1
 
         }
 
+
+
         private void btn_Load_Click(object sender, EventArgs e)
         {
-            
+            this.LoadParameter();
+
+        }
+
+        private void LoadParameter()
+        {
             string file = "SystemParameters.json";
             if (File.Exists(file))
             {
@@ -1729,6 +1745,113 @@ namespace WindowsFormsApp1
             {
                 this._SystemParameter = new SystemParameter();
             }
+        }
+
+        private void btn_特別獎名次_Click(object sender, EventArgs e)
+        {
+            using (var dbContext = new TianwenContext())
+            {
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '第一名', rank_id = 0 WHERE entry_name = 'BS0100001';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '第二名', rank_id = 1 WHERE entry_name = 'BS0100002';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '第三名', rank_id = 2 WHERE entry_name = 'BS0100003';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '優選', rank_id = 3 WHERE entry_name = 'BS0100004';;");
+                var result = dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100005'");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100006';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100007';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100008';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100009';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100010';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100011';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100012';");
+                dbContext.Database.ExecuteSqlCommand("UPDATE competitors SET rank = '佳作', rank_id = 4 WHERE entry_name = 'BS0100013';");
+
+                MessageBox.Show($"已更新特別獎名次!!");
+            }
+        }
+
+        private void btn_特別獎獎狀_Click(object sender, EventArgs e)
+        {
+            var stream = new MemoryStream();
+            using (var db = new TianwenContext())
+            {
+                var results = db.Competitors.Where(x => x.CompetitionType == 112)
+                   .OrderBy(g => new { g.RankId, g.EntryNumber }).ToList();
+
+                using (var doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4))
+                {
+                    string chFontPath = "c:\\windows\\fonts\\kaiu.ttf"; //標楷體                           
+                    BaseFont baseFont = BaseFont.CreateFont(chFontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                    iTextSharp.text.Font chtFont = new iTextSharp.text.Font(baseFont, _SystemParameter.TWFontNumber, 1);
+                    iTextSharp.text.Font pageFont = new iTextSharp.text.Font(baseFont, 10);
+                    iTextSharp.text.Rectangle pageSize = doc.PageSize;
+                    using (var writer = PdfWriter.GetInstance(doc, stream))
+                    {
+                        doc.Open();
+                        PdfContentByte cb = writer.DirectContent;
+
+                        int rankIndex = 0;
+                        int pageIndex = 1;
+                        foreach (var comp in results)
+                        {
+                            if (comp.RankId >= 3 && rankIndex != comp.RankId)
+                            {
+                                rankIndex = comp.RankId;
+                                pageIndex = 1;
+                            }
+                            iTextSharp.text.Phrase txtName = new iTextSharp.text.Phrase(comp.Name, chtFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtName, pageSize.GetLeft(_SystemParameter.TWName.PointX), pageSize.GetTop(_SystemParameter.TWName.PointY), 0);
+
+                            iTextSharp.text.Phrase txt屆數
+                                = new iTextSharp.text.Phrase("25", chtFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txt屆數, pageSize.GetLeft(_SystemParameter.TW屆數.PointX), pageSize.GetTop(_SystemParameter.TW屆數.PointY), 0);
+
+                            iTextSharp.text.Phrase txt比賽名稱
+                                = new iTextSharp.text.Phrase("寫生", chtFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txt比賽名稱, pageSize.GetLeft(_SystemParameter.TW比賽.PointX), pageSize.GetTop(_SystemParameter.TW比賽.PointY), 0);
+
+                            iTextSharp.text.Phrase txt組別名次
+                                = new iTextSharp.text.Phrase($"特別獎 {comp.Group} {comp.Rank}", chtFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txt組別名次, pageSize.GetLeft(_SystemParameter.TW分組名次.PointX), pageSize.GetTop(_SystemParameter.TW分組名次.PointY), 0);
+
+                            iTextSharp.text.Phrase txtYear
+                                = new iTextSharp.text.Phrase(_SystemParameter.TWYear.Label, chtFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtYear, pageSize.GetLeft(_SystemParameter.TWYear.PointX), pageSize.GetTop(_SystemParameter.TWYear.PointY), 0);
+
+                            iTextSharp.text.Phrase txtMonth
+                                = new iTextSharp.text.Phrase(_SystemParameter.TWMonth.Label, chtFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtMonth, pageSize.GetLeft(_SystemParameter.TWMonth.PointX), pageSize.GetTop(_SystemParameter.TWMonth.PointY), 0);
+
+                            iTextSharp.text.Phrase txtDay
+                                = new iTextSharp.text.Phrase(_SystemParameter.TWDay.Label, chtFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtDay, pageSize.GetLeft(_SystemParameter.TWDay.PointX), pageSize.GetTop(_SystemParameter.TWDay.PointY), 0);
+
+                            iTextSharp.text.Phrase txtPageNumber = new iTextSharp.text.Phrase(pageIndex.ToString(), pageFont);
+                            ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txtPageNumber, pageSize.GetLeft(_SystemParameter.TWPageNumber.PointX), pageSize.GetTop(_SystemParameter.TWPageNumber.PointY), 0);
+
+                            doc.NewPage();
+
+                            pageIndex++;
+                        }
+                        doc.Close();
+                    }
+                }
+            }
+
+            var path = $"{_SystemParameter.TWRoot}\\獎狀";
+            Directory.CreateDirectory(path);
+            var filename = $"{path}\\寫生特別獎_天文宮獎狀_{DateTime.Now.ToString("HHmm")}.pdf";
+            FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            stream.WriteTo(file);
+            file.Close();
+            stream.Close();
+            System.Diagnostics.Process.Start("Acrobat.exe", filename);
+
+            stream.Dispose();
+        }
+
+        private void label24_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

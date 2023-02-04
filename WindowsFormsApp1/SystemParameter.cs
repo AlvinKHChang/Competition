@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
 
         public TextPrintInfo GovPageNumber { get; set; } = new TextPrintInfo() { Label = "1", X = 175, Y = 260 };
 
-        public int GovFontNumber = 18;
+        public int GovFontNumber { get; set; } = 18;
 
         public TextPrintInfo TWName { get; set; } = new TextPrintInfo() { Label = "Name", X = 42, Y = 95 };
 
@@ -39,7 +39,7 @@ namespace WindowsFormsApp1
 
         public TextPrintInfo TWPageNumber { get; set; } = new TextPrintInfo() { Label = "1", X = 184, Y = 260 };
 
-        public int TWFontNumber = 18;
+        public int TWFontNumber { get; set; } = 18;
 
         public int EngFontNumber = 30;
 

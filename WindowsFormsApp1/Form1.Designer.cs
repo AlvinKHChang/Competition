@@ -47,6 +47,7 @@ namespace WindowsFormsApp1
             this.label2 = new System.Windows.Forms.Label();
             this.cbx_報到作業選擇比賽 = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_清除報到輸入 = new System.Windows.Forms.Button();
             this.btn_匯出參賽證 = new System.Windows.Forms.Button();
             this.btn_報到作業重置狀態 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,6 +74,9 @@ namespace WindowsFormsApp1
             this.tpg_排名作業 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.btn_排名作業更新 = new System.Windows.Forms.Button();
             this.lbl_排名作業人數 = new System.Windows.Forms.Label();
             this.cbx_排名作業名次 = new System.Windows.Forms.ComboBox();
@@ -80,6 +84,7 @@ namespace WindowsFormsApp1
             this.cbx_排名作業選擇比賽 = new System.Windows.Forms.ComboBox();
             this.dgv_排名作業統計 = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btn_排名欄位清除 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txt_排名作業圖紙編號 = new System.Windows.Forms.TextBox();
@@ -109,29 +114,60 @@ namespace WindowsFormsApp1
             this.dgv_成績統計 = new System.Windows.Forms.DataGridView();
             this.tpg_setting = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grb_DbSetting = new System.Windows.Forms.GroupBox();
+            this.btn_特別獎名次 = new System.Windows.Forms.Button();
             this.btn_初始化所有資料 = new System.Windows.Forms.Button();
             this.btn_刪除所有資料 = new System.Windows.Forms.Button();
             this.btn_匯入參賽者資料 = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.btn_英文獎狀測試 = new System.Windows.Forms.Button();
-            this.btn_天文宮獎狀測試 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.btn_特別獎獎狀 = new System.Windows.Forms.Button();
             this.btn_市政府獎狀測試 = new System.Windows.Forms.Button();
+            this.btn_天文宮獎狀測試 = new System.Windows.Forms.Button();
+            this.btn_英文獎狀測試 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btn_Load = new System.Windows.Forms.Button();
+            this.btn_Save = new System.Windows.Forms.Button();
+            this.btn_測試連線 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.txt_ServerIp = new System.Windows.Forms.TextBox();
-            this.btn_清除報到輸入 = new System.Windows.Forms.Button();
-            this.btn_排名欄位清除 = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btn_測試連線 = new System.Windows.Forms.Button();
-            this.btn_Save = new System.Windows.Forms.Button();
+            this.textBox18 = new System.Windows.Forms.TextBox();
             this.bs_System = new System.Windows.Forms.BindingSource(this.components);
-            this.btn_Load = new System.Windows.Forms.Button();
+            this.bs_TW比賽姓名 = new System.Windows.Forms.BindingSource(this.components);
+            this.bs_TW屆數 = new System.Windows.Forms.BindingSource(this.components);
+            this.bs_TW比賽名稱 = new System.Windows.Forms.BindingSource(this.components);
+            this.bs_TW比賽分組 = new System.Windows.Forms.BindingSource(this.components);
+            this.bs_TW年 = new System.Windows.Forms.BindingSource(this.components);
+            this.bs_TW月 = new System.Windows.Forms.BindingSource(this.components);
+            this.bs_TW日 = new System.Windows.Forms.BindingSource(this.components);
+            this.bs_TW頁 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tpg_統計.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -159,10 +195,19 @@ namespace WindowsFormsApp1
             ((System.ComponentModel.ISupportInitialize)(this.dgv_成績統計)).BeginInit();
             this.tpg_setting.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.grb_DbSetting.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_System)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW比賽姓名)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW屆數)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW比賽名稱)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW比賽分組)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW年)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW月)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW日)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW頁)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -350,6 +395,16 @@ namespace WindowsFormsApp1
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(895, 101);
             this.panel2.TabIndex = 1;
+            // 
+            // btn_清除報到輸入
+            // 
+            this.btn_清除報到輸入.Location = new System.Drawing.Point(315, 8);
+            this.btn_清除報到輸入.Name = "btn_清除報到輸入";
+            this.btn_清除報到輸入.Size = new System.Drawing.Size(132, 33);
+            this.btn_清除報到輸入.TabIndex = 8;
+            this.btn_清除報到輸入.Text = "清除欄位";
+            this.btn_清除報到輸入.UseVisualStyleBackColor = true;
+            this.btn_清除報到輸入.Click += new System.EventHandler(this.btn_清除報到輸入_Click);
             // 
             // btn_匯出參賽證
             // 
@@ -626,6 +681,33 @@ namespace WindowsFormsApp1
             this.panel4.Size = new System.Drawing.Size(852, 115);
             this.panel4.TabIndex = 0;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(317, 22);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(49, 19);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "名次";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(166, 22);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(49, 19);
+            this.label14.TabIndex = 12;
+            this.label14.Text = "分組";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(13, 22);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(49, 19);
+            this.label13.TabIndex = 11;
+            this.label13.Text = "比賽";
+            // 
             // btn_排名作業更新
             // 
             this.btn_排名作業更新.Location = new System.Drawing.Point(688, 41);
@@ -698,6 +780,16 @@ namespace WindowsFormsApp1
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(541, 515);
             this.panel5.TabIndex = 2;
+            // 
+            // btn_排名欄位清除
+            // 
+            this.btn_排名欄位清除.Location = new System.Drawing.Point(324, 36);
+            this.btn_排名欄位清除.Name = "btn_排名欄位清除";
+            this.btn_排名欄位清除.Size = new System.Drawing.Size(107, 37);
+            this.btn_排名欄位清除.TabIndex = 11;
+            this.btn_排名欄位清除.Text = "欄位清除";
+            this.btn_排名欄位清除.UseVisualStyleBackColor = true;
+            this.btn_排名欄位清除.Click += new System.EventHandler(this.btn_排名欄位清除_Click);
             // 
             // label7
             // 
@@ -1008,7 +1100,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.grb_DbSetting, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel7, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
@@ -1019,18 +1111,29 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1399, 636);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // groupBox1
+            // grb_DbSetting
             // 
-            this.groupBox1.Controls.Add(this.btn_初始化所有資料);
-            this.groupBox1.Controls.Add(this.btn_刪除所有資料);
-            this.groupBox1.Controls.Add(this.btn_匯入參賽者資料);
-            this.groupBox1.Location = new System.Drawing.Point(702, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(463, 316);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            this.groupBox1.Visible = false;
+            this.grb_DbSetting.Controls.Add(this.btn_特別獎名次);
+            this.grb_DbSetting.Controls.Add(this.btn_初始化所有資料);
+            this.grb_DbSetting.Controls.Add(this.btn_刪除所有資料);
+            this.grb_DbSetting.Controls.Add(this.btn_匯入參賽者資料);
+            this.grb_DbSetting.Location = new System.Drawing.Point(702, 3);
+            this.grb_DbSetting.Name = "grb_DbSetting";
+            this.grb_DbSetting.Size = new System.Drawing.Size(463, 426);
+            this.grb_DbSetting.TabIndex = 0;
+            this.grb_DbSetting.TabStop = false;
+            this.grb_DbSetting.Text = "groupBox1";
+            this.grb_DbSetting.Visible = false;
+            // 
+            // btn_特別獎名次
+            // 
+            this.btn_特別獎名次.Location = new System.Drawing.Point(16, 264);
+            this.btn_特別獎名次.Name = "btn_特別獎名次";
+            this.btn_特別獎名次.Size = new System.Drawing.Size(202, 55);
+            this.btn_特別獎名次.TabIndex = 3;
+            this.btn_特別獎名次.Text = "特別獎名次";
+            this.btn_特別獎名次.UseVisualStyleBackColor = true;
+            this.btn_特別獎名次.Click += new System.EventHandler(this.btn_特別獎名次_Click);
             // 
             // btn_初始化所有資料
             // 
@@ -1064,12 +1167,292 @@ namespace WindowsFormsApp1
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.groupBox1);
             this.panel7.Controls.Add(this.groupBox4);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(3, 3);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(693, 630);
             this.panel7.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textBox18);
+            this.groupBox1.Controls.Add(this.label24);
+            this.groupBox1.Controls.Add(this.textBox16);
+            this.groupBox1.Controls.Add(this.textBox17);
+            this.groupBox1.Controls.Add(this.label23);
+            this.groupBox1.Controls.Add(this.textBox14);
+            this.groupBox1.Controls.Add(this.textBox15);
+            this.groupBox1.Controls.Add(this.label22);
+            this.groupBox1.Controls.Add(this.textBox12);
+            this.groupBox1.Controls.Add(this.textBox13);
+            this.groupBox1.Controls.Add(this.label21);
+            this.groupBox1.Controls.Add(this.textBox10);
+            this.groupBox1.Controls.Add(this.textBox11);
+            this.groupBox1.Controls.Add(this.label20);
+            this.groupBox1.Controls.Add(this.label19);
+            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.label17);
+            this.groupBox1.Controls.Add(this.textBox9);
+            this.groupBox1.Controls.Add(this.textBox8);
+            this.groupBox1.Controls.Add(this.textBox7);
+            this.groupBox1.Controls.Add(this.textBox6);
+            this.groupBox1.Controls.Add(this.textBox5);
+            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.textBox3);
+            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.btn_特別獎獎狀);
+            this.groupBox1.Controls.Add(this.btn_市政府獎狀測試);
+            this.groupBox1.Controls.Add(this.btn_天文宮獎狀測試);
+            this.groupBox1.Controls.Add(this.btn_英文獎狀測試);
+            this.groupBox1.Location = new System.Drawing.Point(6, 205);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(684, 407);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(12, 156);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(49, 19);
+            this.label24.TabIndex = 29;
+            this.label24.Text = "比賽";
+            this.label24.Click += new System.EventHandler(this.label24_Click);
+            // 
+            // textBox16
+            // 
+            this.textBox16.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW比賽名稱, "Y", true));
+            this.textBox16.Location = new System.Drawing.Point(225, 145);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(100, 30);
+            this.textBox16.TabIndex = 28;
+            // 
+            // textBox17
+            // 
+            this.textBox17.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW比賽名稱, "X", true));
+            this.textBox17.Location = new System.Drawing.Point(97, 145);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.Size = new System.Drawing.Size(100, 30);
+            this.textBox17.TabIndex = 27;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(12, 373);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(29, 19);
+            this.label23.TabIndex = 26;
+            this.label23.Text = "頁";
+            // 
+            // textBox14
+            // 
+            this.textBox14.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW頁, "Y", true));
+            this.textBox14.Location = new System.Drawing.Point(225, 362);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(100, 30);
+            this.textBox14.TabIndex = 25;
+            // 
+            // textBox15
+            // 
+            this.textBox15.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW頁, "X", true));
+            this.textBox15.Location = new System.Drawing.Point(97, 362);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(100, 30);
+            this.textBox15.TabIndex = 24;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(12, 333);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(29, 19);
+            this.label22.TabIndex = 23;
+            this.label22.Text = "日";
+            // 
+            // textBox12
+            // 
+            this.textBox12.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW日, "Y", true));
+            this.textBox12.Location = new System.Drawing.Point(225, 322);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(100, 30);
+            this.textBox12.TabIndex = 22;
+            // 
+            // textBox13
+            // 
+            this.textBox13.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW日, "X", true));
+            this.textBox13.Location = new System.Drawing.Point(97, 322);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(100, 30);
+            this.textBox13.TabIndex = 21;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(12, 297);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(29, 19);
+            this.label21.TabIndex = 20;
+            this.label21.Text = "月";
+            // 
+            // textBox10
+            // 
+            this.textBox10.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW月, "Y", true));
+            this.textBox10.Location = new System.Drawing.Point(225, 286);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(100, 30);
+            this.textBox10.TabIndex = 19;
+            // 
+            // textBox11
+            // 
+            this.textBox11.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW月, "X", true));
+            this.textBox11.Location = new System.Drawing.Point(97, 286);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(100, 30);
+            this.textBox11.TabIndex = 18;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(12, 261);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(29, 19);
+            this.label20.TabIndex = 17;
+            this.label20.Text = "年";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(12, 207);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(49, 19);
+            this.label19.TabIndex = 16;
+            this.label19.Text = "分組";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(12, 120);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(49, 19);
+            this.label18.TabIndex = 15;
+            this.label18.Text = "屆數";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(12, 70);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(49, 19);
+            this.label17.TabIndex = 14;
+            this.label17.Text = "名字";
+            // 
+            // textBox9
+            // 
+            this.textBox9.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW年, "Y", true));
+            this.textBox9.Location = new System.Drawing.Point(225, 250);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(100, 30);
+            this.textBox9.TabIndex = 13;
+            // 
+            // textBox8
+            // 
+            this.textBox8.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW年, "X", true));
+            this.textBox8.Location = new System.Drawing.Point(97, 250);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(100, 30);
+            this.textBox8.TabIndex = 12;
+            // 
+            // textBox7
+            // 
+            this.textBox7.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW比賽分組, "Y", true));
+            this.textBox7.Location = new System.Drawing.Point(225, 196);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(100, 30);
+            this.textBox7.TabIndex = 11;
+            // 
+            // textBox6
+            // 
+            this.textBox6.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW比賽分組, "X", true));
+            this.textBox6.Location = new System.Drawing.Point(97, 196);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 30);
+            this.textBox6.TabIndex = 10;
+            // 
+            // textBox5
+            // 
+            this.textBox5.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW屆數, "Y", true));
+            this.textBox5.Location = new System.Drawing.Point(225, 109);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 30);
+            this.textBox5.TabIndex = 9;
+            // 
+            // textBox4
+            // 
+            this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW屆數, "X", true));
+            this.textBox4.Location = new System.Drawing.Point(97, 109);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 30);
+            this.textBox4.TabIndex = 8;
+            // 
+            // textBox3
+            // 
+            this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW比賽姓名, "Y", true));
+            this.textBox3.Location = new System.Drawing.Point(225, 59);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 30);
+            this.textBox3.TabIndex = 7;
+            // 
+            // textBox2
+            // 
+            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_TW比賽姓名, "X", true));
+            this.textBox2.Location = new System.Drawing.Point(97, 59);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 30);
+            this.textBox2.TabIndex = 6;
+            // 
+            // btn_特別獎獎狀
+            // 
+            this.btn_特別獎獎狀.Location = new System.Drawing.Point(463, 186);
+            this.btn_特別獎獎狀.Name = "btn_特別獎獎狀";
+            this.btn_特別獎獎狀.Size = new System.Drawing.Size(163, 40);
+            this.btn_特別獎獎狀.TabIndex = 5;
+            this.btn_特別獎獎狀.Text = "特別獎獎狀";
+            this.btn_特別獎獎狀.UseVisualStyleBackColor = true;
+            this.btn_特別獎獎狀.Click += new System.EventHandler(this.btn_特別獎獎狀_Click);
+            // 
+            // btn_市政府獎狀測試
+            // 
+            this.btn_市政府獎狀測試.Location = new System.Drawing.Point(463, 29);
+            this.btn_市政府獎狀測試.Name = "btn_市政府獎狀測試";
+            this.btn_市政府獎狀測試.Size = new System.Drawing.Size(163, 40);
+            this.btn_市政府獎狀測試.TabIndex = 2;
+            this.btn_市政府獎狀測試.Text = "市政府獎狀測試";
+            this.btn_市政府獎狀測試.UseVisualStyleBackColor = true;
+            this.btn_市政府獎狀測試.Click += new System.EventHandler(this.btn_市政府獎狀測試_Click);
+            // 
+            // btn_天文宮獎狀測試
+            // 
+            this.btn_天文宮獎狀測試.Location = new System.Drawing.Point(463, 84);
+            this.btn_天文宮獎狀測試.Name = "btn_天文宮獎狀測試";
+            this.btn_天文宮獎狀測試.Size = new System.Drawing.Size(163, 40);
+            this.btn_天文宮獎狀測試.TabIndex = 3;
+            this.btn_天文宮獎狀測試.Text = "天文宮獎狀測試";
+            this.btn_天文宮獎狀測試.UseVisualStyleBackColor = true;
+            this.btn_天文宮獎狀測試.Click += new System.EventHandler(this.btn_天文宮獎狀測試_Click);
+            // 
+            // btn_英文獎狀測試
+            // 
+            this.btn_英文獎狀測試.Location = new System.Drawing.Point(463, 130);
+            this.btn_英文獎狀測試.Name = "btn_英文獎狀測試";
+            this.btn_英文獎狀測試.Size = new System.Drawing.Size(163, 40);
+            this.btn_英文獎狀測試.TabIndex = 4;
+            this.btn_英文獎狀測試.Text = "英文獎狀測試";
+            this.btn_英文獎狀測試.UseVisualStyleBackColor = true;
+            this.btn_英文獎狀測試.Click += new System.EventHandler(this.btn_英文獎狀測試_Click);
             // 
             // groupBox4
             // 
@@ -1079,18 +1462,62 @@ namespace WindowsFormsApp1
             this.groupBox4.Controls.Add(this.textBox1);
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.panel8);
-            this.groupBox4.Controls.Add(this.btn_英文獎狀測試);
-            this.groupBox4.Controls.Add(this.btn_天文宮獎狀測試);
-            this.groupBox4.Controls.Add(this.btn_市政府獎狀測試);
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.txt_ServerIp);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(693, 630);
+            this.groupBox4.Size = new System.Drawing.Size(693, 199);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "設定";
+            // 
+            // btn_Load
+            // 
+            this.btn_Load.Location = new System.Drawing.Point(371, 28);
+            this.btn_Load.Name = "btn_Load";
+            this.btn_Load.Size = new System.Drawing.Size(75, 35);
+            this.btn_Load.TabIndex = 10;
+            this.btn_Load.Text = "載入";
+            this.btn_Load.UseVisualStyleBackColor = true;
+            this.btn_Load.Click += new System.EventHandler(this.btn_Load_Click);
+            // 
+            // btn_Save
+            // 
+            this.btn_Save.Location = new System.Drawing.Point(461, 28);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(75, 35);
+            this.btn_Save.TabIndex = 9;
+            this.btn_Save.Text = "儲存";
+            this.btn_Save.UseVisualStyleBackColor = true;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            // 
+            // btn_測試連線
+            // 
+            this.btn_測試連線.Location = new System.Drawing.Point(398, 94);
+            this.btn_測試連線.Name = "btn_測試連線";
+            this.btn_測試連線.Size = new System.Drawing.Size(101, 35);
+            this.btn_測試連線.TabIndex = 8;
+            this.btn_測試連線.Text = "測試連線";
+            this.btn_測試連線.UseVisualStyleBackColor = true;
+            this.btn_測試連線.Click += new System.EventHandler(this.btn_測試連線_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_System, "TWRoot", true));
+            this.textBox1.Location = new System.Drawing.Point(162, 138);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(192, 30);
+            this.textBox1.TabIndex = 7;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(27, 141);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(129, 19);
+            this.label16.TabIndex = 6;
+            this.label16.Text = "檔案匯出路徑";
             // 
             // panel8
             // 
@@ -1102,36 +1529,6 @@ namespace WindowsFormsApp1
             this.panel8.TabIndex = 5;
             this.panel8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel8_MouseClick);
             this.panel8.MouseLeave += new System.EventHandler(this.panel8_MouseLeave);
-            // 
-            // btn_英文獎狀測試
-            // 
-            this.btn_英文獎狀測試.Location = new System.Drawing.Point(354, 317);
-            this.btn_英文獎狀測試.Name = "btn_英文獎狀測試";
-            this.btn_英文獎狀測試.Size = new System.Drawing.Size(163, 40);
-            this.btn_英文獎狀測試.TabIndex = 4;
-            this.btn_英文獎狀測試.Text = "英文獎狀測試";
-            this.btn_英文獎狀測試.UseVisualStyleBackColor = true;
-            this.btn_英文獎狀測試.Click += new System.EventHandler(this.btn_英文獎狀測試_Click);
-            // 
-            // btn_天文宮獎狀測試
-            // 
-            this.btn_天文宮獎狀測試.Location = new System.Drawing.Point(354, 271);
-            this.btn_天文宮獎狀測試.Name = "btn_天文宮獎狀測試";
-            this.btn_天文宮獎狀測試.Size = new System.Drawing.Size(163, 40);
-            this.btn_天文宮獎狀測試.TabIndex = 3;
-            this.btn_天文宮獎狀測試.Text = "天文宮獎狀測試";
-            this.btn_天文宮獎狀測試.UseVisualStyleBackColor = true;
-            this.btn_天文宮獎狀測試.Click += new System.EventHandler(this.btn_天文宮獎狀測試_Click);
-            // 
-            // btn_市政府獎狀測試
-            // 
-            this.btn_市政府獎狀測試.Location = new System.Drawing.Point(354, 216);
-            this.btn_市政府獎狀測試.Name = "btn_市政府獎狀測試";
-            this.btn_市政府獎狀測試.Size = new System.Drawing.Size(163, 40);
-            this.btn_市政府獎狀測試.TabIndex = 2;
-            this.btn_市政府獎狀測試.Text = "市政府獎狀測試";
-            this.btn_市政府獎狀測試.UseVisualStyleBackColor = true;
-            this.btn_市政府獎狀測試.Click += new System.EventHandler(this.btn_市政府獎狀測試_Click);
             // 
             // label12
             // 
@@ -1150,103 +1547,49 @@ namespace WindowsFormsApp1
             this.txt_ServerIp.Size = new System.Drawing.Size(192, 30);
             this.txt_ServerIp.TabIndex = 0;
             // 
-            // btn_清除報到輸入
+            // textBox18
             // 
-            this.btn_清除報到輸入.Location = new System.Drawing.Point(315, 8);
-            this.btn_清除報到輸入.Name = "btn_清除報到輸入";
-            this.btn_清除報到輸入.Size = new System.Drawing.Size(132, 33);
-            this.btn_清除報到輸入.TabIndex = 8;
-            this.btn_清除報到輸入.Text = "清除欄位";
-            this.btn_清除報到輸入.UseVisualStyleBackColor = true;
-            this.btn_清除報到輸入.Click += new System.EventHandler(this.btn_清除報到輸入_Click);
-            // 
-            // btn_排名欄位清除
-            // 
-            this.btn_排名欄位清除.Location = new System.Drawing.Point(324, 36);
-            this.btn_排名欄位清除.Name = "btn_排名欄位清除";
-            this.btn_排名欄位清除.Size = new System.Drawing.Size(107, 37);
-            this.btn_排名欄位清除.TabIndex = 11;
-            this.btn_排名欄位清除.Text = "欄位清除";
-            this.btn_排名欄位清除.UseVisualStyleBackColor = true;
-            this.btn_排名欄位清除.Click += new System.EventHandler(this.btn_排名欄位清除_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(13, 22);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(49, 19);
-            this.label13.TabIndex = 11;
-            this.label13.Text = "比賽";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(166, 22);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(49, 19);
-            this.label14.TabIndex = 12;
-            this.label14.Text = "分組";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(317, 22);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(49, 19);
-            this.label15.TabIndex = 13;
-            this.label15.Text = "名次";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(27, 141);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(129, 19);
-            this.label16.TabIndex = 6;
-            this.label16.Text = "檔案匯出路徑";
-            // 
-            // textBox1
-            // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_System, "TWRoot", true));
-            this.textBox1.Location = new System.Drawing.Point(162, 138);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(192, 30);
-            this.textBox1.TabIndex = 7;
-            // 
-            // btn_測試連線
-            // 
-            this.btn_測試連線.Location = new System.Drawing.Point(398, 94);
-            this.btn_測試連線.Name = "btn_測試連線";
-            this.btn_測試連線.Size = new System.Drawing.Size(101, 35);
-            this.btn_測試連線.TabIndex = 8;
-            this.btn_測試連線.Text = "測試連線";
-            this.btn_測試連線.UseVisualStyleBackColor = true;
-            this.btn_測試連線.Click += new System.EventHandler(this.btn_測試連線_Click);
-            // 
-            // btn_Save
-            // 
-            this.btn_Save.Location = new System.Drawing.Point(461, 28);
-            this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(75, 35);
-            this.btn_Save.TabIndex = 9;
-            this.btn_Save.Text = "儲存";
-            this.btn_Save.UseVisualStyleBackColor = true;
-            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            this.textBox18.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs_System, "TWFontNumber", true));
+            this.textBox18.Location = new System.Drawing.Point(365, 362);
+            this.textBox18.Name = "textBox18";
+            this.textBox18.Size = new System.Drawing.Size(100, 30);
+            this.textBox18.TabIndex = 30;
             // 
             // bs_System
             // 
             this.bs_System.DataSource = typeof(WindowsFormsApp1.SystemParameter);
             // 
-            // btn_Load
+            // bs_TW比賽姓名
             // 
-            this.btn_Load.Location = new System.Drawing.Point(371, 28);
-            this.btn_Load.Name = "btn_Load";
-            this.btn_Load.Size = new System.Drawing.Size(75, 35);
-            this.btn_Load.TabIndex = 10;
-            this.btn_Load.Text = "載入";
-            this.btn_Load.UseVisualStyleBackColor = true;
-            this.btn_Load.Click += new System.EventHandler(this.btn_Load_Click);
+            this.bs_TW比賽姓名.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
+            // 
+            // bs_TW屆數
+            // 
+            this.bs_TW屆數.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
+            // 
+            // bs_TW比賽名稱
+            // 
+            this.bs_TW比賽名稱.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
+            // 
+            // bs_TW比賽分組
+            // 
+            this.bs_TW比賽分組.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
+            // 
+            // bs_TW年
+            // 
+            this.bs_TW年.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
+            // 
+            // bs_TW月
+            // 
+            this.bs_TW月.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
+            // 
+            // bs_TW日
+            // 
+            this.bs_TW日.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
+            // 
+            // bs_TW頁
+            // 
+            this.bs_TW頁.DataSource = typeof(WindowsFormsApp1.TextPrintInfo);
             // 
             // Form1
             // 
@@ -1292,11 +1635,21 @@ namespace WindowsFormsApp1
             ((System.ComponentModel.ISupportInitialize)(this.dgv_成績統計)).EndInit();
             this.tpg_setting.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
+            this.grb_DbSetting.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bs_System)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW比賽姓名)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW屆數)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW比賽名稱)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW比賽分組)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW年)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW月)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW日)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs_TW頁)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1307,7 +1660,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TabPage tpg_統計;
         private System.Windows.Forms.TabPage tpg_setting;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grb_DbSetting;
         private System.Windows.Forms.Button btn_匯入參賽者資料;
         private System.Windows.Forms.Button btn_刪除所有資料;
         private System.Windows.Forms.Button btn_初始化所有資料;
@@ -1404,6 +1757,42 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button btn_測試連線;
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.Button btn_Load;
+        private System.Windows.Forms.Button btn_特別獎名次;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btn_特別獎獎狀;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.TextBox textBox17;
+        private System.Windows.Forms.BindingSource bs_TW比賽姓名;
+        private System.Windows.Forms.BindingSource bs_TW屆數;
+        private System.Windows.Forms.BindingSource bs_TW比賽名稱;
+        private System.Windows.Forms.BindingSource bs_TW比賽分組;
+        private System.Windows.Forms.BindingSource bs_TW年;
+        private System.Windows.Forms.BindingSource bs_TW月;
+        private System.Windows.Forms.BindingSource bs_TW日;
+        private System.Windows.Forms.BindingSource bs_TW頁;
+        private System.Windows.Forms.TextBox textBox18;
     }
 }
 
