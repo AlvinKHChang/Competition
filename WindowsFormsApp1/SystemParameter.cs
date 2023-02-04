@@ -41,11 +41,11 @@ namespace WindowsFormsApp1
 
         public int TWFontNumber { get; set; } = 18;
 
-        public int EngFontNumber = 30;
+        public int EngFontNumber { get; set; } = 30;
 
-        public int EngNameFontNumber = 30;
+        public int EngNameFontNumber { get; set; } = 30;
 
-        public float Eng行距 = 20.0f;
+        public float Eng行距 { get; set; } = 20.0f;
 
         public TextPrintInfo EnDate { get; set; } = new TextPrintInfo() { Label = "February 5th, 2023", X = 0, Y = 180 };
         public TextPrintInfo EnPageNumber { get; set; } = new TextPrintInfo() { Label = "1", X = 260, Y = 184 };

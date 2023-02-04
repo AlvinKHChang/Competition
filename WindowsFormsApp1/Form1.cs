@@ -88,7 +88,14 @@ namespace WindowsFormsApp1
             this.bs_TW年.DataSource = this._SystemParameter.TWYear;
             this.bs_TW月.DataSource = this._SystemParameter.TWMonth;
             this.bs_TW日.DataSource = this._SystemParameter.TWDay;
-            this.bs_TW頁.DataSource = this._SystemParameter.TWPageNumber;
+            this.bs_TW序號.DataSource = this._SystemParameter.TWPageNumber;
+            this.bs_Gov比賽姓名.DataSource = this._SystemParameter.GovName;
+            this.bs_Gov比賽名稱.DataSource = this._SystemParameter.Gov比賽名稱;
+            this.bs_Gov屆數分組名次.DataSource = this._SystemParameter.Gov比賽屆數分組名次;
+            this.bs_Gov序號.DataSource = this._SystemParameter.GovPageNumber;
+            this.bs_En序號.DataSource = this._SystemParameter.EnPageNumber;
+
+
 
             for (int i = 0; i < this._GroupList.Count(); i++)
             {
@@ -1204,7 +1211,7 @@ namespace WindowsFormsApp1
                     float dist = iTextSharp.text.Utilities.MillimetersToPoints(_SystemParameter.Eng行距);
                     iTextSharp.text.Font genFont = new iTextSharp.text.Font(genBaseFont, _SystemParameter.EngFontNumber);
                     iTextSharp.text.Font nameFont = new iTextSharp.text.Font(nameBaseFont, _SystemParameter.EngNameFontNumber);
-                    iTextSharp.text.Font chtFont = new iTextSharp.text.Font(chBaseFont, _SystemParameter.TWFontNumber);
+                    iTextSharp.text.Font chtFont = new iTextSharp.text.Font(chBaseFont, _SystemParameter.TWFontNumber, 3);
                     iTextSharp.text.Font pageFont = new iTextSharp.text.Font(timesBaseFont, 10);
                     iTextSharp.text.Rectangle pageSize = doc.PageSize;
                     using (var writer = PdfWriter.GetInstance(doc, stream))
@@ -1226,7 +1233,7 @@ namespace WindowsFormsApp1
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_CENTER, txtPhrase1, pageSize.Right / 2, pageSize.Top / 2 + dist * 2, 0);
 
                             iTextSharp.text.Phrase txtPhrase2;
-                            if (Regex.IsMatch(comp.PassportName, "[A-Za-z]"))
+                            if (comp.PassportName != null && Regex.IsMatch(comp.PassportName, "[A-Za-z]"))
                             {
                                 txtPhrase2 = new iTextSharp.text.Phrase(comp.PassportName, nameFont);
                             }
