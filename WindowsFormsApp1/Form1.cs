@@ -371,7 +371,7 @@ namespace WindowsFormsApp1
                         var drawingMsg = result.DrawingId != null ? result.DrawingId : "--";
                         this.rtb_報到作業參賽資料.AppendText($"圖紙編號: {drawingMsg}" + Environment.NewLine);
 
-                        if (result.DrawingId == null)
+                        if (result.DrawingId != null)
                         {
                             MessageBox.Show($"已綁定圖紙編號!!");
                         }
@@ -1050,7 +1050,7 @@ namespace WindowsFormsApp1
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txt比賽名稱, pageSize.GetLeft(_SystemParameter.TW比賽.PointX), pageSize.GetTop(_SystemParameter.TW比賽.PointY), 0);
 
                             iTextSharp.text.Phrase txt組別名次
-                                = new iTextSharp.text.Phrase($"{comp.Group}  {comp.Rank}", chtFont);
+                                = new iTextSharp.text.Phrase($"{comp.Group}  精神獎", chtFont);
                             ColumnText.ShowTextAligned(cb, iTextSharp.text.Element.ALIGN_LEFT, txt組別名次, pageSize.GetLeft(_SystemParameter.TW分組名次.PointX), pageSize.GetTop(_SystemParameter.TW分組名次.PointY), 0);
 
                             iTextSharp.text.Phrase txtYear
